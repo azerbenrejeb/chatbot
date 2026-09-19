@@ -115,5 +115,7 @@ chatbot/
 └── tests/                  # Tests unitaires
 ```
 
-## 👤 Auteur
-**Azer Ben Rejeb** — PFE 2025/2026 — RSE Time, Tunisie
+## 👤 Auteur & GitHub
+**Azer Ben Rejeb** — PFE 2025/2026 — RSE Time, Tunisie  
+🔗 GitHub: [https://github.com/azerbenrejeb](https://github.com/azerbenrejeb)
+

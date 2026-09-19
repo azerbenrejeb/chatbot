@@ -1,0 +1,48 @@
+# 
+# CHATBOT ESG — DÉPENDANCES PYTHON
+# Nouveau CDC — Pipeline: CNN → Extraction → CamemBERT → NER → ChromaDB → Mistral
+# 
+# Pour installer : pip install -r requirements.txt
+# 
+
+# --- Framework Web & API ---
+fastapi           # API backend REST
+uvicorn           # Serveur ASGI pour FastAPI
+streamlit         # Interface chatbot (frontend)
+
+# --- Extraction PDF ---
+pdfplumber        # Extraction de texte depuis les PDF
+camelot-py[cv]    # Extraction de tableaux depuis les PDF
+PyMuPDF           # Conversion pages PDF → images (fitz)
+Pillow            # Manipulation d'images Python
+
+# --- Deep Learning (Module 1 — CNN) ---
+torch             # PyTorch — framework deep learning
+torchvision       # Modèles pré-entraînés (ResNet-50)
+
+# --- NLP & Machine Learning (Modules 3 & 4) ---
+transformers      # HuggingFace — CamemBERT fine-tuning
+scikit-learn      # Métriques, train/test split
+datasets          # HuggingFace datasets utilities
+
+# --- LLM + RAG (Modules 5 & 6) ---
+chromadb          # Base de données vectorielle
+sentence-transformers  # Embeddings multilingues
+ollama            # Client Python pour Ollama (Mistral 7B)
+
+# --- Visualisation & Graphiques ---
+matplotlib        # Graphiques : courbes, barres, etc.
+seaborn           # Graphiques statistiques (heatmaps, etc.)
+
+# --- Génération de rapports PDF ---
+reportlab         # Création de rapports PDF
+
+# --- Utilitaires ---
+python-dotenv     # Chargement variables .env
+numpy             # Calcul numérique
+pandas            # Manipulation de données
+tqdm              # Barres de progression
+python-multipart  # Upload de fichiers FastAPI
+requests          # Requêtes HTTP
+python-docx       # Lecture de fichiers .docx
+easyocr           # OCR pour les PDF scannés

@@ -1,0 +1,32 @@
+# Environment & Credentials
+.env
+*.env
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv/
+
+# IDE / Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# ChromaDB & Vector Store Cache
+data/chroma_db/
+*.log
+
+# Operating System files
+Thumbs.db
+Desktop.ini
+.DS_Store

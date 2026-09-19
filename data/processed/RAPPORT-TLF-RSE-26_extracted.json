@@ -1,0 +1,879 @@
+{
+  "metadata": {
+    "nom_fichier": "RAPPORT-TLF-RSE-26.pdf",
+    "nombre_pages": 50,
+    "chemin": "C:\\RSE Time\\chatbot\\rapport_non _annoteé\\RAPPORT-TLF-RSE-26.pdf"
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "20\nRapport ESG\n25\nInnovation\nEngagement\nConfiance\nProximité",
+      "tables": [
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 59
+    },
+    {
+      "page_number": 2,
+      "text": "",
+      "tables": [
+        [
+          [
+            "",
+            null
+          ],
+          [
+            null,
+            ""
+          ],
+          [
+            "",
+            ""
+          ]
+        ]
+      ],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 3,
+      "text": "Sommaire\n2",
+      "tables": [
+        [
+          [
+            "",
+            ""
+          ]
+        ],
+        [
+          [
+            "",
+            "S"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 10
+    },
+    {
+      "page_number": 4,
+      "text": "RAPPORT ESG 2025\nMOT DU DIRECTEUR GÉNÉRAL P.04\nI. A PROPOS DE CE RAPPORT P.06\nII. TUNISIE LEASING & FACTORING EN BREF P.08\nIII. NOTRE ENGAGEMENT RSE P.14\nIV. ENJEUX ET MATÉRIALITÉS P.18\nV. GOUVERNANCE P.25\nVI. ENJEUX ENVIRONNEMENTAUX\nP.34\nVI. ENJEUX SOCIAUX\nP.44\n3",
+      "tables": [],
+      "has_text": true,
+      "char_count": 264
+    },
+    {
+      "page_number": 5,
+      "text": "MOT DU\nDIRECTEUR GÉNÉRAL\nL’année 2025 marque une étape déterminante dans l’évolution de Tunisie Leasing\n& Factoring, qui poursuit avec conviction son ambition d’incarner une finance\nresponsable, innovante et durable. À l’heure où nous célébrons 41 années\nd’engagement au service du développement économique, je tiens à rappeler avec\nfierté le chemin parcouru depuis notre adhésion, en 2020, au Pacte Mondial des\nNations Unies. Cette démarche volontariste demeure aujourd’hui un socle essentiel\nguidant nos orientations stratégiques et l’intégration transversale des principes ESG\nau sein de tous nos métiers.\n4",
+      "tables": [
+        [
+          [
+            "",
+            "",
+            "MOT DU\nDIRECTEUR GÉNÉRAL\nL’année 2025 marque une étape déterminante dans l’évolution de Tunisie Leasing\n& Factoring, qui poursuit avec conviction son ambition d’incarner une finance\nresponsable, innovante et durable. À l’heure où nous célébrons 41 années\nd’engagement au service du développement économique, je tiens à rappeler avec\nfierté le chemin parcouru depuis notre adhésion, en 2020, au Pacte Mondial des\nNations Unies. Cette démarche volontariste demeure aujourd’hui un socle essentiel\nguidant nos orientations stratégiques et l’intégration transversale des principes ESG\nau sein de tous nos métiers."
+          ],
+          [
+            null,
+            "",
+            null
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 610
+    },
+    {
+      "page_number": 6,
+      "text": "RAPPORT ESG 2025\nLa publication de ce rapport s’inscrit dans la Le pilier social demeure central dans notre\ncontinuité, puisqu’il s’agit de la troisième édition démarche ESG. Nous avons poursuivi nos efforts\nconsécutive que nous partageons avec nos parties en matière d’égalité des chances, de diversité\nprenantes, consolidant ainsi notre démarche de et d’inclusion, tout en renforçant les actions de\ntransparence et d’amélioration continue. prévention et de sensibilisation autour du bien-être\net de la santé au travail. Sur le terrain, notre action\nLa durabilité est profondément ancrée dans notre de reboisement de 5 000 arbres à Zaghouan, pour\nmodèle opérationnel. Cette année, nous avons la 2ème année consécutive, menée en coopération\nfranchi un jalon majeur grâce à la réalisation de avec une association, la Direction Générale des\nnotre premier bilan carbone portant sur les scopes Forêts et des collaborateurs volontaires, symbolise\n1 et 2, mené avec l’appui d’experts externes. notre contribution tangible à la préservation des\nCet exercice fondateur nous offre désormais un écosystèmes et à la lutte contre la dégradation\nréférentiel précis pour structurer, mesurer et climatique.\npiloter notre trajectoire de réduction des émissions.\nParallèlement, la mise en service imminente de Notre gouvernance constitue plus que jamais le\nnotre centrale photovoltaïque constitue une avancée fondement de notre crédibilité. La mise à jour\nconcrète vers une consommation énergétique plus de nos politiques internes, le renforcement des\npropre et plus autonome. compétences du Comité RSE et la participation\nà des formations certifiantes témoignent de\nNotre responsabilité s’exprime également à travers notre exigence de transparence, d’éthique et de\nnotre soutien actif à la transition écologique de nos conformité.\nclients. Nos solutions dédiées, telles que les offres de\nfinancement photovoltaïque ou l’accompagnement Le présent rapport ESG 2025 reflète l’ensemble\ndes mobilités électriques et hybrides, contribuent de ces avancées et la volonté de notre institution\nà stimuler une économie résiliente et bas-carbone. d’élever chaque année son niveau d’ambition.\nNotre partenariat avec l’Agence Italienne pour Je tiens à exprimer ma gratitude à l’ensemble\nla Coopération au Développement dans le cadre de nos Collaborateurs pour leur engagement\ndu programme ADAPT illustre, quant à lui, notre exemplaire, à nos Partenaires pour leur confiance\ncapacité à nouer des alliances internationales renouvelée, ainsi qu’à nos Administrateurs pour\nau service d’une agriculture et d’une pêche plus la qualité de leur accompagnement. Ensemble,\ndurables. nous poursuivons la construction d’un modèle de\ncroissance durable, créateur de valeur et porteur\nd’avenir pour notre pays.\nHichem ZGHAL\nDirecteur Général\n5",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2799
+    },
+    {
+      "page_number": 7,
+      "text": "CONSTRUIRE UN AVENIR DURABLE\nI.\nLe rapport de développement durable 2025 de Tunisie\nLeasing & Factoring (TLF) constitue un document de\nréférence offrant une lecture claire et intégrée de notre\nA propos de\nstratégie, de notre modèle économique et de notre\ncadre de gouvernance. Il rend compte de notre gestion\nproactive des risques et des opportunités, et présente\nce rapport\nun bilan complet de nos performances économiques,\nenvironnementales et sociales au titre de l’exercice 2025.\nCe rapport s’adresse à l’ensemble de nos parties\nprenantes - partenaires, investisseurs, collaborateurs et\ngrand public - avec pour ambition d’illustrer nos valeurs\nfondamentales, de rendre compte de nos engagements\nconcrets et de mettre en lumière les progrès tangibles\naccomplis tout au long de l’année.\n6",
+      "tables": [],
+      "has_text": true,
+      "char_count": 791
+    },
+    {
+      "page_number": 8,
+      "text": "RAPPORT ESG 2025\nUNE APPROCHE FONDÉE SUR LA DOUBLE MATÉRIALITÉ ALIGNEMENT AVEC LES OBJECTIFS DE DÉVELOPPEMENT\nDURABLE\nNotre démarche de durabilité repose sur le principe\nde la double matérialité, qui structure l’ensemble Dans la continuité de la démarche engagée l’année\nde notre analyse des enjeux ESG selon deux axes précédente, les Objectifs de Développement Durable\ncomplémentaires : la matérialité d’impact, qui examine (ODD) des Nations Unies demeurent un cadre de\nles effets de nos activités sur l’environnement et la référence structurant pour TLF. Ils nous permettent\nsociété, et la matérialité financière, qui évalue dans d’identifier nos enjeux stratégiques prioritaires, d’orienter\nquelle mesure les enjeux de développement durable notre création de valeur partagée et d’inscrire nos\ninfluencent notre performance et notre capacité à créer réalisations les plus significatives dans une perspective\nde la valeur sur le long terme. Cette grille d’analyse universelle et reconnue.\nnous permet d’ancrer pleinement les dimensions\nEnvironnementale, Sociale et de Gouvernance au cœur DISPONIBILITÉ DU RAPPORT\nde notre stratégie globale.\nLe présent rapport ESG est accessible en version\nDES ENGAGEMENTS QUI SE TRADUISENT EN ACTES numérique sur notre site web : www.tlf.com.tn.\nAu-delà des orientations stratégiques, ce rapport\ndocumente les résultats concrets de nos initiatives. Il\ndétaille les actions menées en faveur d’un développement\nplus responsable et respectueux de l’environnement,\ntémoignant ainsi de la capacité de TLF à transformer\nses engagements en réalisations mesurables.\nCADRE DE REPORTING\nCe rapport a été élaboré en conformité avec les\nrecommandations du Conseil du Marché Financier\n(CMF) et de la Bourse des Valeurs Mobilières de\nTunis (BVMT). Il couvre la période du 1er janvier au\n31 décembre 2025.\n7",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1827
+    },
+    {
+      "page_number": 9,
+      "text": "II.\nTUNISIE LEASING &\nFACTORING EN BREF\n8",
+      "tables": [],
+      "has_text": true,
+      "char_count": 41
+    },
+    {
+      "page_number": 10,
+      "text": "RAPPORT ESG 2025\nTunisie Leasing & Factoring (TLF) est une filiale LLD, offrant aux entreprises une solution complète\nd’Amen Group, conglomérat tunisien privé dont les de gestion externalisée de leurs flottes de véhicules\norigines remontent au début du siècle dernier. Le - incluant entretien et assurance - et leur permettant\ngroupe est aujourd’hui présent dans un large éventail ainsi d’optimiser à la fois leur gestion opérationnelle\nde secteurs - banque, assurances, financements et leur structure financière.\nspécialisés, distribution d’équipements, santé, industrie\nagroalimentaire, hôtellerie et promotion immobilière - UNE EXPANSION À L’ÉCHELLE CONTINENTALE\nfaisant de lui l’un des acteurs économiques privés les\nplus diversifiés de Tunisie. Poursuivant sa stratégie de croissance, TLF étend ses\nactivités au-delà des frontières nationales avec la création,\nUNE HISTOIRE FONDATRICE en 2006, de Maghreb Leasing Algérie, puis avec la prise\nde participation dans le groupe Alios Finance - opérant\nTLF a été constituée le 8 octobre 1984 sous la dénomination dans plusieurs pays d’Afrique subsaharienne - réalisée\nTunisie Leasing, à l’initiative conjointe de la Banque conjointement avec Amen Bank.\nTuniso-Saoudienne d’Investissement et de Développement\n(STUSID) et de plusieurs institutions tunisiennes et En 2015, TLF consolide cette présence panafricaine en\ninternationales de premier plan, dont la Société Financière prenant une participation majoritaire dans Alios Finance,\nInternationale (SFI), filiale du Groupe Banque Mondiale, et avec le soutien de Proparco et de Responsability.\nle Crédit Lyonnais. Dès sa création, TLF s’est positionnée\ncomme un acteur pionnier dans l’introduction et le UNE ORGANISATION RATIONALISÉE\ndéveloppement de solutions de financement innovantes\nsur le marché tunisien. En 2018, dans une logique de renforcement des synergies\nopérationnelles, Tunisie Leasing et Tunisie Factoring\nUN DÉVELOPPEMENT PAR L’INNOVATION fusionnent pour donner naissance à l’entité unifiée\nTunisie Leasing & Factoring, réunissant sous une\nEn 1995, TLF élargit son périmètre en intégrant l’activité même enseigne l’ensemble des expertises du groupe\nde factoring en son sein, avant de la structurer en entité en matière de financement spécialisé.\nautonome en 2001 avec la création de Tunisie Factoring.\nEn 2025, dans le cadre d’une recentrage stratégique,\nEn 2004, la société franchit une nouvelle étape en lançant Alios Finance procède à la cession de l’ensemble de ses\nla location longue durée (LLD) à travers sa filiale Tunisie filiales de leasing en Afrique subsaharienne.\n9",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2591
+    },
+    {
+      "page_number": 11,
+      "text": "DATES CLÉS DE L’HISTOIRE DU GROUPE TLF\n1984 2004\nCréation de lancement de\ntunisie leasing l’activité de\nlocation longue\ndurée\n1989 2005\némission du participation\n1er emprunt minoritaire dans\nobligatire privé alios finance\n1992 2006\nintroduction création de\nen bourse maghreb leasing\nalgérie\n1995 2015\nlancement de participation\nl’activité factoring majoritaire dans\nalios finance\n2004 2018\nPrise de contrôle fusion avec\npar le groupe Amen tunisie factoring\n10",
+      "tables": [],
+      "has_text": true,
+      "char_count": 459
+    },
+    {
+      "page_number": 12,
+      "text": "RAPPORT ESG 2025\nSTRUCTURE DE L’ACTIONNARIAT\n59,53% 9,00% 8,66% 4,20% 18,63%\nGROUPE AMEN GROUPE POULINA HORCHANI FINANCE MENINX HOLDING PUBLIC\nNOS MÉTIERS\nleasing\nIntroduit en 1984\npour faciliter\nl’acquisition\nd’actifs\nfactoring\nIntroduit en 1995\nlocation pour améliorer\nla liquidité des\nlongue durée\nentreprises\nLancée en 2004\npour la gestion de\nflotte\n11",
+      "tables": [
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 356
+    },
+    {
+      "page_number": 13,
+      "text": "CHIFFRES CLÉS 2025\ncollaborateurs financement total\n212 7\nemployés Près de milliards de DT\n47 financés depuis 1984\n% ayant moins\nde 45 ans\nclients\nréseau 40 000\n13 Plus de\nagences à travers\nla Tunisie clients ont été accompagnés\nTLF commercialise\négalement ses\nproduits à travers\nle réseau d’agence\nd’Amen Bank\n12",
+      "tables": [],
+      "has_text": true,
+      "char_count": 313
+    },
+    {
+      "page_number": 14,
+      "text": "RAPPORT ESG 2025\nINDICATEURS FINANCIERS 2025\n54.000.000 238.466.433\nDT DT\ncapital social Capitaux propres\n84.704.071 34.214.974\nDT DT\nProduits nets Résultat net\n13",
+      "tables": [
+        [
+          [
+            "54.000.000\nDT"
+          ],
+          [
+            ""
+          ],
+          [
+            "capital social"
+          ]
+        ],
+        [
+          [
+            "238.466.433\nDT"
+          ],
+          [
+            ""
+          ],
+          [
+            "Capitaux propres"
+          ]
+        ],
+        [
+          [
+            "84.704.071\nDT"
+          ],
+          [
+            ""
+          ],
+          [
+            "Produits nets"
+          ]
+        ],
+        [
+          [
+            "34.214.974\nDT"
+          ],
+          [
+            ""
+          ],
+          [
+            "Résultat net"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 163
+    },
+    {
+      "page_number": 15,
+      "text": "III.\nNotre engagement\nRSE\n14",
+      "tables": [],
+      "has_text": true,
+      "char_count": 28
+    },
+    {
+      "page_number": 16,
+      "text": "RAPPORT ESG 2025\nPOLITIQUE RSE\nNOTRE POLITIQUE RSE : UN ENGAGEMENT INTÉGRÉ AU SERVICE D’UNE VALEUR PARTAGÉE\nLa politique de Responsabilité Sociétale d’Entreprise Cette ambition se décline concrètement dans notre\nde TLF repose sur une conviction fondamentale : la cœur de métier : en accompagnant la transition\nperformance durable ne se construit pas en marge de la énergétique et en intégrant ses enjeux dans nos\nsociété, mais en interaction constante avec elle. Notre processus décisionnels, en développant des produits\ndémarche RSE vise ainsi à générer une valeur ajoutée et services durables adaptés aux nouvelles attentes\ntangible pour l’ensemble de nos parties prenantes, tout de nos clients, et en plaçant la satisfaction de ces\nen contribuant activement aux transformations positives derniers au fondement de notre relation de confiance\nqui façonnent notre environnement économique, social et de notre performance globale.\net environnemental.\nQUATRE PILIERS POUR UNE RSE STRUCTURÉE ET COHÉRENTE\nNotre politique RSE s’articule autour de quatre axes fondamentaux qui guident l’ensemble de nos actions et\norientent nos prises de décision.\nLa responsabilité La responsabilité La responsabilité La responsabilité\nenvironnementale économique sociale civique\nTraduit notre Reflète notre Place l’humain au Exprime notre volonté\nengagement à réduire attachement à une cœur de notre modèle, d’agir en acteur\nnotre empreinte performance pérenne en favorisant le bien- engagé du tissu\nécologique et à et éthique, créatrice de être, la diversité et économique et social,\nmobiliser nos capacités valeur pour l’ensemble le développement en contribuant au\nde financement au de nos parties professionnel de nos développement des\nservice de la transition prenantes. collaborateurs. territoires et au bien-\nverte. être collectif.\n15",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1820
+    },
+    {
+      "page_number": 17,
+      "text": "ADHÉSION AU PACTE MONDIAL\nDES NATIONS UNIES\nTLF, MEMBRE DU PACTE MONDIAL DES NATIONS UNIES\nDepuis 2020, Tunisie Leasing & Factoring a franchi engagements essentiels : le respect et la promotion\nune étape structurante dans sa trajectoire ESG en des droits de l’Homme dans l’ensemble de nos activités,\nadhérant au Pacte Mondial des Nations Unies - l’UN l’application des normes internationales du travail et\nGlobal Compact - la plus grande initiative internationale la garantie de conditions professionnelles dignes et\nfédérant les entreprises autour d’un développement équitables, l’adoption d’une approche de précaution\nresponsable et durable. Cette adhésion volontaire face aux défis environnementaux, et le renforcement\nancre notre stratégie dans un cadre de référence de notre culture d’intégrité et de transparence dans\nuniversel, en alignant nos pratiques sur les dix principes la lutte contre la corruption.\nfondamentaux du Pacte, articulés autour de quatre\nUN LEVIER DE CONSOLIDATION POUR NOTRE STRATÉGIE DURABLE\nEn rejoignant cette initiative, TLF réaffirme sa volonté Ce cadre international vient renforcer et nourrir notre\nde faire évoluer en continu ses pratiques internes et stratégie RSE globale, notre Système de Gestion\nses relations avec l’ensemble de ses parties prenantes, Environnementale et Sociale (SGES), ainsi que nos\ndans un esprit d’équité, de transparence et de durabilité. politiques de conformité, d’éthique et de gouvernance.\nUN ENGAGEMENT RENOUVELÉ CHAQUE ANNÉE\nFidèles à notre engagement, nous rendons compte chaque lettre d’engagement de notre Directeur Général et\nannée de nos progrès à travers la Communication sur notre rapport de développement durable, témoigne de\nle Progrès (CoP), soumise sur la plateforme officielle notre détermination à inscrire nos actions dans une\ndu Pacte Mondial. Ce reporting annuel, qui inclut la démarche d’amélioration continue et de responsabilité.\n16",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1918
+    },
+    {
+      "page_number": 18,
+      "text": "RAPPORT ESG 2025\nLES ODD COMME BOUSSOLE STRATÉGIQUE\nEn tant qu’institution financière résolument engagée dans Ces objectifs constituent pour nous bien plus qu’un\nla transition durable, TLF inscrit sa stratégie RSE dans référentiel de reporting : ils représentent un cap\nle cadre universel des 17 Objectifs de Développement stratégique partagé, qui oriente nos décisions et guide\nDurable (ODD), adoptés par les Nations Unies en 2015. nos actions face aux défis sociaux, environnementaux\net économiques de notre époque.\n17",
+      "tables": [],
+      "has_text": true,
+      "char_count": 520
+    },
+    {
+      "page_number": 19,
+      "text": "IV.\nEnjeux et matérialité\n18",
+      "tables": [],
+      "has_text": true,
+      "char_count": 28
+    },
+    {
+      "page_number": 20,
+      "text": "RAPPORT ESG 2025\nDOUBLE MATÉRIALITÉ ET ENJEUX CLÉS\nNOTRE ANALYSE DE DOUBLE MATÉRIALITÉ : COMPRENDRE NOS IMPACTS POUR MIEUX AGIR\nDans le cadre de notre engagement en faveur du principe de double matérialité, cette démarche a été\ndéveloppement durable, TLF a conduit un exercice réalisée en référence au guide du Conseil du Marché\nrigoureux d’identification et de hiérarchisation des Financier (CMF) et de la Bourse des Valeurs Mobilières\nenjeux matériels susceptibles d’affecter significativement de Tunis (BVMT), et constitue le socle méthodologique\nses activités et ses parties prenantes. Ancrée dans le sur lequel repose l’ensemble de notre stratégie ESG.\nLES DEUX DIMENSIONS DE LA DOUBLE MATÉRIALITÉ\nNotre analyse repose sur une approche à deux dimensions complémentaires :\nDIMENSION DÉFINITION OBJECTIF\nMatérialité financière Évaluation de l’impact des enjeux Comprendre comment ces enjeux peuvent\nESG sur la performance financière, affecter la résilience et la durabilité de\nles risques et les opportunités nos activités.\nde TLF.\nMesure des effets directs et indirects Refléter notre responsabilité sociétale\nMatérialité d’impact\nde nos activités sur la société et et environnementale en assurant une\nl’environnement. contribution positive à la transition\ndurable.\nCes deux dimensions sont intégrées dans une matrice de double matérialité, un outil qui combine les perspectives\nde nos parties prenantes et notre analyse interne pour prioriser nos actions et orienter nos décisions.\n19",
+      "tables": [
+        [
+          [
+            "DIMENSION DÉFINITION OBJECTIF"
+          ],
+          [
+            "Matérialité financière Évaluation de l’impact des enjeux Comprendre comment ces enjeux peuvent\nESG sur la performance financière, affecter la résilience et la durabilité de\nles risques et les opportunités nos activités.\nde TLF."
+          ],
+          [
+            "Mesure des effets directs et indirects Refléter notre responsabilité sociétale\nMatérialité d’impact\nde nos activités sur la société et et environnementale en assurant une\nl’environnement. contribution positive à la transition\ndurable."
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 1489
+    },
+    {
+      "page_number": 21,
+      "text": "CARTOGRAPHIE DES PARTIES PRENANTES\nLE DIALOGUE AVEC NOS PARTIES PRENANTES : UN LEVIER STRATÉGIQUE DE PERFORMANCE\nDURABLE\nDans un environnement économique, réglementaire Instaurer un dialogue constructif et régulier nous\net sociétal en constante mutation, le dialogue avec permet d’anticiper les risques émergents, de mieux\nles parties prenantes constitue un pilier fondamental répondre aux enjeux sociétaux et environnementaux,\nde notre démarche de durabilité et de résilience et de saisir de nouvelles opportunités de création de\ninstitutionnelle. Régulateurs, clients, collaborateurs, valeur partagée. Dans cette perspective, TLF s’engage\ninvestisseurs, partenaires - chacun de ces acteurs porte à renforcer ses mécanismes d’écoute, à favoriser\nune vision, des attentes et des exigences spécifiques la transparence des échanges et à impliquer plus\nque TLF s’attache à comprendre et à intégrer dans activement ses parties prenantes dans ses processus\nl’élaboration de sa stratégie. de décision, une démarche d’amélioration continue\nvisant à bâtir des relations de confiance durables et\nmutuellement bénéfiques.\nUNE CARTOGRAPHIE STRUCTURÉE AU SERVICE DE L’ANALYSE DE DOUBLE MATÉRIALITÉ\nDans le cadre de notre analyse de la double matérialité, La première étape a consisté en un travail d’inventaire\nla cartographie des parties prenantes représente une exhaustif visant à recenser l’ensemble des acteurs en\nétape méthodologique fondamentale pour appréhender interaction avec TLF. La seconde a porté sur l’analyse\nles impacts, les risques et les opportunités associés du degré d’influence et d’exposition de chaque partie\nà nos enjeux ESG. En cohérence avec les meilleures prenante, évaluée selon deux axes stratégiques :\npratiques de reporting de durabilité, notre Comité RSE d’une part, le niveau d’influence qu’elle exerce sur les\na conduit une démarche structurée en deux étapes décisions et les performances de l’entreprise ; d’autre\ncomplémentaires. part, le degré d’intérêt qu’elle manifeste à l’égard des\nimpacts réels ou potentiels de l’activité de TLF.\nUN OUTIL ÉVOLUTIF AU SERVICE DE NOTRE AGILITÉ STRATÉGIQUE\nLa cartographie des parties prenantes est conçue périodiques, notamment à l’occasion de chaque\ncomme un référentiel vivant, destiné à évoluer en exercice d’analyse de matérialité ou en réponse à tout\nfonction des transformations de notre environnement changement significatif dans notre contexte externe\net de nos activités. Elle fera l’objet de révisions ou notre périmètre d’activité.\n20",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2508
+    },
+    {
+      "page_number": 22,
+      "text": "Degré d’influence\ntêrétni’d\nérgeD\nRAPPORT ESG 2025\nCARTOGRAPHIE DES PARTIES PRENANTES\nClients\nEmployés et leurs\nreprésentants\nActionnaires\net Conseil\nd’Administration\nFournisseurs et\npartenaires\nBailleurs de fonds\nConseil bancaire\net financier\nmédias\nPouvoirs Publics\net Régulateurs\nAgences de\nnotation\n21",
+      "tables": [],
+      "has_text": true,
+      "char_count": 305
+    },
+    {
+      "page_number": 23,
+      "text": "NOS PARTIES PRENANTES STRATÉGIQUES\nLes parties prenantes qui combinent un fort pouvoir TLF s’attache à construire avec elles une relation de\nd’influence et un intérêt marqué pour les activités confiance fondée sur une communication régulière,\nde TLF occupent une place centrale dans notre transparente et proactive, en les associant étroitement\nécosystème. Leur soutien est déterminant pour à l’élaboration et à l’évolution de ses orientations\ngarantir notre stabilité opérationnelle, notre conformité stratégiques majeures.\nréglementaire et notre performance durable. À ce titre,\nIDENTIFICATION DES ENJEUX ET ÉVALUATION DES\nIMPACTS\nUNE DÉMARCHE STRUCTURÉE AU SERVICE DE NOTRE STRATÉGIE DURABLE\nDans le cadre de sa mise en conformité avec le guide de la Bourse des Valeurs Mobilières de Tunis (BVMT), TLF\na déployé une méthodologie rigoureuse d’analyse de double matérialité visant à identifier et hiérarchiser les\nenjeux ESG les plus significatifs selon deux perspectives complémentaires :\n• leur impact sur la société et l’environnement d’une part - matérialité d’impact ;\n• leur incidence potentielle sur notre performance économique d’autre part - matérialité financière.\nL’ANALYSE DES IRO : SOCLE MÉTHODOLOGIQUE DE NOTRE DÉMARCHE\nNotre approche repose sur l’évaluation systématique d’analyse nous permet de croiser les deux dimensions\ndes Impacts, Risques et Opportunités (IRO) associés de la double matérialité et d’obtenir une vision globale\nà nos activités, à nos produits et services, ainsi qu’à et cohérente de nos enjeux prioritaires.\nl’ensemble de nos relations d’affaires. Ce prisme\n22",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1598
+    },
+    {
+      "page_number": 24,
+      "text": "RAPPORT ESG 2025\nUNE ÉVALUATION SIMPLIFIÉE ET ROBUSTE\nL’évaluation des IRO a été conduite selon une méthodologie matérialité de chaque enjeu identifié. Cette approche\nsimplifiée, fondée sur un système de cotation objectif garantit à la fois la transparence du processus et la\npermettant de déterminer avec rigueur le niveau de fiabilité des résultats obtenus.\nNOTRE MATRICE DE DOUBLE MATÉRIALITÉ : UN OUTIL STRATÉGIQUE\nCette évaluation a abouti à l’élaboration de notre identifiés en fonction de leur importance relative sous\nmatrice de double matérialité, qui hiérarchise les enjeux les deux angles d’analyse.\nNOS RÉSULTATS CLÉS\nÀ l’issue de ce processus rigoureux, 16 enjeux matériels ont constitueront le socle de notre feuille de route ESG pour\nété identifiés, parmi lesquels plusieurs ont été les années à venir.\njugés cruciaux pour notre institution. Ces enjeux prioritaires\n23",
+      "tables": [],
+      "has_text": true,
+      "char_count": 883
+    },
+    {
+      "page_number": 25,
+      "text": "Matérialité Financière\ntcapmI’d\nétilairétaM\nMatrice de double matérialité\n• Inclusion Financière • Digitalisation et innovation\n• Réduction de notre empreinte carbone • Confidentialité des données et risques\n• Développement d’une culture ESG au sein de cybernétiques\nl’entreprise • Dialogue social avec les représentants des\ncollaborateurs\n• Garantie des conditions du bien-être au travail\n• Contribution au développement économique\nde la communauté\n• Transparence et divulgation des informations\n• Formation pour assurer la qualité\n• Protection des intérêts des clients\n• Standards d’éthique et de conformité dans\nles affaires\n• Offre de produits éco-responsables\n• Œuvres caritatives • Diversité et égalité des chances\n• Respect du volet social dans la chaîne de valeur\n24",
+      "tables": [
+        [
+          [
+            "• Inclusion Financière\n• Réduction de notre empreinte carbone\n• Développement d’une culture ESG au sein de\nl’entreprise",
+            "• Digitalisation et innovation\n• Confidentialité des données et risques\ncybernétiques\n• Dialogue social avec les représentants des\ncollaborateurs\n• Garantie des conditions du bien-être au travail\n• Contribution au développement économique\nde la communauté\n• Transparence et divulgation des informations\n• Formation pour assurer la qualité\n• Protection des intérêts des clients\n• Standards d’éthique et de conformité dans\nles affaires\n• Offre de produits éco-responsables"
+          ],
+          [
+            "• Œuvres caritatives\n• Respect du volet social dans la chaîne de valeur",
+            "• Diversité et égalité des chances"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 774
+    },
+    {
+      "page_number": 26,
+      "text": "RAPPORT ESG 2025\nV.\nGouvernance\n25",
+      "tables": [],
+      "has_text": true,
+      "char_count": 34
+    },
+    {
+      "page_number": 27,
+      "text": "CODE DE GOUVERNANCE\nTLF s’est dotée d’un code de gouvernance approuvé normatif assure la conformité de TLF aux dispositions\npar son Conseil d’Administration, qui définit les règles légales et réglementaires en vigueur, notamment la\nd’administration et de gestion de la société avec pour loi n° 2016-48 relative aux banques et établissements\nobjectif de garantir sa pérennité et de préserver les financiers ainsi que la circulaire de la Banque Centrale\nintérêts de l’ensemble de ses parties prenantes. Ce cadre de Tunisie n° 2021-05 relative au cadre de gouvernance\ndes banques et établissements financiers.\nLE CONSEIL D’ADMINISTRATION\nLe Conseil d’Administration assume la responsabilité\nde la mise en place et du suivi du dispositif de\ngouvernance dans sa globalité. À ce titre, il veille\nà l’institution des Comités de Gouvernance, à la\ngestion des conflits d’intérêts, ainsi qu’à la mise Le Conseil d’Administration est composé de :\nen œuvre d’un dispositif de contrôle interne,\nd’un code de déontologie et d’une politique de\n6 Administrateurs représentant le groupe Amen\nconformité robuste. Il lui incombe également\nd’évaluer régulièrement l’efficacité du cadre de\n2 Administrateurs représentant le groupe Poulina\ngouvernance, d’actualiser les statuts et règlements\ninternes, et de promouvoir au sein de TLF une\n1 Administrateur représentant le groupe Meninx\nculture d’entreprise fondée sur la responsabilité,\nl’éthique et le respect des principes de responsabilité\n2 Administrateurs indépendants\nsociétale et environnementale.\n1 Administrateur représentant les actionnaires\nPar ailleurs, le Conseil s’appuie sur une politique\nminoritaires\nde diversité de genre qui a permis de renforcer\nprogressivement la représentation féminine en\nson sein, atteignant 25% de sa composition en\n2025, témoignant ainsi d’un engagement concret\nen faveur d’une gouvernance plus inclusive et\néquilibrée.\n26",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1891
+    },
+    {
+      "page_number": 28,
+      "text": "RAPPORT ESG 2025\nNOS PARTIES PRENANTES STRATÉGIQUES\nTLF dispose de 4 Comités de Gouvernance, chacun exerçant des responsabilités spécifiques :\nLe Comité d’Audit : ce Comité analyse les comptes de la Société, examine le programme d’intervention des\ncommissaires aux comptes, s’assure de la qualité et de la pertinence du dispositif de production des informations\nfinancières et de la cohérence des systèmes de mesure, de surveillance et de maîtrise des risques et veille au\nrenforcement de l’indépendance de l’audit interne.\nLe Comité des Risques : chargé du suivi du processus d’identification et de gestion des risques, en vue d’assister\nle Conseil d’Administration en matière de stratégie, de gestion et de surveillance des risques auxquels TLF est\nexposée.\nLe Comité de Nomination et Rémunération soumet au Conseil les propositions relatives au dispositif de\ngouvernance, à la nomination et la rémunération des dirigeants de la Société.\nLe Comité Stratégique est chargé du pilotage, de la surveillance et de la gestion des activités stratégiques de\nla Société ainsi que de ses différents métiers. Il examine également les synergies avec les filiales du groupe.\nLES COMITÉS DE GESTION\nTLF dispose de 10 Comités de gestion avec les prérogatives suivantes :\nComité de recrutement : il arrête les décisions en Comité des projets informatiques : il supervise la\nmatière de recrutement. réalisation des projets informatiques de la Société.\nComité de crédit : il décide des crédits et financements Comité de sécurité informatique : il supervise la\nqui ne rentrent pas dans les délégations données gestion des risques cybernétiques de la Société et\naux différents responsables de la Société. le plan d’actions visant à les atténuer.\nComité de recouvrement : il passe en revue le Comité RSE : il est en charge de la supervision\nportefeuille des clients sensibles et arrête des des actions décidées dans le cadre de la démarche\norientations pour le recouvrement des impayés. RSE de la Société. Il est également en charge de\nl’élaboration du rapport ESG.\nComité de vente de matériel contentieux : il statue sur\nles offres d’achat de matériel contentieux récupéré. Comité Santé Sécurité au Travail : il est chargé de\nsuivre les questions relatives à la santé, à la sécurité\nComité ALCO : il est chargé de superviser les risques et au bien-être des collaborateurs. Ce comité veille\nfinanciers de la Société (risque de taux, risque de à l’identification des risques professionnels, au\ntransformation, risque de change, etc). suivi des actions de prévention et à l’amélioration\ncontinue des conditions de travail.\nComité de Trésorerie : il est chargé du suivi de la\ntrésorerie de la Société.\n27",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2682
+    },
+    {
+      "page_number": 29,
+      "text": "ÉTHIQUE, CONFORMITÉ ET TRANSPARENCE\nL’INTÉGRITÉ AU CŒUR DE NOTRE MODÈLE D’AFFAIRES\nChez Tunisie Leasing & Factoring, l’éthique, la conformité À travers une gouvernance rigoureuse, des politiques\net la transparence ne sont pas de simples exigences internes exigeantes et une culture d’entreprise\nréglementaires - elles constituent le fondement de fondée sur l’exemplarité, TLF fait de l’éthique et de\nnotre relation avec l’ensemble de nos parties prenantes. la conformité de véritables leviers stratégiques au\nNotre ambition est double : préserver la confiance de service de sa performance durable. Cette conviction\nnos clients, collaborateurs, investisseurs et partenaires, guide l’ensemble de nos engagements fondamentaux,\net prévenir de manière proactive les risques juridiques, dont les principaux sont détaillés ci-après.\nfinanciers et réputationnels auxquels notre activité\npourrait être exposée.\nNOS ENGAGEMENTS FONDAMENTAUX\nPilier Notre engagement\nLutte contre la corruption • Tolérance zéro et dispositifs de prévention renforcée\nRespect des exigences réglementaires • Conformité stricte et veille permanente\nCulture éthique • Diffusion et ancrage des bonnes pratiques à tous les niveaux\nL’INTÉGRITÉ COMME CONDITION DE NOTRE PÉRENNITÉ\nEn tant qu’acteur financier responsable, TLF considère et à la pérennité de l’institution. Ces trois impératifs\nque l’intégrité de ses pratiques est une condition forment le socle sur lequel repose l’ensemble de notre\nindispensable à la confiance durable de ses parties démarche éthique et de conformité.\nprenantes, à la résilience de son modèle d’affaires\n28",
+      "tables": [
+        [
+          [
+            ""
+          ],
+          [
+            "Pilier Notre engagement\nLutte contre la corruption • Tolérance zéro et dispositifs de prévention renforcée\nRespect des exigences réglementaires • Conformité stricte et veille permanente\nCulture éthique • Diffusion et ancrage des bonnes pratiques à tous les niveaux"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 1602
+    },
+    {
+      "page_number": 30,
+      "text": "RAPPORT ESG 2025\nDES DISPOSITIFS ROBUSTES FACE AUX DÉFIS CONTEMPORAINS\nDans un environnement marqué par un cadre de conformité et de contrôle interne à la hauteur de\nréglementaire de plus en plus exigeant et des attentes ces enjeux. Ces mécanismes couvrent l’ensemble des\nsociétales croissantes, TLF a déployé des dispositifs risques prioritaires identifiés par notre organisation :\n• La prévention de la fraude s’appuie sur des contrôles • La prévention du blanchiment de capitaux s’inscrit\nrenforcés et une vigilance proactive à tous les niveaux dans le respect des normes internationales les plus\nde l’organisation. exigeantes en la matière.\n• La lutte anti-corruption repose sur des politiques • Enfin, la transparence de nos activités est assurée\nstrictes et des programmes de formation continue par un reporting clair et une communication ouverte\ndestinés à l’ensemble de nos équipes. envers l’ensemble de nos parties prenantes.\n• La gestion des conflits d’intérêts fait l’objet d’une\nidentification systématique et d’un traitement rigoureux,\ngarantissant l’impartialité de nos décisions.\nNOS INSTRUMENTS DE RÉFÉRENCE\nDISPOSITIF OBJECTIF\nCode de déontologie Formalise les principes éthiques et les règles de conduite attendues\nde l’ensemble de nos collaborateurs.\nCharte de conformité Traduit notre engagement à exercer nos activités dans le respect\ndes exigences réglementaires et normatives applicables.\nCharte de déontologie boursière Encadre les comportements des personnes ayant accès à des\ninformations privilégiées (« Les Initiés ») pour garantir le respect\nstrict de la réglementation boursière et des recommandations des\nAutorités du Marché Financier.\nPolitique de protection des intérêts Assure un traitement équitable, responsable et transparent\ndes clients de l’ensemble de notre clientèle, en encadrant notamment les\npratiques de commercialisation, la gestion des réclamations, la\nprévention des conflits d’intérêts et l’adéquation des produits aux\nbesoins des clients.\n29",
+      "tables": [
+        [
+          [
+            "DISPOSITIF OBJECTIF"
+          ],
+          [
+            "Code de déontologie Formalise les principes éthiques et les règles de conduite attendues\nde l’ensemble de nos collaborateurs."
+          ],
+          [
+            "Charte de conformité Traduit notre engagement à exercer nos activités dans le respect\ndes exigences réglementaires et normatives applicables."
+          ],
+          [
+            "Charte de déontologie boursière Encadre les comportements des personnes ayant accès à des\ninformations privilégiées (« Les Initiés ») pour garantir le respect\nstrict de la réglementation boursière et des recommandations des\nAutorités du Marché Financier."
+          ],
+          [
+            "Politique de protection des intérêts Assure un traitement équitable, responsable et transparent\ndes clients de l’ensemble de notre clientèle, en encadrant notamment les\npratiques de commercialisation, la gestion des réclamations, la\nprévention des conflits d’intérêts et l’adéquation des produits aux\nbesoins des clients."
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 1991
+    },
+    {
+      "page_number": 31,
+      "text": "UN MÉCANISME ESSENTIEL DE VIGILANCE\nAu cœur de notre dispositif, une procédure de lancement ou réglementaires. Ce mécanisme incarne notre\nd’alerte permet à tout collaborateur ou partenaire de volonté de promouvoir une culture de transparence\nsignaler, en toute confidentialité, des faits susceptibles et de responsabilité à tous les niveaux.\nde constituer une violation des règles éthiques, légales\nRENFORCER EN CONTINU LA CULTURE DE CONFORMITÉ\nDans un souci de consolidation de son dispositif de contre le blanchiment de capitaux et le financement\ngouvernance et de prévention des risques financiers, du terrorisme (LAB/FT), de maîtriser les mécanismes\nTLF a organisé une session de formation dédiée à de détection des opérations suspectes, et de diffuser\nl’intention de ses Administrateurs. Cette initiative les bonnes pratiques en matière de conformité et de\ns’inscrit pleinement dans notre engagement à maintenir contrôle interne à l’ensemble des membres du Conseil.\nun niveau d’expertise élevé au sein de nos instances de Au-delà de ses effets immédiats, cette démarche\ngouvernance, en garantissant une vigilance optimale de formation illustre la volonté de TLF de faire de la\nface aux risques émergents. conformité non pas une contrainte subie, mais une\ncompétence stratégique cultivée à tous les niveaux\nCette session a permis de renforcer la compréhension de l’organisation - à commencer par ses plus hautes\ndes obligations réglementaires en matière de lutte instances de décision.\n30",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1492
+    },
+    {
+      "page_number": 32,
+      "text": "RAPPORT ESG 2025\nCERTIFICATION MSI 20000\nTLF a obtenu la certification MSI 20000®, délivrée • La solidité financière : structure du bilan, solvabilité,\npar COFICERT France, organisme de certification liquidité, résilience et maîtrise des risques\nfrançais multinormes, spécialisé dans les certifications commerciaux.\nfinancières et extra-financières, pionnier et leader\nrégional sur ces activités, intervenant dans plus de • La performance financière : rentabilité, efficacité\n40 pays et rassemblant des experts internationaux opérationnelle et création de valeur durable.\nde premier rang en matière de gestion financière et\nde finance durable.\nCette certification positionne TLF parmi les établissements\nfinanciers tunisiens les plus avancés en matière de\nLe processus de certification a porté\ngouvernance responsable. Elle constitue un signal fort\nsur une évaluation approfondie des\nde confiance adressée à ses investisseurs, clients,\nderniers exercices financiers de TLF\nMSI partenaires et autorités de tutelle, en leur offrant\narticulée autour de deux axes : 20000®\nun repère fiable et indépendant sur la solvabilité, la\nrentabilité et la pérennité de l’établissement.\n31",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1174
+    },
+    {
+      "page_number": 33,
+      "text": "PROTECTION DES DONNÉES PERSONNELLES ET\nRISQUES CYBERNÉTIQUES\nLA SÉCURITÉ NUMÉRIQUE AU CŒUR DE NOTRE RESPONSABILITÉ\nDans un monde où la digitalisation des services Notre responsabilité est claire : garantir la sécurité,\nfinanciers s’accélère et où les menaces cybernétiques la confidentialité et l’intégrité des informations que\nse multiplient et se sophistiquent, la protection des nous confient nos clients, nos partenaires et nos\ndonnées et la maîtrise des risques informatiques collaborateurs.\ns’imposent comme des enjeux stratégiques majeurs\npour Tunisie Leasing & Factoring.\nUNE INFRASTRUCTURE RÉSILIENTE FACE AUX MENACES\nPour faire face à un environnement numérique en de sécurité informatique sont menés périodiquement\nconstante évolution, nous avons déployé une stratégie de pour évaluer notre conformité aux normes et standards\ncybersécurité fondée sur le renforcement continu de nos du secteur. En parallèle, une veille proactive est assurée\ninfrastructures, afin d’assurer une résilience optimale face pour anticiper les menaces émergentes et adapter en\naux cyberattaques et aux fuites de données. Des audits permanence nos dispositifs de protection.\nNOTRE ENGAGEMENT POUR LA PROTECTION DES DONNÉES PERSONNELLES\nAu cœur de notre dispositif, la Notice de protection des chacune de ces étapes, nous appliquons des principes\ndonnées personnelles constitue le cadre de référence stricts : transparence sur les finalités de la collecte,\nqui définit nos engagements en matière de collecte, utilisation loyale des informations, durées de conservation\nde traitement, de conservation, de sécurisation et de limitées et justifiées, protection optimale contre les accès\ndestruction des données à caractère personnel. Pour non autorisés.\n32",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1739
+    },
+    {
+      "page_number": 34,
+      "text": "RAPPORT ESG 2025\nDans ce cadre, TLF conduit des audits de conformité et la conformité légale des traitements de données, le\njuridique en matière de protection des données personnelles, respect des droits des personnes concernées (accès,\nconformément au cadre légal tunisien, notamment la Loi rectification, opposition, suppression), la sécurité et la\norganique n° 2004-63 du 27 juillet 2004 et la Convention confidentialité des données, ainsi que la conformité des\n108 du Conseil de l’Europe, ratifiée par la Tunisie en déclarations auprès des instances concernées.\n2017. Ces audits portent notamment sur la légitimité\nLA CONFIANCE, FRUIT D’UNE VIGILANCE CONSTANTE\nEn assurant le respect rigoureux des réglementations Cette vigilance permanente est au service d’un objectif\napplicables en matière de protection des données, unique : faire de la sécurité numérique un véritable\nnous renforçons chaque jour la confiance de nos facteur de différenciation et de valeur pour l’ensemble\nclients et partenaires dans notre capacité à préserver de nos parties prenantes.\nla confidentialité et la sécurité de leurs informations.\n33",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1121
+    },
+    {
+      "page_number": 35,
+      "text": "VI.\nEnjeux\nenvironnementaux\n34",
+      "tables": [],
+      "has_text": true,
+      "char_count": 30
+    },
+    {
+      "page_number": 36,
+      "text": "RAPPORT ESG 2025\nUNE OFFRE DE PRODUITS ÉCO-RESPONSABLES AU SERVICE DE LA TRANSITION DURABLE\nFace aux défis environnementaux et climatiques de par le renouvellement de leurs équipements au profit\nnotre époque, Tunisie Leasing & Factoring réaffirme de matériels moins polluants et moins consommateurs\nson rôle d’acteur économique engagé dans la transition d’énergie.\nvers une économie plus durable. Le développement\nd’une offre de produits éco-responsables constitue Cette offre se décline à travers deux axes complémentaires.\npour TLF un levier stratégique essentiel pour Le produit TLF Photovoltaïque propose une solution de\naccompagner ses clients dans la transformation de leasing dédiée au financement d’installations solaires,\nleurs modèles économiques, en orientant les capacités permettant aux entreprises de produire leur propre\nde financement de l’institution vers des projets à impact énergie renouvelable tout en réduisant significativement\nenvironnemental positif. leur empreinte énergétique. Parallèlement, TLF soutient\nle développement de la mobilité durable à travers le\nDans cette perspective, TLF a structuré une offre financement de véhicules électriques et hybrides,\ndédiée de financement vert, conçue pour encourager contribuant ainsi activement à la décarbonation des\nses clients à investir dans la production d’énergies flottes professionnelles et individuelles et à l’atteinte\nrenouvelables et à améliorer leur efficacité énergétique des objectifs climatiques nationaux.\nLE FINANCEMENT DE L’ÉCONOMIE CIRCULAIRE : UN ENGAGEMENT STRATÉGIQUE POUR UN\nUSAGE RESPONSABLE DES RESSOURCES\nLe réchauffement climatique, l’accumulation des déchets, Cette orientation se concrétise à travers deux axes\nla raréfaction des matières premières et les tensions complémentaires. D’une part, TLF a développé une\nd’approvisionnement qui en découlent imposent aux offre de financement de matériels d’occasion et\nacteurs économiques d’adopter un comportement plus reconditionnés, permettant de prolonger le cycle de\nresponsable dans l’utilisation des ressources naturelles vie des équipements et de réduire la pression sur les\net la réduction de leurs déchets. Dans ce contexte, ressources naturelles. D’autre part, TLF finance les\nTLF a placé le financement de l’économie circulaire équipements de recyclage des déchets - plastique,\nau cœur de sa stratégie, en mobilisant ses capacités papier, textile, alimentaire - offrant à ses clients la\nde financement au service de modèles économiques possibilité de valoriser leurs déchets comme matières\nplus sobres et plus durables. premières dans la fabrication d’une large gamme\nde produits, contribuant ainsi à la fermeture des\nboucles de production et à la réduction de l’empreinte\nenvironnementale globale de leurs activités.\n35",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2775
+    },
+    {
+      "page_number": 37,
+      "text": "BILAN CARBONE\nConformément aux exigences de la norme ISO 14064- L’inventaire, qui couvre la période du 1er janvier au\n1 et aux standards internationaux du GHG Protocol, 31 décembre 2025, inclut les émissions directes\nTunisie Leasing & Factoring (TLF) a réalisé son premier (Scope 1) ainsi que les émissions indirectes liées à\nbilan carbone au titre de l’exercice 2025. la consommation d’électricité (Scope 2), selon une\napproche de consolidation fondée sur le contrôle\nopérationnel.\nLES SCOPES D’ÉMISSION\nDans ce cadre, TLF a organisé une session de les scopes d’émissions et les bonnes pratiques de\nsensibilisation, destinée à un groupe de collaborateurs, collecte des données. Cette initiative vise à renforcer\nsur les enjeux du changement climatique et les la compréhension interne des enjeux climatiques, à\nprincipes de calcul des émissions de gaz à effet de favoriser l’appropriation de la démarche du bilan carbone\nserre. Cette session a permis de présenter les causes et à encourager l’implication des collaborateurs dans\net les impacts du réchauffement climatique ainsi que le la mise en œuvre des actions futures de réduction des\nrôle des organisations dans la mesure et la réduction émissions de la société.\nde leur empreinte carbone, notamment à travers\n36",
+      "tables": [
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ],
+          [
+            "LES SCOPES D’ÉMISSION"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 1267
+    },
+    {
+      "page_number": 38,
+      "text": "RAPPORT ESG 2025\nEMPREINTE CARBONE GLOBALE\nLes émissions totales de gaz à effet de serre (GES) générées par les activités opérationnelles de TLF s’élèvent\nà 587,89 tonnes de CO équivalent (tCO e).\n2 2\nLa répartition par périmètre est la suivante :\n• Scope 1 – Émissions directes : 334,19 tCO2e (56,85%)\nCes émissions proviennent principalement de la consommation de carburant liée à la flotte\nde véhicules de l’institution, qui en constitue le poste dominant.\n• Scope 2 – Émissions indirectes liées à l’électricité : 253,70 tCO e (43,15%)\n2\nCes émissions sont associées à la consommation d’électricité de l’ensemble du réseau\nd’agences et du siège social.\nCette structure met en évidence le poids significatif des consommations énergétiques (mobilité professionnelle\net électricité= dans l’empreinte carbone globale de notre institution.\n43,15%\n587,89\ntonne CO -éq\n2\n56,85%\nScope 1\nScope 2\n37",
+      "tables": [],
+      "has_text": true,
+      "char_count": 892
+    },
+    {
+      "page_number": 39,
+      "text": "PERSPECTIVES D’ÉLARGISSEMENT DU PÉRIMÈTRE\nDans une logique d’amélioration continue et de permettra de couvrir des postes additionnels tels que\nrenforcement de la transparence extra-financière, les déplacements domicile-travail, certains achats de\nTLF prévoit d’élargir le périmètre de son prochain biens et services, les prestations externalisées, ainsi\nbilan carbone afin d’y intégrer progressivement les que, à terme, les émissions associées aux activités\némissions du Scope 3, soit les autres émissions financées.\nindirectes liées à sa chaîne de valeur. Cette extension\nRÉDUCTION DE NOTRE EMPREINTE CARBONE\nConsciente de l’importance de la réduction de son Par ailleurs, nous avons finalisé l’installation d’une\nimpact environnemental, TLF intègre la réduction de station photovoltaïque, sur un terrain propriété de\nson empreinte carbone dans sa stratégie de durabilité. TLF, pour la production d’une énergie verte pour notre\nNous mettons en œuvre, au sein de notre institution, propre consommation. Cette installation, dont l’entrée\ndes initiatives visant à optimiser notre consommation en exploitation est prévue pour 2026, constituera un pas\nd’énergie et à soutenir la transition énergétique. important vers l’amélioration de notre mix énergétique\net la réduction de notre empreinte carbone.\nDans cette démarche, nous avons procédé au changement\nde notre éclairage vers des solutions LED, plus efficaces\net moins énergivores, permettant ainsi de réduire\nnotre consommation d’électricité tout en améliorant\nla qualité de notre environnement de travail.\n38",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1560
+    },
+    {
+      "page_number": 40,
+      "text": "RAPPORT ESG 2025\nPARTICIPATION AUX EFFORTS DE REBOISEMENT : UN ENGAGEMENT ANCRÉ DANS LA DURÉE\nDans le cadre de son engagement en faveur de la\npréservation de l’environnement et de la lutte contre\nle changement climatique, TLF a poursuivi en 2025 le\nprogramme de reboisement initié l’année précédente.\nForte du succès de la première opération conduite\nen 2024, la société a renouvelé cette initiative en\nprocédant à la plantation de 5 000 arbres dans la région\nde Zaghouan - zone reconnue pour son importance\nécologique et forestière - en collaboration avec des\npartenaires locaux et avec la participation active de\ncollaborateurs volontaires.\nCette action s’inscrit dans une triple ambition : contribuer À travers la pérennisation de ce programme, TLF\nà la restauration des écosystèmes dégradés, renforcer témoigne de sa volonté de traduire ses engagements\nla séquestration du carbone dans une région à fort environnementaux en actions concrètes et mesurables,\npotentiel forestier, et promouvoir la sensibilisation inscrits dans une démarche de long terme au service\nenvironnementale au sein de nos équipes et de nos de la protection des ressources naturelles et du\ncommunautés locales. développement durable.\nRECYCLAGE DES DÉCHETS : UN GESTE CONCRET POUR\nLA PRÉSERVATION DES RESSOURCES\nDans le prolongement de ses engagements environnementaux,\nTLF a mis en place un dispositif de recyclage de ses déchets de\npapier, contribuant ainsi à la réduction de son empreinte écologique,\nà la préservation des ressources naturelles et à la lutte contre la\ndéforestation. Cette démarche, bien qu’opérationnelle dans sa\nnature, reflète la volonté de l’institution d’intégrer la responsabilité\nenvironnementale à tous les niveaux de son fonctionnement interne.\n39",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1751
+    },
+    {
+      "page_number": 41,
+      "text": "PROGRAMME ADAPT : UN PARTENARIAT INTERNATIONAL AU SERVICE D’UNE AGRICULTURE\nDURABLE\nEn 2025, TLF a renouvelé la convention de partenariat avec Dans ce cadre, le programme ADAPT contribue en\nl’Agence Italienne pour la Coopération au Développement partie aux fonds propres des bénéficiaires, facilitant\n(AICS) pour la mise en œuvre du programme ADAPT leur accès au financement et renforçant la viabilité\n- Appui au Développement durable dans le secteur de économique de leurs projets. À travers cette convention,\nl’Agriculture et de la Pêche artisanale en Tunisie. Ce TLF consolide son rôle de catalyseur du développement\nprogramme vise à promouvoir une agriculture plus durable, en accompagnant la transition écologique des\nrésiliente face aux effets du changement climatique, acteurs économiques tunisiens tout en mobilisant des\nen soutenant financièrement les porteurs de projets partenariats internationaux à fort impact territorial et\nà impact environnemental positif dans les secteurs de environnemental.\nl’agriculture, de la pêche artisanale et de l’aquaculture.\nPARTICIPATION À DES ÉVÉNEMENTS À FORT IMPACT SUR LE DÉVELOPPEMENT DURABLE\nAffirmant sa volonté de promouvoir activement la\nfinance durable et d’accompagner les initiatives\nfavorables à la transition écologique, TLF a participé\nen 2025, pour la deuxième année consécutive, au\nSalon de l’Économie Verte, de la Finance Responsable\net du Développement Durable. À cette occasion, la\nsociété y était représentée à travers un stand dédié,\nainsi que par la participation de son Président du\nConseil d’Administration en qualité de panéliste. Cette\nprésence a constitué une opportunité privilégiée pour\néchanger avec les différents acteurs de l’écosystème Par ailleurs, TLF a assuré le sponsoring du Forum du\nvert, renforcer la visibilité de l’engagement ESG de Pacte Mondial des Nations Unies – Tunisie, consacré\nTLF et affirmer son positionnement en tant qu’acteur au rôle de la RSE comme levier de lutte contre le\nfinancier de référence dans l’accompagnement de la changement climatique. Réunissant des acteurs\ntransition vers une économie plus durable. économiques et institutionnels engagés, ce forum\na été le cadre d’échanges constructifs, de partages\nd’expériences et d’opportunités de collaboration\nvisant à promouvoir des pratiques responsables et à\nsoutenir une transition climatique juste et inclusive,\nen particulier à l’échelle du continent africain.\n40",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2424
+    },
+    {
+      "page_number": 42,
+      "text": "RAPPORT ESG 2025\nADHÉSION DE TLF À ICC TUNISIA ET ENGAGEMENT AU SEIN DE LA COMMISSION\nENVIRONNEMENT ET ÉNERGIE\nTLF a adhéré en 2024 à ICC Tunisia, la section nationale de encore les mécanismes de financement durable. Cette\nla Chambre de Commerce Internationale (ICC), organisation implication revêt une importance stratégique pour\nmondiale dont l’objectif est de faire entendre la voix TLF lui permettant de renforcer la cohérence de sa\ndes entreprises auprès des instances de gouvernance démarche ESG, d’anticiper les évolutions réglementaires\ninternationale. TLF a participé activement courant et d’enrichir ses solutions de financement pour\n2025 aux travaux de la Commission Environnement et accompagner ses clients dans leur propre transition\nÉnergie d’ICC Tunisia aux côtés d’autres entreprises environnementale.\nengagées. Cette commission constitue un espace\nde réflexion collective, de partage d’expertise et de À travers ces initiatives, TLF réaffirme sa volonté d’être\nproposition vis-à-vis des pouvoirs publics tunisiens non seulement un financeur de la transition écologique,\nsur des sujets aussi stratégiques que l’adaptation au mais également un acteur de dialogue et d’influence au\nchangement climatique, le développement des énergies sein des écosystèmes économiques et institutionnels\nrenouvelables, la décarbonation de l’économie ou engagés pour un développement durable.\n41",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1391
+    },
+    {
+      "page_number": 43,
+      "text": "DIGITALISATION ET INNOVATION : LA TECHNOLOGIE AU SERVICE D’UNE FINANCE PLUS\nRESPONSABLE\nLa digitalisation et l’innovation constituent deux piliers de transparence et de simplicité, TLF mobilise les\nfondamentaux de la stratégie de TLF pour construire technologies numériques au service de trois objectifs\nune finance plus efficace, plus accessible et plus complémentaires : l’amélioration de la performance\nresponsable. Face à la transformation des usages et opérationnelle, le renforcement de la relation client\naux exigences croissantes en matière de réactivité, et la réduction de son empreinte environnementale.\nUne transformation numérique profonde des\nprocessus internes\nTLF a digitalisé la quasi-totalité de ses processus\ninternes, générant des gains significatifs de productivité\net une réduction drastique de la consommation de\npapier. Cette transformation structurelle témoigne\nde la volonté de l’institution d’inscrire l’efficience\nopérationnelle et la sobriété environnementale au\ncœur de son fonctionnement quotidien.\nTLFNet : une plateforme digitale au service de\nl’inclusion et de la durabilité\nDans le prolongement de cette démarche, TLF a\ndéployé TLFNet, une plateforme digitale accessible\nsept jours sur sept et vingt-quatre heures sur vingt-\nquatre, conçue pour offrir à l’ensemble de ses clients\n- y compris ceux résidant dans les villes de l’intérieur\ndu pays — un accès à distance à ses services, sans\ncontrainte de déplacement. Cette solution permet\nde soumettre des demandes de financement, de\nsuivre l’avancement des dossiers, de transmettre des\ndocuments électroniquement et d’échanger avec les\néquipes de TLF de manière sécurisée et entièrement\ndématérialisée.\nAu-delà de l’amélioration de l’expérience utilisateur,\nTLFNet contribue activement à la réduction de la\nconsommation de papier et des émissions liées aux\ndéplacements, s’inscrivant ainsi pleinement dans la\nstratégie environnementale et sociale de TLF.\n42",
+      "tables": [
+        [
+          [
+            ""
+          ],
+          [
+            ""
+          ]
+        ],
+        [
+          [
+            "Une transformation numérique profonde des\nprocessus internes\nTLF a digitalisé la quasi-totalité de ses processus\ninternes, générant des gains significatifs de productivité\net une réduction drastique de la consommation de\npapier. Cette transformation structurelle témoigne\nde la volonté de l’institution d’inscrire l’efficience\nopérationnelle et la sobriété environnementale au\ncœur de son fonctionnement quotidien."
+          ],
+          [
+            "TLFNet : une plateforme digitale au service de\nl’inclusion et de la durabilité\nDans le prolongement de cette démarche, TLF a\ndéployé TLFNet, une plateforme digitale accessible\nsept jours sur sept et vingt-quatre heures sur vingt-\nquatre, conçue pour offrir à l’ensemble de ses clients\n- y compris ceux résidant dans les villes de l’intérieur\ndu pays — un accès à distance à ses services, sans\ncontrainte de déplacement. Cette solution permet\nde soumettre des demandes de financement, de\nsuivre l’avancement des dossiers, de transmettre des\ndocuments électroniquement et d’échanger avec les\néquipes de TLF de manière sécurisée et entièrement\ndématérialisée.\nAu-delà de l’amélioration de l’expérience utilisateur,\nTLFNet contribue activement à la réduction de la\nconsommation de papier et des émissions liées aux\ndéplacements, s’inscrivant ainsi pleinement dans la\nstratégie environnementale et sociale de TLF."
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 1941
+    },
+    {
+      "page_number": 44,
+      "text": "RAPPORT ESG 2025\nSYSTÈME DE GESTION ENVIRONNEMENTALE ET SOCIALE : UN CADRE RIGOUREUX POUR\nDES FINANCEMENTS RESPONSABLES\nTLF s’est dotée d’un Système de Gestion Environnementale Le SGES couvre l’ensemble des financements en\net Sociale (SGES) destiné à garantir que ses financements leasing de TLF comprenant notamment le matériel de\nbénéficient exclusivement à des projets respectueux production industrielle, le transport lourd, les engins de\ndes normes internationales et des réglementations chantier et de travaux publics, les équipements spéciaux\nenvironnementales et sociales en vigueur en Tunisie. agricoles et de pêche, le matériel de manutention, ainsi\nCe dispositif a été renforcé par l’ajustement des que les immeubles à usage industriel ou commercial\npolitiques commerciales et de crédit de TLF, ainsi que soit l’ensemble des catégories d’actifs susceptibles\npar l’optimisation des procédures opérationnelles afin de générer des impacts environnementaux et sociaux\nd’améliorer l’évaluation systématique des impacts significatifs.\nsociaux et environnementaux associés à chaque\nopération de financement.\nUn investissement continu dans les compétences\ninternes\nDans le cadre du renforcement de son dispositif de davantage l’intégration des principes ESG dans ses\ngestion des risques environnementaux et sociaux, TLF processus de gestion des risques et de prise de\na assuré en 2025 la participation de son Responsable décision, faisant de la montée en compétences un\nRSE à une formation certifiante sur le SGES, organisée levier stratégique à part entière de sa trajectoire de\npar le CBF. Cette démarche traduit la volonté de TLF durabilité.\nde consolider ses expertises internes et de structurer\n43",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1705
+    },
+    {
+      "page_number": 45,
+      "text": "VII.\nEnjeux sociaux\n44",
+      "tables": [],
+      "has_text": true,
+      "char_count": 22
+    },
+    {
+      "page_number": 46,
+      "text": "RAPPORT ESG 2025\nBIEN-ÊTRE AU TRAVAIL\nConscients que la performance pérenne d’une collaborateurs une approche structurée et préventive\nentreprise repose sur l’épanouissement et la motivation de la gestion du stress. Elle a permis de sensibiliser les\nde ses collaborateurs, nous œuvrons pour créer un participants aux bonnes pratiques favorisant l’équilibre\nenvironnement de travail sain, inclusif et propice psychologique, d’améliorer leur capacité d’adaptation\nà l’épanouissement personnel et professionnel de face aux exigences professionnelles et de renforcer\nchacun. Dans ce cadre, nous avons : leur efficacité au travail.\n• Permis des aménagements flexibles du temps de travail\nEnfin, pour aider le personnel à trouver des solutions\n(horaires modulables pour certains collaborateurs);\nde stationnement abordables, TLF prend en charge\n50% des frais d’abonnement annuel au parking du\n• Accordé le télétravail pour certains employés pour\nCentre Urbain Nord.\nles aider à concilier les contraintes personnelles et\nles contraintes professionnelles,\nEn créant un environnement de travail respectueux,\néthique et collaboratif, nous favorisons un climat de\nLa société a organisé un webinaire consacré à la gestion confiance, de transparence et de reconnaissance,\ndu stress et au bien-être professionnel animé par une essentiel pour cultiver une culture d’entreprise positive\nspécialiste en psychiatrie et en accompagnement et engagée.\nprofessionnel, l’objectif étant de proposer aux\nSANTÉ\nDans le cadre de sa politique de santé et de bien-être En Tunisie, le « Novembre Bleu » est une campagne\nau travail, Tunisie Leasing & Factoring a organisé annuelle de sensibilisation et de dépistage du cancer\ndes visites médicales au profit de l’ensemble de son de la prostate et des maladies masculines. A cette\npersonnel entièrement pris en charge par la société. occasion, soucieuse de préserver la santé et le bien-\nCette initiative vise à assurer un suivi régulier de l’état être de ses collaborateurs, TLF a organisé un atelier\nde santé des collaborateurs, à favoriser la prévention de sensibilisation consacré au sujet animé par un\net le dépistage précoce de certaines pathologies et médecin spécialiste en urologie. Cette session a\nà promouvoir une culture de prévention au sein de permis d’informer les participants sur les enjeux\nl’entreprise. liés à cette pathologie, de souligner l’importance du\ndépistage précoce et des consultations régulières, et\nTLF a organisé, à l’occasion du mois de Ramadan d’encourager l’adoption de modes de vie favorables\n2025, une session de sensibilisation consacrée aux à la prévention.\nbienfaits du jeûne et aux principes de la détoxification\nnaturelle. Animée par un professionnel de la santé,\ncette formation a permis de présenter les bonnes\npratiques alimentaires, les conseils d’hydratation et\nles habitudes favorisant le maintien de l’énergie et\nde l’équilibre physique durant cette période. Cette\ninitiative s’inscrit dans la démarche de la Société visant\nà promouvoir un environnement de travail sain et à\naccompagner ses collaborateurs dans l’adoption de\nmodes de vie favorables à leur bien-être.\n45",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3136
+    },
+    {
+      "page_number": 47,
+      "text": "CULTURE ESG : ANCRER LA RESPONSABILITÉ AU CŒUR DE NOTRE INSTITUTION\nLa culture ESG constitue un vecteur fondamental pour renforcer l’engagement de TLF envers une finance\nresponsable et durable. Consciente de l’importance d’une approche globale et cohérente, TLF a déployé plusieurs\ninitiatives structurantes visant à faire des enjeux environnementaux, sociaux et de gouvernance une réalité\nopérationnelle à tous les niveaux de l’organisation.\nCette ambition se concrétise à travers quatre axes complémentaires :\n• L’intégration des critères ESG dans les processus de • La création d’un Comité RSE garantit quant à elle\ndécision de crédit permet d’ancrer la responsabilité une supervision continue de l’intégration des enjeux\nenvironnementale et sociale au cœur même de notre ESG dans nos processus, tout en constituant un\n• activité de financement. organe de proposition et d’amélioration permanente.\nLa désignation d’un Responsable RSE dédié assure le • La participation active du Responsable RSE à des\npilotage opérationnel et la cohérence de la démarche formations, ateliers et réunions spécialisés sur les\nESG à l’échelle de l’institution. enjeux de durabilité témoigne de la volonté de TLF\nd’inscrire le développement des compétences internes\ncomme un levier stratégique de sa trajectoire ESG.\nDIVERSITÉ ET ÉGALITÉ DES CHANCES\nConvaincus que la richesse des parcours, des profils\net des expériences individuelles est un levier de\nperformance collective, la société offre à chacun\ndes collaborateurs les mêmes opportunités de\ndéveloppement et d’évolution, quels que soient leurs\ngenres, leurs origines, leurs âges ou leurs situations\npersonnelles. Cet engagement se traduit par des\nprocessus de recrutement équitables, une garantie\nde l’équité salariale et l’accès à la formation pour tous\nen particulier pour les collaborateurs en début ou en\nreconversion de carrière.\nGENRE\nLa part globale des femmes au sein de Tunisie Leasing & limitée dans les postes de direction (23%) ce qui appelle\nFactoring s’élève à 37% avec une présence significative à une réflexion sur les leviers à activer pour renforcer\ndans les fonctions d’encadrement (42%) et d’exécution la parité dans les niveaux hiérarchiques supérieurs.\n(33%). Toutefois, leur représentation reste encore\n46",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2267
+    },
+    {
+      "page_number": 48,
+      "text": "RAPPORT ESG 2025\nLA FORMATION CONTINUE\nLa formation continue est essentielle pour garantir la qualité des services que nous offrons à nos clients. Nous\navons planifié, comme chaque année, des sessions de formation adaptées qui permettent aux collaborateurs de\nse maintenir à jour sur les évolutions réglementaires, les outils numériques, et les bonnes pratiques du métier.\nDe plus, nous favorisons des formations en interne par des experts métiers afin de garantir une approche\nspécifique à nos besoins opérationnels.\nAinsi, des formations ont été assurées en interne portant sur la lutte contre le blanchiment d’argent et le\nfinancement du terrorisme, sur la nouvelle réglementation sur les chèques et une formation sur le risque\nopérationnel et la procédure de déclarations des incidents.\nLes sessions de formation réalisées en 2025 se résument comme suit :\nFormation 2025\nNombre d’actions 30\nNombre de participants 160\nTaux de participation 90%\nTotal jours de formation/an 208\n• Dont actions sur la santé et la sécurité de travail 24\n• Dont actions RSE 13\nNombre moyen de jours de formation par employé 1,2\nACTIONS SOLIDAIRES\nEn 2025, TLF a continué son soutien à plusieurs\nassociations en charge notamment du soutien des\npersonnes nécessiteuses, des maisons de retraite\npour les personnes âgées défavorisées, des enfants\nabandonnés et des handicapés.\nAu titre de cet engagement sociétal en faveur de\nl’éducation et du développement des communautés\nlocales, Tunisie Leasing & Factoring a accordé un don\npour participer à la rénovation d’une école primaire\nà Sidi Salem - Sajnene. Cette contribution a permis\nd’améliorer les conditions d’accueil et d’apprentissage\ndes élèves à travers des travaux de réhabilitation et\nde remise en état des infrastructures. À travers cette\naction à fort impact social, la Société réaffirme sa\nvolonté de soutenir des initiatives durables en faveur de\nl’égalité des chances et de l’accès à un environnement\néducatif de qualité, contribuant ainsi au développement\ninclusif des régions.\n47",
+      "tables": [
+        [
+          [
+            "Formation",
+            "2025"
+          ],
+          [
+            "Nombre d’actions",
+            "30"
+          ],
+          [
+            "Nombre de participants",
+            "160"
+          ],
+          [
+            "Taux de participation",
+            "90%"
+          ],
+          [
+            "Total jours de formation/an\n• Dont actions sur la santé et la sécurité de travail\n• Dont actions RSE",
+            "208\n24\n13"
+          ],
+          [
+            "Nombre moyen de jours de formation par employé",
+            "1,2"
+          ]
+        ]
+      ],
+      "has_text": true,
+      "char_count": 2022
+    },
+    {
+      "page_number": 49,
+      "text": "TLF a soutenu aussi en 2025 par un don la 2ème édition de\nl’événement caritatif « Run for Brave Hearts » visant à\nmobiliser des fonds au profit du service de cardiologie\nde l’hôpital Taher Maamouri de Nabeul afin d’améliorer\nla qualité de la prise en charge des patients de la région\ndu Cap Bon tout en sensibilisant le grand public à la\nprévention des maladies cardiovasculaires.\nRESPECT DES OBLIGATIONS SOCIALES TOUT AU LONG DE LA CHAÎNE DE VALEUR\nEn tant qu’institution financière responsable, TLF veille responsabilité sociale à chaque maillon de sa chaîne\nà ce que l’ensemble de ses partenaires, fournisseurs et de valeur, TLF contribue activement à la construction\nsous-traitants adoptent des pratiques conformes aux d’un écosystème économique plus équitable et plus\nprincipes éthiques, sociaux et de bonne gouvernance durable, en cohérence avec ses engagements au titre\nqu’elle défend en interne. En intégrant l’exigence de des Objectifs de Développement Durable.\nINCLUSION FINANCIÈRE : ÉLARGIR L’ACCÈS AU FINANCEMENT SUR L’ENSEMBLE DU\nTERRITOIRE\nTLF œuvre à rendre ses produits et services accessibles pour assurer une couverture efficace et équitable de\nà un public élargi, en portant une attention particulière l’ensemble du territoire national.\naux petites et moyennes entreprises, aux porteurs de\nprojets implantés dans les zones moins desservies et Cette double démarche, exigence sociale dans la chaîne\naux clients traditionnellement éloignés du système de valeur et inclusion financière active, illustre la\nfinancier classique. Dans cette perspective, TLF conviction de TLF que la performance durable ne peut\ndéveloppe des solutions simples, transparentes et se construire sans un ancrage fort dans les réalités\nadaptées aux réalités de chacun, en s’appuyant sur son économiques et sociales des territoires qu’elle sert.\nréseau d’agences régionales et sur ses canaux digitaux\n48",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1893
+    },
+    {
+      "page_number": 50,
+      "text": "20\nRapport ESG\n25\nInnovation\nEngagement\nConfiance\nProximité",
+      "tables": [],
+      "has_text": true,
+      "char_count": 59
+    }
+  ]
+}

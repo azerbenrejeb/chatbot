@@ -1,0 +1,2054 @@
+{
+  "metadata": {
+    "nom_fichier": "world-stats-pocketbook-2022.pdf",
+    "nombre_pages": 292,
+    "chemin": "C:\\RSE Time\\chatbot\\rapport_non _annoteé\\world-stats-pocketbook-2022.pdf",
+    "extracteur": "PyMuPDF"
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "Series V, No. 46 \nDepartment of Economic \nand Social Affairs \nStatistics Division \nWorld   \nStatistics \nPocketbook \n2022 edition \nContaining data available \nas of 31 July 2022 \nUnited Nations, New York, 2022",
+      "tables": [],
+      "has_text": true,
+      "char_count": 207
+    },
+    {
+      "page_number": 2,
+      "text": "The Department of Economic and Social Affairs of the United Nations is a vital \ninterface between global policies in the economic, social and environmental \nspheres and national action. The Department works in three main interlinked \nareas: (i) it compiles, generates and analyses a wide range of economic, social \nand environmental data and information on which United Nations Member \nStates draw to review common problems and to take stock of policy options; (ii) \nit facilitates the negotiations of Member States in many intergovernmental \nbodies on joint courses of action to address ongoing or emerging global \nchallenges; and (iii) it advises interested Governments on the ways and means \nof translating policy frameworks developed in United Nations conferences and \nsummits into programmes at the country level and, through technical \nassistance, helps build national capacities. \nNote \nThe designations employed and the presentation of the material in the present \npublication do not imply the expression of any opinion whatsoever on the part of \nthe United Nations concerning the legal status of any country or of its authorities, \nor the delimitations of its frontiers. The term “country” as used in this report also \nrefers, as appropriate, to territories or areas. The designations of country groups \nare intended solely for statistical or analytical convenience and do not necessarily \nexpress a judgement about the stage reached by a particular country, territory or \narea in the development process. Mention of the names of firms and commercial \nproducts does not imply endorsement by the United Nations. The symbols of United \nNations documents are composed of capital letters and numbers. \nThe term “country” as used in the text of this publication also refers, as appropriate, \nto territories or areas. \nVisit the United Nations World Wide Web site on the Internet: \nFor the Department of Economic and Social Affairs,  \nhttp://www.un.org/esa/desa/ \nFor statistics and statistical publications, \nhttp://unstats.un.org/unsd/ \nFor UN publications, https://shop.un.org/ \nST/ESA/STAT/SER.V/46 \nUnited Nations Publication \nSales No. E.22.XVII.8 \nISBN: 978-92-1-259198-8 \neISBN: 978-92-1-001441-0 \nPrint ISSN: 2411-8915 \neISSN: 2411-894X \nAll queries on rights and licenses, including subsidiary rights, should be addressed \nto United Nations Publications Customer Service, PO Box 960, Herndon, VA 20172, \nUSA, e-mail: order@un.org, web: https://shop.un.org/ \nWorld Statistics Pocketbook, 2022 edition\n© 2022 United Nations\nNew York, NY 10017, United States of America\nAll rights reserved\nPrinted by the United Nations, New York",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2639
+    },
+    {
+      "page_number": 3,
+      "text": "Contents \n  World Statistics Pocketbook 2022  iii  \nExplanatory notes ............................................................................................................ vi \nIntroduction .................................................................................................................... vii \nProfile information and indicator list ............................................................................... ix \nWorld, regional and country profiles................................................................................ 1 \nTechnical notes ............................................................................................................ 265 \nStatistical sources and references ................................................................................ 278 \nRelated statistical products .......................................................................................... 282 \nWorld, Regional and Country profiles \nWorld ............................................................ 3 \n Africa ............................................................ 4 \n  Northern Africa ........................................... 5 \n  Sub-Saharan Africa ...................................... 6 \n   Eastern Africa ............................................. 7 \n   Middle Africa .............................................. 8 \n   Southern Africa .......................................... 9 \n   Western Africa ......................................... 10 \n Americas .................................................... 11 \n  Northern America ..................................... 12 \n  Latin America and the Caribbean ............. 13 \n   Caribbean ................................................. 14 \n   Central America ....................................... 15 \n   South America .......................................... 16 \n Asia ............................................................. 17 \n  Central Asia ............................................... 18 \n  Eastern Asia ............................................... 19 \n  South-eastern Asia .................................... 20 \n  Southern Asia ............................................ 21 \n  Western Asia ............................................. 22 \n Europe ........................................................ 23 \n  Eastern Europe .......................................... 24 \n  Northern Europe ....................................... 25 \n  Southern Europe ....................................... 26 \n  Western Europe ........................................ 27 \n Oceania ...................................................... 28 \n  Australia and New Zealand ....................... 29 \n  Melanesia .................................................. 30 \n  Micronesia ................................................ 31 \n  Polynesia ................................................... 32 \nAfghanistan ................................................. 33 \nAlbania ........................................................ 34 \nAlgeria ......................................................... 35 \nAmerican Samoa ......................................... 36 \nAndorra ....................................................... 37 \nAngola ......................................................... 38 \nAnguilla ....................................................... 39 \nAntigua and Barbuda .................................. 40 \nArgentina .................................................... 41 \nArmenia ...................................................... 42 \nAruba ........................................................... 43 \nAustralia ...................................................... 44 \nAustria ......................................................... 45 \nAzerbaijan ................................................... 46 \nBahamas ...................................................... 47 \nBahrain ........................................................ 48 \nBangladesh .................................................. 49 \nBarbados ..................................................... 50 \nBelarus ......................................................... 51 \nBelgium ....................................................... 52 \nBelize ........................................................... 53 \nBenin ........................................................... 54 \nBermuda ...................................................... 55 \nBhutan ......................................................... 56 \nBolivia (Plurinational State of) .................... 57 \nBonaire, Sint Eustatius and Saba ................ 58 \nBosnia and Herzegovina ............................. 59 \nBotswana..................................................... 60 \nBrazil ............................................................ 61 \nBritish Virgin Islands .................................... 62 \nBrunei Darussalam ...................................... 63 \nBulgaria ....................................................... 64 \nBurkina Faso ................................................ 65 \nBurundi ........................................................ 66 \nCabo Verde .................................................. 67 \nCambodia .................................................... 68 \nCameroon.................................................... 69 \nCanada......................................................... 70 \nCayman Islands ........................................... 71 \nCentral African Republic ............................. 72 \nChad ............................................................ 73 \nChannel Islands ........................................... 74 \nChile ............................................................. 75 \nChina ........................................................... 76 \nChina, Hong Kong SAR ................................ 77 \nChina, Macao SAR ....................................... 78 \nColombia ..................................................... 79 \nComoros ...................................................... 80 \nCongo .......................................................... 81 \nCook Islands ................................................ 82",
+      "tables": [],
+      "has_text": true,
+      "char_count": 6234
+    },
+    {
+      "page_number": 4,
+      "text": "Contents (continued) \niv    World Statistics Pocketbook 2022 \nCosta Rica .................................................... 83 \nCôte d’Ivoire................................................ 84 \nCroatia ......................................................... 85 \nCuba ............................................................ 86 \nCuraçao ....................................................... 87 \nCyprus ......................................................... 88 \nCzechia ........................................................ 89 \nDemocratic People's Republic of Korea ..... 90 \nDemocratic Republic of the Congo ............ 91 \nDenmark ..................................................... 92 \nDjibouti........................................................ 93 \nDominica ..................................................... 94 \nDominican Republic .................................... 95 \nEcuador ....................................................... 96 \nEgypt ........................................................... 97 \nEl Salvador ................................................... 98 \nEquatorial Guinea ....................................... 99 \nEritrea........................................................ 100 \nEstonia ...................................................... 101 \nEswatini ..................................................... 102 \nEthiopia ..................................................... 103 \nFalkland Islands (Malvinas)  ...................... 104 \nFaroe Islands ............................................. 105 \nFiji .............................................................. 106 \nFinland....................................................... 107 \nFrance ....................................................... 108 \nFrench Guiana ........................................... 109 \nFrench Polynesia ....................................... 110 \nGabon ........................................................ 111 \nGambia ...................................................... 112 \nGeorgia ...................................................... 113 \nGermany ................................................... 114 \nGhana ........................................................ 115 \nGibraltar .................................................... 116 \nGreece ....................................................... 117 \nGreenland ................................................. 118 \nGrenada .................................................... 119 \nGuadeloupe .............................................. 120 \nGuam ......................................................... 121 \nGuatemala ................................................ 122 \nGuinea ....................................................... 123 \nGuinea-Bissau ........................................... 124 \nGuyana ...................................................... 125 \nHaiti ........................................................... 126 \nHoly See .................................................... 127 \nHonduras................................................... 128 \nHungary ..................................................... 129 \nIceland .......................................................130 \nIndia ...........................................................131 \nIndonesia ...................................................132 \nIran (Islamic Republic of) ..........................133 \nIraq ............................................................134 \nIreland .......................................................135 \nIsle of Man.................................................136 \nIsrael ..........................................................137 \nItaly ............................................................138 \nJamaica ......................................................139 \nJapan .........................................................140 \nJordan ........................................................141 \nKazakhstan ................................................142 \nKenya .........................................................143 \nKiribati .......................................................144 \nKuwait .......................................................145 \nKyrgyzstan .................................................146 \nLao People's Democratic Republic ...........147 \nLatvia .........................................................148 \nLebanon.....................................................149 \nLesotho ......................................................150 \nLiberia ........................................................151 \nLibya ..........................................................152 \nLiechtenstein .............................................153 \nLithuania ....................................................154 \nLuxembourg ..............................................155 \nMadagascar ...............................................156 \nMalawi .......................................................157 \nMalaysia ....................................................158 \nMaldives ....................................................159 \nMali............................................................160 \nMalta .........................................................161 \nMarshall Islands ........................................162 \nMartinique ................................................163 \nMauritania .................................................164 \nMauritius ...................................................165 \nMayotte .....................................................166 \nMexico .......................................................167 \nMicronesia (Federated States of) .............168 \nMonaco .....................................................169 \nMongolia ...................................................170 \nMontenegro ..............................................171 \nMontserrat ................................................172 \nMorocco ....................................................173 \nMozambique .............................................174 \nMyanmar ...................................................175 \nNamibia .....................................................176",
+      "tables": [],
+      "has_text": true,
+      "char_count": 6238
+    },
+    {
+      "page_number": 5,
+      "text": "Contents (continued) \nWorld Statistics Pocketbook 2022  v \nNauru ........................................................ 177 \nNepal ......................................................... 178 \nNetherlands .............................................. 179 \nNew Caledonia .......................................... 180 \nNew Zealand ............................................. 181 \nNicaragua .................................................. 182 \nNiger .......................................................... 183 \nNigeria ....................................................... 184 \nNiue ........................................................... 185 \nNorth Macedonia...................................... 186 \nNorthern Mariana Islands ........................ 187 \nNorway ...................................................... 188 \nOman ........................................................ 189 \nPakistan ..................................................... 190 \nPalau.......................................................... 191 \nPanama ..................................................... 192 \nPapua New Guinea ................................... 193 \nParaguay ................................................... 194 \nPeru ........................................................... 195 \nPhilippines ................................................. 196 \nPoland ....................................................... 197 \nPortugal ..................................................... 198 \nPuerto Rico................................................ 199 \nQatar ......................................................... 200 \nRepublic of Korea ...................................... 201 \nRepublic of Moldova ................................. 202 \nRéunion ..................................................... 203 \nRomania .................................................... 204 \nRussian Federation ................................... 205 \nRwanda ..................................................... 206 \nSaint Helena .............................................. 207 \nSaint Kitts and Nevis ................................. 208 \nSaint Lucia ................................................. 209 \nSaint Pierre and Miquelon ........................ 210 \nSaint Vincent and the Grenadines ............ 211 \nSamoa ....................................................... 212 \nSan Marino ................................................ 213 \nSao Tome and Principe ............................. 214 \nSaudi Arabia .............................................. 215 \nSenegal ...................................................... 216 \nSerbia ........................................................ 217 \nSeychelles.................................................. 218 \nSierra Leone .............................................. 219 \nSingapore .................................................. 220 \nSint Maarten (Dutch part)  ....................... 221 \nSlovakia ..................................................... 222 \nSlovenia .....................................................223 \nSolomon Islands ........................................224 \nSomalia ......................................................225 \nSouth Africa ...............................................226 \nSouth Sudan ..............................................227 \nSpain ..........................................................228 \nSri Lanka ....................................................229 \nState of Palestine ......................................230 \nSudan .........................................................231 \nSuriname ...................................................232 \nSweden ......................................................233 \nSwitzerland ................................................234 \nSyrian Arab Republic .................................235 \nTajikistan ...................................................236 \nThailand .....................................................237 \nTimor-Leste ...............................................238 \nTogo ...........................................................239 \nTokelau ......................................................240 \nTonga .........................................................241 \nTrinidad and Tobago .................................242 \nTunisia .......................................................243 \nTürkiye .......................................................244 \nTurkmenistan ............................................245 \nTurks and Caicos Islands ...........................246 \nTuvalu ........................................................247 \nUganda ......................................................248 \nUkraine ......................................................249 \nUnited Arab Emirates................................250 \nUnited Kingdom ........................................251 \nUnited Republic of Tanzania .....................252 \nUnited States of America ..........................253 \nUnited States Virgin Islands ......................254 \nUruguay .....................................................255 \nUzbekistan .................................................256 \nVanuatu .....................................................257 \nVenezuela (Bolivarian Republic of) ...........258 \nViet Nam ...................................................259 \nWallis and Futuna Islands .........................260 \nWestern Sahara.........................................261 \nYemen .......................................................262 \nZambia .......................................................263 \nZimbabwe..................................................264",
+      "tables": [],
+      "has_text": true,
+      "char_count": 5700
+    },
+    {
+      "page_number": 6,
+      "text": "Explanatory notes \nvi    World Statistics Pocketbook 2022 \nThe following symbols and abbreviations have been used in the World \nStatistics Pocketbook: \n. A point is used to indicate decimals. \n… Data are not available or not applicable. \n~0.0 Not zero, but less than half of the unit employed. \n–~0.0 Not zero, but negative and less than half of the unit employed. \n% Percentage \n000 Thousands \nAssist. Assistance \nBol. Rep. Bolivarian Republic \nCIF Cost, Insurance and Freight \nCO2 Carbon dioxide \nconst. Constant \nCPI Consumer price index \nDem. Rep. Democratic Republic \nest. Estimate \nF Females \nFOB Free on board \nGDP Gross domestic product \nGNI Gross national income \nGVA Gross value added \nISIC International Standard Industrial Classification \nISO International Organization for Standardization \nKm2 Square kilometres \nM Males \nnes Not elsewhere specified \npop. Population \nRep. Republic \nSAR Special Administrative Region \nUN United Nations \nUNHCR Office of the UN High Commissioner for Refugees \nUnited Kingdom United Kingdom of Great Britain and Northern Ireland \nUnited States United States of America \nUNSD United Nations Statistics Division \nUS$/USD United States dollars \nThe metric system of weights and measures has been employed in the World \nStatistics Pocketbook.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1282
+    },
+    {
+      "page_number": 7,
+      "text": "Introduction \nWorld Statistics Pocketbook 2022    vii \nThe World Statistics Pocketbook is an annual compilation of key economic, \nsocial and environmental indicators, presented in one-page profiles. This \nedition includes profiles for the 30 world geographical regions and 232 \ncountries or areas. Prepared by the United Nations Statistics Division of the \nDepartment of Economic and Social Affairs, it responds to General Assembly \nresolution 2626 (XXV), in which the Secretary-General is requested to supply \nbasic national data that will increase international public awareness of \ncountries' development efforts. \nThe indicators shown are selected from the wealth of international \nstatistical information compiled regularly by the Statistics Division and the \nPopulation Division of the United Nations, the statistical services of the \nUnited Nations specialized agencies and other international organizations and \ninstitutions. Special recognition is gratefully given for their assistance in \ncontinually providing data. \nOrganization of the Pocketbook \nThe profiles are presented first with the world and its geographical regions \nand sub-regions, based on the M49 regional classification1, and then \ncountries and areas alphabetically according to their names in English. Each \nprofile is organised into 5 sections, where relevant and/or available: \n• \nGeneral information: includes data on surface area, population and \npopulation density, sex ratio of the population, capital city and its \npopulation, national currency and its exchange rate to the US dollar, \nlocation by geographical region and the date of admission to the United \nNations. \n• \nEconomic indicators: includes data on national accounts Gross domestic \nproduct (GDP), GDP per capita, GDP growth rate, Gross Value Added \n(GVA) share by industry, employment share by industry, unemployment \nrate, labour force participation rate, consumer price index, agricultural \nproduction index, the value of total exports, imports and the trade \nbalance and balance of payments. \n• \nMajor trading partners: shows a country’s main trading partners \n• \nSocial indicators: includes data on population (growth rates, including \nfor the urban population), total fertility rate, life expectancy at birth, \npopulation age distribution, international migrant stock, refugees, infant \nmortality rate, health (expenditure and physicians), education \n(expenditure and gross enrolment ratios), intentional homicide rate and \nseats held by women in the National Parliament. \n• \nEnvironmental and infrastructure indicators: includes data on internet \nusers, Research & Development expenditure, threatened species, \nforested area, CO2 emission estimates, energy production and energy \n \n1 See UNSD website: https://unstats.un.org/unsd/methodology/m49/",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2799
+    },
+    {
+      "page_number": 8,
+      "text": "Introduction (continued) \nviii    World Statistics Pocketbook 2022 \nsupply per capita, tourist/visitor arrivals, important sites for terrestrial \nbiodiversity protected, population using safely managed water sources \nand sanitation facilities and Official Development Assitance received or \ndisbursed. \nThe complete set of indicators, listed by category and in the order in which \nthey appear in the profiles, is shown before the country profile section (see \npage ix). Not all indicators are shown for each country or area due to different \ndegrees of data availability. \nThe technical notes section, which follows the country profile pages, \ncontains brief descriptions of the concepts and methodologies used in the \ncompilation of the indicators as well as information on the statistical sources \nfor the indicators. Readers interested in longer time-series data or more \ndetailed descriptions of the concepts or methodologies should consult the \nprimary sources of the data and the references listed in the section following \nthe technical notes. \nFor brevity the Pocketbook omits specific information on the source or \nmethodology for individual data points, and when a data point is estimated \nno distinction is made between whether the estimation was done by the \ninternational or national organization. See the technical notes section for the \nprimary source which may provide this information. \nTime period \nThis issue of the World Statistics Pocketbook presents data for the \neconomic, social, environmental and infrastructure sections for three \nreference years - 2010, 2015 and 2022 - when available or the most recent \ndata previous to these years, back to 2000. These instances are footnoted in \neach profile. For the general information and major trading partners sections \nthe reference year is 2022 and 2021 respectively, unless otherwise footnoted. \nAcknowledgement \nThe World Statistics Pocketbook is prepared annually by the Development \nData and Outreach Branch of the Statistics Division, Department of Economic \nand Social Affairs of the United Nations Secretariat. The programme manager \nis Matthias Reister and Anuradha Chimata is the editor; David Carter, \nMohamed Nabassoua and Kebebush Welkema provided production \nassistance; Joshua Kneidl provided IT support. Comments on this publication \nare welcome and may be sent by e-mail to statistics@un.org.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2379
+    },
+    {
+      "page_number": 9,
+      "text": "Profile information and indicator list* \nWorld Statistics Pocketbook 2022    ix \nGeneral information \nRegion \nPopulation (000) \nPopulation density (per km2) \nCapital city \nCapital city population (000) \nUN membership date \nSurface area (km2) \nSex ratio (males per 100 females) \nNational currency \nExchange rate (per US$) \nEconomic indicators \nGDP: Gross domestic product (million current US$) \nGDP growth rate (annual %, constant 2015 prices) \nGDP per capita (current US$) \nEconomy: Agriculture, industry and services and other activity (% of GVA) \nEmployment in agriculture, industry and services & other sectors (% of \nemployed) \nUnemployment rate (% of labour force) \nLabour force participation rate (% of female/male population) \nCPI: Consumer Price Index (2010=100) \nAgricultural production index (2014-2016=100) \nInternational trade: Exports, imports and balance (million current US$) \nBalance of payments, current account (million current US$) \nMajor trading partners (% of exports and imports) \nSocial indicators \nPopulation growth rate (average annual %) \nUrban population (% of total population) \nUrban population growth rate (average annual %) \nFertility rate, total (live births per woman) \nLife expectancy at birth (females/males, years) \nPopulation age distribution (0-14/60+ years old, %) \nInternational migrant stock (000/% of total population) \nRefugees and others of concern to the UNHCR (000) \nInfant mortality rate (per 1 000 live births) \nHealth: Current expenditure (% of GDP) \nHealth: Physicians (per 1 000 population) \nEducation: Government expenditure (% of GDP) \nEducation: Primary, Secondary and Upper secondary gross enrolment ratio       \n(females/males per 100 population) \nIntentional homicide rate (per 100 000 population) \nSeats held by women in the National Parliament (% of total seats) \nEnvironmental and infrastructure indicators \nIndividuals using the Internet (per 100 inhabitants) \nResearch & Development expenditure (% of GDP) \nThreatened species (number) \nForested area (% of land area) \nCO2 emission estimates (million tons/tons per capita) \nEnergy production, primary (Petajoules) \nEnergy supply per capita (Gigajoules) \nTourist/visitor arrivals at national borders (000) \nImportant sites for terrestrial biodiversity protected (%) \nPopulation using safely managed drinking water sources (urban/rural, %) \nPopulation using safely managed sanitation facilities (urban/rural, %) \nNet Official Development Assistance disbursed (% of GNI of donor) \nNet Official Development Assistance received (% of GNI of recipient) \n \n*  The complete set of information and indicators listed here may not be shown for \neach country or area depending upon data availability. The technical notes provide \na brief description of each information item and indicator.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2788
+    },
+    {
+      "page_number": 10,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 11,
+      "text": "World, Regional and \nCountry /Area profiles",
+      "tables": [],
+      "has_text": true,
+      "char_count": 43
+    },
+    {
+      "page_number": 12,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 13,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 14,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 15,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 16,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 17,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 18,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 19,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 20,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 21,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 22,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 23,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 24,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 25,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 26,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 27,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 28,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 29,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 30,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 31,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 32,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 33,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 34,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 35,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 36,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 37,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 38,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 39,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 40,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 41,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 42,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 43,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 44,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 45,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 46,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 47,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 48,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 49,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 50,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 51,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 52,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 53,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 54,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 55,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 56,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 57,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 58,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 59,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 60,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 61,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 62,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 63,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 64,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 65,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 66,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 67,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 68,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 69,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 70,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 71,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 72,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 73,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 74,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 75,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 76,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 77,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 78,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 79,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 80,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 81,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 82,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 83,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 84,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 85,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 86,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 87,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 88,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 89,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 90,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 91,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 92,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 93,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 94,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 95,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 96,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 97,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 98,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 99,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 100,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 101,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 102,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 103,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 104,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 105,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 106,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 107,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 108,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 109,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 110,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 111,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 112,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 113,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 114,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 115,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 116,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 117,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 118,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 119,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 120,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 121,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 122,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 123,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 124,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 125,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 126,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 127,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 128,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 129,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 130,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 131,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 132,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 133,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 134,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 135,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 136,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 137,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 138,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 139,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 140,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 141,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 142,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 143,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 144,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 145,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 146,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 147,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 148,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 149,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 150,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 151,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 152,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 153,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 154,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 155,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 156,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 157,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 158,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 159,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 160,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 161,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 162,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 163,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 164,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 165,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 166,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 167,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 168,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 169,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 170,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 171,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 172,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 173,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 174,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 175,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 176,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 177,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 178,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 179,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 180,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 181,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 182,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 183,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 184,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 185,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 186,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 187,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 188,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 189,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 190,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 191,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 192,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 193,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 194,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 195,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 196,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 197,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 198,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 199,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 200,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 201,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 202,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 203,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 204,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 205,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 206,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 207,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 208,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 209,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 210,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 211,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 212,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 213,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 214,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 215,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 216,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 217,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 218,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 219,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 220,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 221,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 222,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 223,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 224,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 225,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 226,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 227,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 228,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 229,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 230,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 231,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 232,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 233,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 234,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 235,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 236,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 237,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 238,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 239,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 240,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 241,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 242,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 243,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 244,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 245,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 246,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 247,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 248,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 249,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 250,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 251,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 252,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 253,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 254,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 255,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 256,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 257,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 258,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 259,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 260,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 261,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 262,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 263,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 264,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 265,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 266,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 267,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 268,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 269,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 270,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 271,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 272,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 273,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 274,
+      "text": "",
+      "tables": [],
+      "has_text": false,
+      "char_count": 0
+    },
+    {
+      "page_number": 275,
+      "text": "Technical notes \nWorld Statistics Pocketbook 2022   265 \nBelow are brief descriptions of the indicators presented in the world, regional and \ncountry profiles. The terms are arranged in alphabetical order.  \n \nAgricultural production index is calculated by the Laspeyres formula based on the \nsum of price‐weighted quantities of different agricultural commodities produced. \nThe commodities covered in the computation of indices of agricultural production \nare all crops and livestock products originating in each country. Practically all \nproducts are covered, with the main exception of fodder crops. Production \nquantities of each commodity are weighted by the average international \ncommodity prices in the base period and summed for each year. To obtain the \nindex, the aggregate for a given year is divided by the average aggregate for the \nbase period 2014‐2016. Indices are calculated without any deductions for feed and \nseed and are referred to as “gross” by the Food and Agriculture Organization of the \nUnited Nations (FAO). \nSource of the data: Food and Agriculture Organization of the United Nations (FAO), \nRome, FAOSTAT database, last accessed June 2022. \n \nBalance  of  payments  is  a  statement  summarizing  the  economic  transactions \nbetween the residents of a country and non‐residents during a specific period, usually \na year. It includes transactions in goods, services, income, transfers and financial \nassets and liabilities. Generally, the balance of payments is divided into two major \ncomponents: the current account and the capital and financial account. The data on \nbalance  of  payments  correspond  to  the  current  account  category.  The  current \naccount is a record of all transactions in the balance of payments covering the exports \nand  imports  of  goods  and  services,  payments  of  income,  and  current  transfers \nbetween residents of a country and non‐residents. \nSource of the data: International Monetary Fund (IMF), Washington, D.C., Balance \nof Payment (BOP) Statistics database, last accessed June 2022. \n \nCapital city and capital city population is the designation of any specific city as a \ncapital city as reported by the country or area. The city can be the seat of the \ngovernment as determined by the country. Some countries designate more than \none city to be a capital city with a specific title function (e.g., administrative and/or \nlegislative capital). The data refer to the year 2022, unless otherwise stated in a \nfootnote. \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nUrbanization Prospects (WUP): The 2018 Revision\", last accessed May 2018. \n \nCO2 emission estimates represent total CO2 emissions from fuel combustion. This \nincludes CO2 emissions from fuel combustion in IPCC Source/Sink Category 1 A Fuel \nCombustion  Activities  and  those  which  may  be  reallocated  to  IPCC  Source/Sink \nCategory 2 Industrial Processes and Product Use under the 2006 GLs. \nSource of the data: International Energy Agency, IEA World Energy Balances 2020 \nand 2006 IPCC Guidelines for Greenhouse Gas Inventories, last accessed June 2022.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3139
+    },
+    {
+      "page_number": 276,
+      "text": "Technical notes (continued) \n266    World Statistics Pocketbook 2022 \nCPI: Consumer price index measures the period‐to‐period proportional change in the \nprices  of  a  fixed  set  of  consumer  goods  and  services  of  constant  quantity  and \ncharacteristics, acquired, used or paid for by the reference population. The index is \nconstructed  as  a  weighted  average  of  a  large  number  of  elementary  aggregate \nindices. Each of the elementary aggregate indices is estimated using a sample of \nprices for a defined set of goods and services obtained in, or by residents of, a specific \nregion from a given set of outlets or other sources of consumption. The indices here \ngenerally refer to “all items” and to the country as a whole, unless otherwise stated \nin a footnote. \nSource of the data: United Nations Statistics Division (UNSD), New York, Monthly \nBulletin of Statistics (MBS), last accessed June 2022.  \n \nEconomy: agriculture, industry and services and other activity presents the shares \nof the components of Gross Value Added (GVA) at current prices by kind of \neconomic activity; agriculture (agriculture, hunting, forestry and fishing), industry \n(mining and quarrying, manufacturing, electricity, gas and water supply; and \nconstruction) and in services and other sectors based on the sections of the \nInternational Standard Industrial Classification of All Economic Activities (ISIC), \nRevision 3, unless a different revision is stated in a footnote. \nSource of the data: United Nations Statistics Division (UNSD), New York, National \nAccounts Statistics: Analysis of Main Aggregates (AMA) database, last accessed \nMarch 2022. \n \nEducation:  Government  expenditure  shows  the  trends  in  general  government \nexpenditures for educational affairs and services at primary, secondary and upper \nsecondary levels and subsidiary services to education, expressed as a percentage of \nthe gross domestic product. \nSource of the data: United Nations Educational, Scientific and Cultural Organization \n(UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, \nlast accessed May 2022. \n \nEducation: Primary, secondary and upper secondary gross enrolment ratio is the \ntotal enrolment in the primary, secondary and upper secondary levels of education, \nregardless  of  age,  expressed  as  a  percentage  of  the  eligible  official  school‐age \npopulation  corresponding  to  the  same  level  of  education  in  a  given  school  year. \nEducation  at  the  primary  level  provides  the  basic  elements  of  education  (e.g.  at \nelementary school or primary school). Education at the secondary level is provided \nat middle school, secondary school, high school, teacher‐training school at this level \nand schools of a vocational or technical nature. Education at the upper secondary \nlevel is the second or final stage of general and vocational secondary  education. \nProgrammes  at  upper  secondary  education,  are  typically  designed  to  complete \nsecondary education in preparation for tertiary education or provide skills relevant \nto employment, or both. The programmes offered are more varied, specialised and \nin‐depth instruction than programmes in lower secondary education. Programmes",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3245
+    },
+    {
+      "page_number": 277,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   267 \nare more differentiated, with an increased range of options and streams available. \nEnrolment is measured at the beginning of the school or academic year. The gross \nenrolment ratio at each level will include all pupils whatever their ages, whereas the \npopulation is limited to the range of official school ages. Therefore, for countries with \nalmost universal education among the school‐age population, the gross enrolment \nratio  can  exceed  100  if  the  actual  age  distribution  of  pupils  extends  beyond  the \nofficial school ages. \nSource of the data: United Nations Educational, Scientific and Cultural Organization \n(UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, \nlast accessed May 2022. \n \nEmployment  in  agricultural,  industrial  and  services  and  other  sectors:  The \n“employed” comprise all persons above a specified age who, during a specified brief \nperiod,  either  one  week  or  one  day,  were  in  \"paid  employment”  or  in  \"self‐\nemployment”,  see  ILO’s  Current  International  Recommendations  on  Labour \nStatistics. The data refer to those 15 years and over, unless otherwise stated in a \nfootnote, who perform any work at all in the reference period, for pay or profit in \nagriculture  (agriculture,  forestry  and  fishing),  industry  (mining  and  quarrying; \nmanufacturing;  electricity,  gas,  steam  and  air  conditioning  supply;  water  supply, \nsewerage, waste management and remediation activities; and construction) and in \nservices  and  other  sectors  based  on  the  sections  of  the  International  Standard \nIndustrial Classification of All Economic Activities (ISIC), Revision 4, unless an earlier \nrevision is stated in a footnote. \nSource of the data: International Labour Organization (ILO), Geneva, Key Indicators \nof the Labour Market (KILM 9th edition) and the ILOSTAT database, last accessed \nJanuary 2020. \n \nEnergy production, primary, is the capture or extraction of fuels or energy from \nnatural energy flows, the biosphere and natural reserves of fossil fuels within the \nnational territory in a form suitable for use. Inert matter removed from the extracted \nfuels  and  quantities  reinjected,  flared  or  vented  are  not  included.    The  resulting \nproducts are referred to as “primary” products. It excludes secondary production, \nthat is, the manufacture of energy products through the process of transforming \nprimary and/or other secondary fuels or energy. Data are provided in a common \nenergy unit (Petajoule) and refer to the following primary energy sources: hard coal, \nbrown coal, peat, oil shale, conventional crude oil, natural gas liquids (NGL), other \nhydrocarbons, additives and oxygenates, natural gas, fuelwood, wood residues and \nby‐products,  bagasse,  animal  waste,  black  liquor,  other  vegetal  material  and \nresidues, biogasoline, biodiesels, bio jet kerosene, other liquid biofuels, biogases, \nindustrial waste, municipal waste, nuclear, solar photovoltaic, solar thermal, hydro, \nwind,  geothermal,  and  tide,  wave  and  other  marine  sources.  Peat,  biomass  and \nwastes  are  included  only  when  the  production  is  for  energy  purposes.  See \nInternational Recommendations for Energy Statistics (2011) and the UN publication \nEnergy Balances for a complete description of the methodology.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3411
+    },
+    {
+      "page_number": 278,
+      "text": "Technical notes (continued) \n268    World Statistics Pocketbook 2022 \nSource of the data: United Nations Statistics Division (UNSD), New York, Energy \nStatistics Yearbook 2019, last accessed March 2022. \n \nEnergy supply per capita is defined as primary energy production plus imports minus \nexports minus international marine bunkers minus international aviation bunkers \nminus stock changes divided by the population. For imports, exports, international \nbunkers and stock changes, it includes secondary energy products, in addition to \nprimary products. \nSource of the data: United Nations Statistics Division (UNSD), New York, Energy \nStatistics Yearbook 2019, last accessed March 2022. \n \nExchange rate in units of national currency per US dollar refers to end‐of‐period \nquotations. The exchange rates are classified into broad categories, reflecting both \nthe  role  of  the  authorities  in  the  determination  of  the  exchange  and/or  the \nmultiplicity  of  exchange  rates  in  a  country.  The  market  rate  is  used  to  describe \nexchange rates determined largely by market forces; the official rate is an exchange \nrate determined by the authorities, sometimes in a flexible manner. For countries \nmaintaining multiple exchange arrangements, the rates are labelled principal rate, \nsecondary rate, and tertiary rate. \nSource of the data: International Monetary Fund (IMF), Washington, D.C., the \nInternational Financial Statistics (IFS) database supplemented by United Nations \nDepartment of Management (DM), UN Treasury operational rates of exchange, last \naccessed June 2022. \n \nFertility rate is the total fertility rate, a widely used summary indicator of fertility. It \nrefers to the number of children that would be born per woman, assuming no female \nmortality  at  child  bearing  ages  and  the  age‐specific  fertility  rates  of  a  specified \ncountry and reference period. The data are an average over five‐year ranges; 2005‐\n2010 data are labelled “2010”, 2011‐2015 data are labelled “2015” and 2016‐\n2022 data are labelled “2022”, unless otherwise stated in a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, “World \nPopulation Prospects (WPP): The 2022 Revision”; supplemented by data from the \nUnited Nations Statistics Division (UNSD), New York, Demographic Yearbook 2020 \nand the Pacific Community (SPC) Statistics and Demography Programme for small \ncountries or areas, last accessed July 2022. \n \nForested area refers to the percentage of land area occupied by forest. Forest is \ndefined  in  the  Food  and  Agriculture  Organization’s  Global  Forest  Resources \nAssessment as land spanning more than 0.5 hectares with trees higher than 5 metres \nand a canopy cover of more than 10 percent, or trees able to reach these thresholds \nin situ. It does not include land that is predominantly under agricultural or urban land \nuse. Data are calculated from the forest estimates divided by the land area. \nSource of the data: Food and Agriculture Organization of the United Nations (FAO), \nRome, FAOSTAT database, last accessed March 2022.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3107
+    },
+    {
+      "page_number": 279,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   269 \n \nGDP: Gross domestic product is an aggregate measure of production equal to the sum \nof gross value added of all resident producer units plus that part (possibly the total) of taxes \non products, less subsidies on products, that is not included in the valuation of output. It is \nalso equal to the sum of the final uses of goods and services (all uses except intermediate \nconsumption) measured at purchasers’ prices, less the value of imports of goods and \nservices, and equal to the sum of primary incomes distributed by resident producer units \n(see System  of National Accounts  2008). The data are in current United States (US) \ndollars and are estimates of the total production of goods and services of the countries \nrepresented  in  economic  terms,  not  as  a  measure  of  the  standard  of  living  of  their \ninhabitants. To have comparable coverage for as many countries as possible, these US \ndollar estimates are based on official GDP data in national currency, supplemented \nby national currency estimates prepared by the Statistics Division using additional \ndata from national and international sources. The estimates given here are in most \ncases  those  accepted  by  the  United  Nations  General  Assembly’s  Committee  on \nContributions for determining United Nations members’ contributions to the United \nNations  regular  budget.  The  exchange  rates  for  the  conversion  of  GDP  national \ncurrency  data  into  US  dollars  are  the  average  market  rates  published  by  the \nInternational Monetary Fund, in International Financial Statistics (IFS). Official exchange \nrates are used only when free market rates are not available. For non‐members of the Fund, \nthe conversion rates used are the average of UN Treasury rates of exchange. It should be \nnoted that the conversion from local currency into US dollars introduces deficiencies in \ncomparability over time and among countries which should be considered when using the \ndata. For example, comparability over time is distorted when exchange rate fluctuations differ \nsubstantially from domestic inflation rates. \nSource of the data: United Nations Statistics Division (UNSD), New York, National \nAccounts Statistics: Analysis of Main Aggregates (AMA) database, last accessed \nMarch 2022. \n \nGDP growth rate is derived on the basis of constant 2015 price series in national \ncurrency. The figures are annual rates of growth expressed in percentages. \nSource of the data: United Nations Statistics Division (UNSD), New York, National \nAccounts Statistics: Analysis of Main Aggregates (AMA) database, last accessed \nMarch 2022. \n \nGDP per capita estimates are the value of all goods and services produced in the \neconomy divided by the population. \nSource of the data: United Nations Statistics Division (UNSD), New York, National \nAccounts Statistics: Analysis of Main Aggregates (AMA) database, last accessed \nMarch 2022. \n \nHealth: Physicians includes generalist medical practitioners and specialist medical \npractitioners,  expressed  as  the  number  of  physicians  per  1  000  population.  The \nclassification of health workers used is based on criteria for vocational education and",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3247
+    },
+    {
+      "page_number": 280,
+      "text": "Technical notes (continued) \n270    World Statistics Pocketbook 2022 \ntraining,  regulation  of  health  professions,  and  activities  and  tasks  of  jobs,  i.e.  a \nframework  for  categorizing  key  workforce  variables  according  to  shared \ncharacteristics. \nSource of the data: World Health Organisation (WHO), Geneva, WHO Global Health \nWorkforce statistics database, last accessed June 2022. \n \nHealth: Current expenditure refers to all health care goods and services used or \nconsumed  during  a  year  excluding  capital  spending,  or  rather  “gross  capital \nformation”, which is the purchase of new assets used repeatedly over several years. \nThese estimates are in line with the 2011 System of Health Accounts (SHA). Current \nexpenditure is expressed as a proportion of Gross Domestic Product (GDP). \nSource of the data: World Health Organization (WHO), Geneva, WHO Global Health \nExpenditure database, last accessed April 2022. \n \nImportant sites for terrestrial biodiversity protected shows land which contributes \nsignificantly to the global persistence of biodiversity measured as a proportion of \nwhich is wholly covered by a designated protected area. Data are based on spatial \noverlap between polygons for Key Biodiversity Areas from the World Database of key \nBiodiversity Areas and polygons for protected areas from the World Database on \nProtected Areas. Figures for each region are calculated as the proportion of each Key \nBiodiversity Area covered by protected areas, averaged (i.e. calculated as the mean) \nacross all Key Biodiversity Areas within the region. \nSource of the data: United Nations Environment Programme (UNEP) World \nConservation Monitoring Centre (WCMC), Cambridge, Sustainable Development \nGoals (SDGs) statistics database, last accessed March 2022. \n \nIndividuals  using  the  Internet  refer  to  the  percentage  of  people  who  used  the \nInternet  from  any  location  and  for  any  purpose,  irrespective  of  the  device  and \nnetwork used. It can be via a computer (i.e. desktop or laptop computer, tablet or \nsimilar handheld computer), mobile phone, games machine, digital TV, etc. Access \ncan be via a fixed or mobile network. There are certain data limits to this indicator, \ninsofar as estimates have to be calculated for many developing countries which do \nnot yet collect information and communications technology household statistics. \nSource of the data: International Telecommunication Union (ITU), Geneva, the ITU \ndatabase, last accessed March 2022. \n \nInfant mortality rate is the ratio of infant deaths (the deaths of children under one \nyear  of age) in a  given year to the total number  of live births in the same year, \nexpressed as a rate per 1 000 live births. The data are an average over five‐year \nranges;  2005‐2010  data  are  labelled  “2010”,  2011‐2015  data  are  labelled \n“2015”  and  2016‐2022  data  are  labelled  “2022”, unless otherwise stated in a \nfootnote. \nSource of the data: United Nations Population Division (UNPD), New York, “World \nPopulation Prospects (WPP): The 2022 Revision”; supplemented by data from the",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3114
+    },
+    {
+      "page_number": 281,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   271 \nUnited Nations Statistics Division (UNSD), New York, Demographic Yearbook 2020 \nand the Pacific Community (SPC) Statistics and Demography Programme for small \ncountries or areas, last accessed July 2022. \n \nIntentional  homicide  rate:  The  rates  are  the  annual  number  of  unlawful  deaths \npurposefully inflicted on a person by another person, reported for the year per \n100 000. For most countries, country information on causes of death is not available \nfor most causes. Estimates are therefore based on cause of death modelling and \ndeath  registration  data  from  other  countries  in  the  region.  Further  country‐level \ninformation and data on specific causes was also used. \nSource of the data: United Nations Office on Drugs and Crime (UNODC), Vienna, \nUNODC Statistics database, last accessed June 2022. \n \nInternational migrant stock generally represents the number of persons born in a \ncountry other than that in which they live. When information on country of birth was \nnot recorded, data on the number of persons having foreign citizenship was used \ninstead. In the absence of any empirical data, estimates were imputed. Data refer to \nmid‐year. Figures for international migrant stock as a percentage of the population \nare  the  outcome  of  dividing  the  estimated  international  migrant  stock  by  the \nestimated total population and multiplying the result by 100. \nSource of the data: United Nations Population Division (UNPD), New York, \n“International migrant stock: The 2020 Revision”, last accessed January 2021. \n \nInternational trade: Exports, imports and balance show the movement of goods out \nof and into a country. Goods simply being transported through a country (goods in \ntransit) or temporarily admitted (except for goods for inward processing) do not add \nto  the  stock  of  material  resources  of  a  country  and  are  not  included  in  the \ninternational  merchandise  trade  statistics.  In  the  “general  trade  system”,  the \ndefinition of the statistical territory of a country coincides with its economic territory. \nIn the “special trade system”, the definition of the statistical territory comprises only \na particular part of the economic territory, mainly that part which coincides with the \nfree circulation area for goods. “The free circulation area” is a part of the economic \nterritory  of  a  country  within  which  goods  “may  be  disposed  of  without  Customs \nrestrictions”. In the case of exports, the transaction value is the value at which the \ngoods were sold by the exporter, including the cost of transportation and insurance, \nto bring the goods onto the transporting vehicle at the frontier  of the exporting \ncountry (an FOB‐type valuation). In the case of imports, the transaction value is the \nvalue  at  which  the  goods  were  purchased  by  the  importer  plus  the  cost  of \ntransportation and insurance to the frontier of the importing country (a CIF‐type \nvaluation). Both imports and exports are shown in United States dollars. Conversion \nfrom national currencies is made by means of currency conversion factors based on \nofficial exchange rates (par values or weighted averages). All regional aggregations \nare calculated as the sum of their components.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3320
+    },
+    {
+      "page_number": 282,
+      "text": "Technical notes (continued) \n272    World Statistics Pocketbook 2022 \nSource of the data: United Nations Statistics Division (UNSD), New York, Commodity \nTrade Statistics Database (UN COMTRADE), last accessed June 2022. \n \nLabour force participation rate is calculated by expressing the number of persons in \nthe labour force as a percentage of the working‐age population. The labour force is \nthe sum of the number of persons employed and the number of unemployed (see \nILO’s current International Recommendations on Labour Statistics). The working‐age \npopulation is the population above a certain age, prescribed for the measurement of \neconomic characteristics. The data refer to the age group of 15 years and over and \nare based on ILO’s modelled estimates, unless otherwise stated in a footnote. \nSource of the data: International Labour Organization (ILO), Geneva, Key Indicators \nof the Labour Market (KILM 9th edition) and the ILOSTAT database, last accessed \nJanuary 2022. \n \nLife expectancy at birth is the average number of years of life at birth (age 0) for \nmales and females according to the expected mortality rates by age estimated for \nthe reference year and population. The data are an average over five‐year ranges; \n2005‐2010 data are labelled “2010”, 2011‐2015 data are labelled “2015” and \n2016‐2022 data are labelled “2022”, unless otherwise stated in a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, “World \nPopulation Prospects (WPP): The 2022 Revision”; supplemented by data from the \nUnited Nations Statistics Division (UNSD), New York, Demographic Yearbook 2020 \nand the Pacific Community (SPC) Statistics and Demography Programme for small \ncountries or areas, last accessed July 2022. \n \nMajor  trading  partners  show  the  three  largest  trade  partners  (countries  of  last \nknown destination and origin or consignment) in international merchandise trade \ntransactions. In some cases a special partner is shown (i.e. Areas nes, bunkers, etc.) \ninstead of a country and refers to one of the following special categories. Areas not \nelsewhere specified (i.e. Areas nes) is used (a) for low value trade, (b) if the partner \ndesignation was unknown to the country or if an error was made in the partner \nassignment and (c) for reasons of confidentiality. If a specific geographical location \ncan be identified within Areas nes, then they are recorded accordingly (i.e. Asia nes). \nBunkers are ship stores and aircraft supplies, which consists mostly of fuels and food. \nFree zones belong to the geographical and economic territory of a country but not to \nits customs territory. For the purposes of trade statistics, the transactions between \nthe customs territory and the free zones are recorded, if the reporting country uses \nthe Special Trade System. Free zones can be commercial free zones (duty free shops) \nor industrial free zones. Data are expressed as percentages of total exports and of \ntotal imports of the country, area or special partner. \nSource of the data: United Nations Statistics Division (UNSD), New York, Commodity \nTrade Statistics Database (UN COMTRADE), last accessed June 2022.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3173
+    },
+    {
+      "page_number": 283,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   273 \nNational currency refers to those notes and coins in circulation that are commonly \nused to make payments. The official currency names and the ISO currency codes are \nthose officially in use, and may be subject to change. \nSource of the data: International Organisation for Standardization (ISO), Geneva, \nCurrency Code Services – ISO 4217 Maintenance Agency, last accessed May 2018. \n \nNet Official Development Assistance received or disbursed is defined as those flows \nto developing countries and multilateral institutions provided by official agencies, \nincluding  state  and  local  governments,  or  by  their  executive  agencies,  each \ntransaction  of  which  meets  the  following  tests:  i)  it  is  administered  with  the \npromotion of the economic development and welfare of developing countries as its \nmain objective; and ii) it is concessional in character and conveys a grant element of \nat least 25 per cent. It is expressed as a percentage of Gross National Income of either \nthe donor or recipient. The multilateral institutions include the World Bank Group, \nregional banks, financial institutions of the European Union and a number of United \nNations institutions, programmes and trust funds. \nSource of the data: Organisation for Economic Co‐operation and Development \n(OECD), Paris, the OECD Development Assistance Committee (DAC) statistics \ndatabase, last accessed June 2022. \n \nPopulation refers to the medium fertility projected de facto population as of 1 July \n2022, unless otherwise stated in a footnote. The total population of a country may \ncomprise either all usual residents of the country (de jure population) or all persons \npresent in the country (de facto population) at the time of the census; for purposes \nof international comparisons, the de facto definition is used, unless otherwise stated \nin a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nPopulation Prospects (WPP): The 2022 Revision\", last accessed July 2022. \n \nPopulation age distribution refers to the percentage of the population aged 0‐14 \nyears  and  aged  60  years  and  older  at  the  mid‐year  unless  otherwise  stated  in  a \nfootnote. \nSource of the data: United Nations Population Division (UNPD), New York, “World \nPopulation Prospects (WPP): The 2022 Revision”; supplemented by data from the \nUnited Nations Statistics Division (UNSD), New York, Demographic Yearbook 2020 \nand the Pacific Community (SPC) Statistics and Demography Programme for small \ncountries or areas, last accessed July 2022. \n \nPopulation density refers to the medium fertility projected population as of 1 July \n2022 per square kilometre of surface area, unless otherwise stated in a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nPopulation Prospects (WPP): The 2022 Revision\", last accessed July 2022.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2956
+    },
+    {
+      "page_number": 284,
+      "text": "Technical notes (continued) \n274    World Statistics Pocketbook 2022 \nPopulation growth rate is the average annual percentage change in total population \nsize. The data are an average over five‐year ranges; 2010‐2015 data are labelled \n“2010”, 2011‐2015 data are labelled “2015” and 2016‐2022 data are labelled \n“2022”, unless otherwise stated in a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nPopulation Prospects (WPP): The 2022 Revision\", last accessed July 2022. \n \nRefugees and others of concern to the UNHCR: The 1951 United Nations Convention \nrelating to the Status of Refugees states that a refugee is someone who, owing to a \nwell‐founded  fear  of  being  persecuted  for  reasons  of  race,  religion,  nationality, \npolitical opinion or membership in a particular social group, is outside the country of \nhis or her nationality and is unable to, or owing to such fear, is unwilling to avail \nhimself or herself of the protection of that country; or who, not having a nationality \nand being outside the country of his or her former habitual residence, is unable or, \nowing to such fear, unwilling to return to it. In this series, refugees refer to persons \ngranted a humanitarian status and/or those granted temporary protection. Included \nare persons who have been granted temporary protection on a group basis. The \nseries  also  includes  returned  refugees,  asylum‐seekers,  stateless  persons  and \npersons  displaced  internally  within  their  own  country  and  others  of  concern  to \nUNHCR. \nSource of the data: United Nations High Commissioner for Refugees (UNHCR), \nGeneva, UNHCR population statistics database, last accessed May 2022. \n \nRegion is based on macro geographical regions arranged according to continents and \ncomponent geographical regions used for statistical purposes as at 31 July 2017. \nSource of the data: United Nations Statistics Division (UNSD), New York, Statistical \nYearbook 2017 edition (60th issue) Annex I ‐ Country and area nomenclature, \nregional and other groupings (based on Series M49: Standard Country or Area codes \nand Geographical Regions for Statistical Use), last accessed October 2017. \n \nResearch  &  Development  expenditure  refers  to  expenditure  on  creative  work \nundertaken  on  a  systematic  basis  in  order  to  increase  the  stock  of  knowledge, \nincluding knowledge of humanity, culture and society, and the use of this stock of \nknowledge to devise new applications, expressed as a percentage of Gross Domestic \nProduct  (GDP).  It  is  the  total  intramural  expenditure  on  R&D  performed  on  the \nnational territory during a given period. It includes R&D performed within a country \nand funded from abroad but excludes payments made abroad for R&D. \nSource of the data: United Nations Educational, Scientific and Cultural Organization \n(UNESCO), Montreal, the UNESCO Institute for Statistics (UIS) statistics database, \nlast accessed June 2022. \n \nSafely managed  water and sanitation: population using safely managed drinking \nwater sources is currently being measured by the proportion of population in urban \nand rural areas, according to national definitions, meeting the criteria for using safely",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3239
+    },
+    {
+      "page_number": 285,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   275 \nmanaged drinking water sources (SDG 6.1.1) by using an improved basic drinking \nwater source which is located on premises, available when needed and free of faecal \nand priority chemical contamination. Improved drinking water sources are those that \nhave the potential to deliver safe water by nature of their design and construction, \nand include: piped water, boreholes or tubewells, protected dug wells, protected \nsprings,  rainwater,  and  packaged  or  delivered  water.  Population  using  safely \nmanaged sanitation facilities is currently being measured by the proportion of the \npopulation in urban and rural areas, according to national definitions, meeting the \ncriteria for having a safely managed sanitation service (SDG 6.2.1a) by using a basic \nsanitation facility which is not shared with other households and where excreta is \nsafely  disposed  in  situ  or  transported  and  treated  off‐site.  Improved  sanitation \nfacilities are those designed to hygienically separate excreta from human contact, \nand  include:  flush/pour  flush  to  piped  sewer  system,  septic  tanks  or  pit  latrines; \nventilated improved pit latrines, composting toilets or pit latrines with slabs. \nSource  of  the  data:  World  Health  Organization  (WHO)  and  the  United  Nations \nChildren's Fund (UNICEF), Geneva and New York, the WHO/UNICEF Joint Monitoring \nProgramme (JMP) for Water and Sanitation database, last accessed July 2021. \n \n \nSeats held by women in the National Parliament refer to the number of women in \nthe lower chamber of the National Parliament expressed as a percentage of total \noccupied seats in the lower or single House, situation as of 1 January 2022. \nSource of the data: Inter‐Parliamentary Union (IPU), Geneva, Women in National \nParliament dataset and the Sustainable Development Goals (SDGs) statistics \ndatabase, last accessed March 2022. \n \nSex ratio is calculated as the ratio of the medium fertility projected population of \nmen to that of 100 women as of 1 July 2022, unless otherwise stated in a footnote. \nSource of the data: United Nations Population Division (UNPD), New York, “World \nPopulation Prospects (WPP): The 2022 Revision”; supplemented by data from the \nUnited Nations Statistics Division (UNSD), New York, Demographic Yearbook 2020 \nand the Pacific Community (SPC) Statistics and Demography Programme for small \ncountries or areas, last accessed July 2022. \n \nSurface area refers to land area excluding inland water. \nSource of the data: United Nations Statistics Division (UNSD), New York, \nDemographic Yearbook 2020 and the demographic statistics database, last accessed \nJune 2022. \n \nThreatened species represents the number of plants and animals that are most in \nneed of conservation attention and are compiled by the World Conservation Union \nIUCN/ Species Survival Commission (SSC).",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2917
+    },
+    {
+      "page_number": 286,
+      "text": "Technical notes (continued) \n276    World Statistics Pocketbook 2022 \nSource of the data: International Union for Conservation of Nature (IUCN), Gland \nand Cambridge, IUCN Red List of Threatened Species publication, last accessed \nMarch 2022. \n \nTourist/visitor arrivals at national borders is any person who travels to a country \nother than that in which he or she has his or her usual residence but outside his/her \nusual environment for a period not exceeding 12 months and whose main purpose \nof visit is other than the exercise of an activity remunerated from with the country \nvisited, and who stays at least one night in a collective or private accommodation in \nthe  country  visited  (see  Recommendations  on  Tourism  Statistics  of  the  United \nNations  and  the  World  Tourism  Organization).  The  data  refer  to  arrivals  of  non‐\nresident tourists at national borders, unless otherwise stated in a footnote. \nSource of the data: World Tourism Organization (UNWTO), Madrid, the UNWTO \nstatistics database, last accessed June 2022. \n \nUN membership date: The United Nations (UN) is an intergovernmental organization \nwhose members are the countries of the world. Currently there are 193 Member \nStates of the United Nations, some of which joined the UN by signing and ratifying \nthe Charter of the United Nations in 1945; the other countries joined the UN later, \nthrough the adoption of a resolution admitting them to membership. The process \nusually follows these steps: first, the country applies for membership and makes a \ndeclaration accepting the obligations of the Charter; second, the Security Council \nadopts a resolution recommending that the General Assembly admit the country to \nmembership  and  finally  the  General  Assembly  adopts  a  resolution  admitting  the \ncountry. \nSource of the data: United Nations (UN), Department of Public Information (DPI), \nNews and Media Division, New York, Member states and date of admission, last \naccessed May 2018. \n \nUnemployment  refers  to  persons  above  a  specified  age  who  during  a  specified \nreference period were: “without work”, i.e. were not in paid employment or self‐\nemployment as defined under employment; “currently available for work”, i.e. were \navailable for paid employment or self‐employment during the reference period; and \n“seeking work”, i.e. had taken specific steps in a specified recent period to seek paid \nemployment or self‐employment (see ILO’s current International Recommendations \non Labour Statistics). The data refer to the 15 years and over age group and are based \non ILO’s modelled estimates, unless otherwise stated in a footnote. \nSource of the data: International Labour Organization (ILO), Geneva, Key Indicators \nof the Labour Market (KILM 9th edition) and the ILOSTAT database, last accessed \nJanuary 2022. \n \nUrban population is based on the number of persons at the mid‐year defined as \nurban  according  to  national  definitions  of  this  concept.  In  most  cases  these \ndefinitions are those used in the most recent population census.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 3068
+    },
+    {
+      "page_number": 287,
+      "text": "Technical notes (continued) \nWorld Statistics Pocketbook 2022   277 \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nUrbanization Prospects (WUP): The 2018 Revision\", last accessed May 2018. \n \nUrban population growth rate is based on the number of persons defined as urban \naccording to national definitions of this concept. In most cases these definitions are \nthose used in the most recent population census. The data are an average over five‐\nyear ranges; 2005‐2010 data are labelled “2010”, 2011‐2015 data are labelled \n“2015”  and  2016‐2022  data  are  labelled  “2022”, unless otherwise stated in a \nfootnote. \nSource of the data: United Nations Population Division (UNPD), New York, \"World \nUrbanization Prospects (WUP): The 2018 Revision\", last accessed May 2018.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 806
+    },
+    {
+      "page_number": 288,
+      "text": "Statistical sources and references \n278    World Statistics Pocketbook 2022 \nStatistical sources \nFood and Agriculture Organization of the United Nations (FAO), Rome, FAOSTAT \ndatabase, available at http://www.fao.org/faostat/en/#home. \nInternational Energy Agency (IEA), Paris, available at https://www.iea.org/data‐\nand‐statistics?country=WORLD&fuel=Energy supply&indicator=Total primary energy \nsupply (TPES) by source \nInternational Labour Organization (ILO), Geneva, the ILOSTAT database, available at \nhttp://www.ilo.org/ilostat. \n__________, Key Indicators of the Labour Market (KILM 9th edition), available at \nhttp://www.ilo.org/global/statistics‐and‐databases/research‐and‐\ndatabases/kilm/lang‐‐en/index.htm. \nInternational Monetary Fund (IMF), Washington, D.C., Balance of Payment (BOP) \nStatistics database, available at http://data.imf.org/bop. \n__________, the International Financial Statistics (IFS) database, available at \nhttp://data.imf.org/ifs. \nInternational Organisation for Standardization (ISO), Geneva, Currency Code \nServices – ISO 4217 Maintenance Agency, available at https://www.iso.org/iso‐\n4217‐currency‐codes.html. \nInternational Telecommunication Union (ITU), Geneva, the ITU Database, available \nat http://www.itu.int/en/ITU‐D/statistics/Pages/default.aspx. \nInternational Union for Conservation of Nature (IUCN), Gland and Cambridge, IUCN \nRed List of Threatened Species publication, available at \nhttp://www.iucnredlist.org/about/summary‐statistics. \nInter‐Parliamentary Union (IPU), Geneva, Women in National Parliament dataset, \navailable at https://data.ipu.org/women‐ranking. \nOrganisation for Economic Co‐operation and Development (OECD), Paris, the OECD \nDevelopment Assistance Committee (DAC) statistics database, available at \nhttp://stats.oecd.org/. \nPacific Community (SPC) Statistics and Demography Programme, Nouméa, \nPopulation and demographic indicators, available at http://sdd.spc.int/en/. \nUnited Nations (UN), Department of Economic and Social Affairs (DESA), Population \nDivision (UNPD), New York, “International migrant stock: The 2020 Revision”, \navailable at \nhttp://www.un.org/en/development/desa/population/migration/data/index.shtml. \n__________, “World Population Prospects (WPP): The 2022 Revision”, available at \nhttps://esa.un.org/unpd/wpp/. \n__________, “World Urbanization Prospects (WUP): The 2018 Revision”, available \nat https://esa.un.org/unpd/wup/.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2420
+    },
+    {
+      "page_number": 289,
+      "text": "Statistical sources and references (continued) \nWorld Statistics Pocketbook 2022   279 \nUnited Nations (UN), Department of Economic and Social Affairs (DESA), Statistics \nDivision (UNSD), New York, Commodity Trade statistics database (UN COMTRADE), \navailable at https://comtrade.un.org/. \n__________, Demographic Yearbook (Series R, United Nations publication), \navailable at https://unstats.un.org/unsd/demographic‐social/products/dyb/. \n__________, Energy Statistics Yearbook (Series J, United Nations publication), \navailable at http://unstats.un.org/unsd/energy/yearbook/default.htm. \n__________, Monthly Bulletin of Statistics (Series Q, United Nations publication), \navailable at http://unstats.un.org/unsd/mbs/. \n__________, National Accounts Statistics: Analysis of Main Aggregates (AMA) \ndatabase (Series X, United Nations publication), available at \nhttp://unstats.un.org/unsd/snaama/introduction.asp. \n__________, Statistical Yearbook (Series S, United Nations publication), available at \nhttps://unstats.un.org/unsd/publications/statistical‐yearbook/. \n__________, Sustainable Development Goals (SDGs) statistics database, available at \nhttps://unstats.un.org/sdgs/indicators/database. \nUnited Nations (UN), Department of Management (DM), Office of Programme \nPlanning, Budget and Accounts (OPPBA), New York, UN Treasury operational rates \nof exchange, available at \nhttps://treasury.un.org/operationalrates/OperationalRates.php \nUnited Nations (UN), Department of Public Information (DPI), News and Media \nDivision, New York, Member states and date of admission, available at \nhttps://www.un.org/en/about‐us/member‐states. \nUnited Nations Educational, Scientific and Cultural Organization (UNESCO), \nMontreal, the UNESCO Institute for Statistics (UIS) statistics database, available at \nhttp://data.uis.unesco.org/. \nUnited Nations High Commissioner for Refugees (UNHCR), Geneva, UNHCR \npopulation statistics database, available at https://www.unhcr.org/refugee‐\nstatistics \nUnited Nations Office on Drugs and Crime (UNODC), Vienna, UNODC Statistics \ndatabase, available at https://dataunodc.un.org. \nWorld Health Organization (WHO) and the United Nations Children’s Fund (UNICEF), \nGeneva and New York, the WHO/UNICEF Joint Monitoring Programme (JMP) for \nWater and Sanitation database, available at \nhttps://washdata.org/monitoring/sanitation. \nWorld Health Organization (WHO), Geneva, WHO Global Health Expenditure \ndatabase, available at http://apps.who.int/nha/database. \n__________, WHO Global Health Workforce statistics database, available at \nhttps://www.who.int/data/gho.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2595
+    },
+    {
+      "page_number": 290,
+      "text": "Statistical sources and references (continued) \n280    World Statistics Pocketbook 2022 \nWorld Tourism Organization (UNWTO), Madrid, the UNWTO statistics database, \navailable at http://www.e‐unwto.org/loi/unwtotfb. \nReferences \nFood and Agriculture Organization of the United Nations (2015). Global Forest \nResources Assessment 2020, available at http://www.fao.org/forest‐resources‐\nassessment/en/. \nInternational Labour Organization (2000). Current International Recommendations \non Labour Statistics, 2000 Edition, available at \nhttp://www.ilo.org/global/publications/ilo‐bookstore/order‐\nonline/books/WCMS_PUBL_9221108465_EN/lang‐‐en/index.htm. \nInternational Monetary Fund (2009). Balance of Payments and International \nInvestment Position Manual, Sixth Edition, available at \nhttps://www.imf.org/external/pubs/ft/bop/2007/bopman6.htm. \nUnited Nations (1951 and 1967). Convention relating to the Status of Refugees of \n1951 (United Nations, Treaty Series, vol. 189 (1954), No. 2545, p. 137), art. 1) and \nProtocol relating to the Status of Refugees of 1967 (United Nations, Treaty Series, \nvol. 606 (1967), No. 8791, p. 267), available at \nhttps://treaties.un.org/doc/Publication/UNTS/Volume%20189/volume‐189‐I‐2545‐\nEnglish.pdf and \nhttps://treaties.un.org/doc/Publication/UNTS/Volume%20606/volume‐606‐I‐8791‐\nEnglish.pdf. \nUnited Nations (1982). Concepts and Methods in Energy Statistics, with Special \nReference to Energy Accounts and Balances: A Technical Report. Statistical Office, \nSeries F, No. 29 and Corr. 1 (United Nations publication, Sales No. E.82.XVII.13 and \ncorrigendum), available at \nhttp://unstats.un.org/unsd/publication/SeriesF/SeriesF_29E.pdf. \nUnited Nations (2008). International Standard Industrial Classification of All \nEconomic Activities (ISIC), Rev. 4. Statistics Division, Series M, No. 4, Rev.4 (United \nNations publication, Sales No. E.08.XVII.25), available at \nhttp://unstats.un.org/unsd/publication/SeriesM/seriesm_4rev4e.pdf. \nUnited Nations (2017). Principles and Recommendations for Population and \nHousing Censuses Rev. 3. Statistics Division, Series M, No. 67, Rev. 3 (United Nations \npublication, Sales No. 15.XVII.10), available at \nhttps://unstats.un.org/unsd/demographic‐social/Standards‐and‐\nMethods/files/Principles_and_Recommendations/Population‐and‐Housing‐\nCensuses/Series_M67rev3‐E.pdf. \nUnited Nations (2010). International Merchandise Trade Statistics: Concepts and \nDefinitions, Statistics Division, Series M, No.52, Rev.3, (United Nations publication, \nSales No. E.10.XVII.13), available at \nhttp://unstats.un.org/unsd/publication/SeriesM/SeriesM_52rev3E.pdf.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 2620
+    },
+    {
+      "page_number": 291,
+      "text": "Statistical sources and references (continued) \nWorld Statistics Pocketbook 2022   281 \nUnited Nations (2011). International Recommendations for Energy Statistics (IRES), \nStatistics Division, available at http://unstats.un.org/unsd/statcom/doc11/BG‐\nIRES.pdf. \nUnited Nations (2013). International Merchandise Trade Statistics: Compilers \nManual Revision 1 (IMTS 2010‐CM), Statistics Division , Series F, No. 87, Rev.1 \n(United Nations publication, Sales No. E.13.XVII.8), available at \nhttps://unstats.un.org/unsd/trade/publications/seriesf_87Rev1_e_cover.pdf. \nUnited Nations (2018). Standard Country or Area Codes for Statistical Use, Statistics \nDivision, Series M, No. 49, available at \nhttp://unstats.un.org/unsd/methods/m49/m49.htm \nUnited Nations, European Commission, International Monetary Fund, Organisation \nfor Economic Cooperation and Development and World Bank (2009). System of \nNational Accounts 2008, Statistics Division, Series M, No. 2, Rev.5 (United Nations \npublication, Sales No. E.08.XVII.29), available at \nhttp://unstats.un.org/unsd/nationalaccount/sna2008.asp. \nWorld Health Organization (2019), International Statistical Classification of Diseases \nand Related Health Problems, Eleventh Revision (ICD‐11), (Geneva) available at \nhttp://www.who.int/classifications/icd/en/. \nUnited Nations and World Tourism Organization (2008). International \nRecommendations for Tourism Statistics 2008, Statistics Division, Series M, No. \n83/Rev.1 (United Nations publication, Sales No. E.08.XVII.28), available at \nhttp://unstats.un.org/unsd/publication/SeriesM/SeriesM_83rev1e.pdf.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1597
+    },
+    {
+      "page_number": 292,
+      "text": "Related statistical products \n  282    World Statistics Pocketbook 2022 \nThe World Statistics Pocketbook can also be viewed online in PDF format as well as \nan \napp \nfor \nAndroid \nand \nApple \ndevices \nat \nhttp://unstats.un.org/unsd/publications/pocketbook/ \nand \nin \nUNdata \nat \nhttp://data.un.org/en/index.html. \n \nOther statistical publications offering a broad cross‐section of information which may \nbe of interest to users of the World Statistics Pocketbook include: \n1. \nThe Monthly Bulletin of Statistics (MBS) in print and the Monthly Bulletin of \nStatistics Online, available at http://unstats.un.org/unsd/mbs/. \n2. \nThe Statistical Yearbook (SYB) in print and online in PDF format, available at \nhttp://unstats.un.org/unsd/publications/statistical‐yearbook/. \n \nBoth publications are available for sale in print format (see below for instructions on \nhow to order). For more information about other publications and online databases \nprepared \nby \nthe \nUnited \nNations \nStatistics \nDivision, \nplease \nvisit: \nhttps://unstats.un.org/unsd/publications/.  For  additional  information  about  the \nwork of the United Nations Statistics Division, please visit http://unstats.un.org/unsd. \nTo order United Nations publications, please visit https://shop.un.org or contact: \n \nUnited Nations Publications \n300 East 42nd Street \nNew York, NY 10017 \nTel: 1‐888‐254‐4286 / Fax: 1‐800‐338‐4550 / E‐mail: publications@un.org \n \nPlease provide the Development Data Section – which is responsible for producing \nthe World Statistics Pocketbook, the Monthly Bulletin of Statistics and the Statistical \nYearbook – your feedback and suggestions regarding these statistical products, as \nwell as the utility of the data, by contacting statistics@un.org.",
+      "tables": [],
+      "has_text": true,
+      "char_count": 1746
+    }
+  ]
+}

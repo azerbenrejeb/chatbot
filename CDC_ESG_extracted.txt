@@ -1,0 +1,390 @@
+
+CAHIER DES CHARGES TECHNIQUE
+Chatbot Intelligent ESG
+
+Projet de Fin d'Études — Spécifié pour Agent IA (Antigravity)
+
+
+1. CONTEXTE ET OBJECTIF DU PROJET
+Ce projet consiste à développer un chatbot intelligent capable d'analyser des rapports ESG (Environnemental, Social, Gouvernance) en format PDF et de répondre aux questions des utilisateurs en se basant uniquement sur les données contenues dans ces rapports.
+
+1.1 Problème résolu
+Un rapport ESG peut contenir 200 à 300 pages. Un analyste doit actuellement lire manuellement l'intégralité du rapport pour trouver une information précise. Ce chatbot permet de poser une question en langage naturel et d'obtenir une réponse immédiate avec la source exacte (numéro de page).
+
+1.2 Utilisateurs cibles
+
+2. ARCHITECTURE TECHNIQUE COMPLÈTE
+Le système est composé de 5 modules qui travaillent ensemble dans un pipeline séquentiel.
+
+2.1 Pipeline général
+PDF Input → CNN (filtre) → pdfplumber (extraction) → CamemBERT (classification) → ChromaDB (stockage) → Mistral (réponse) → Streamlit (interface)
+
+2.2 Stack technologique
+
+3. MODULE 1 — CNN (FILTRE ESG / NON-ESG)
+Ce module analyse chaque page du PDF sous forme d'image et la classe comme ESG (pertinente) ou NON-ESG (à ignorer).
+
+3.1 Objectif simplifié
+
+3.2 Dataset requis
+Note : Il n'y a pas de nombre fixe d'images requis. Plus tu annotes d'images, meilleur sera le modèle. L'objectif est d'avoir un dataset équilibré (autant d'images ESG que NON_ESG).
+
+3.3 Code de conversion PDF → images
+from pdf2image import convert_from_path
+pages = convert_from_path('rapport.pdf', dpi=300)
+for i, page in enumerate(pages):
+    page.save(f'images/page_{i:03d}.jpg', 'JPEG')
+
+3.4 Architecture du modèle CNN
+import torch
+import torchvision.models as models
+from torchvision import transforms
+
+model = models.resnet50(pretrained=True)
+model.fc = torch.nn.Linear(2048, 2)  # 2 classes: ESG / NON_ESG
+
+3.5 Entraînement
+criterion = torch.nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.0001)
+# Entraîner sur 20 epochs minimum
+# Objectif: accuracy > 85%
+
+3.6 Output du CNN
+Le CNN retourne les numéros de pages classées ESG. Ces numéros sont utilisés par le module suivant pour extraire uniquement le texte pertinent.
+
+4. MODULE 2 — EXTRACTION DE TEXTE ET TABLEAUX
+Ce module extrait le texte des pages identifiées comme ESG par le CNN.
+
+4.1 Extraction du texte normal
+import pdfplumber
+
+def extraire_texte(pdf_path, pages_esg):
+    textes = []
+    with pdfplumber.open(pdf_path) as pdf:
+        for num_page in pages_esg:
+            page = pdf.pages[num_page]
+            texte = page.extract_text()
+            if texte and len(texte) > 50:
+                textes.append({'page': num_page, 'texte': texte})
+    return textes
+
+4.2 Extraction des tableaux
+import camelot
+
+def extraire_tableaux(pdf_path, pages_esg):
+    pages_str = ','.join(str(p+1) for p in pages_esg)
+    tables = camelot.read_pdf(pdf_path, pages=pages_str)
+    return [t.df.to_string() for t in tables]
+
+4.3 Segmentation en paragraphes
+def segmenter_paragraphes(texte, min_longueur=50):
+    paragraphes = texte.split('\n\n')
+    return [p.strip() for p in paragraphes if len(p.strip()) > min_longueur]
+
+5. MODULE 3 — CLASSIFICATION ML (CamemBERT)
+Ce module classifie chaque paragraphe extrait en 3 catégories ESG : Environnemental, Social, Gouvernance.
+
+5.1 Dataset requis
+
+5.2 Format du dataset (CSV)
+texte,label
+"Les émissions CO₂ s'élèvent à 45 200 tCO₂e en 2023",Environnemental
+"101 000 employés dont 32% de femmes en 2023",Social
+"Le conseil d'administration compte 12 membres",Gouvernance
+
+5.3 Code d'entraînement CamemBERT
+from transformers import CamembertTokenizer, CamembertForSequenceClassification
+from torch.utils.data import DataLoader, Dataset
+import torch
+
+tokenizer = CamembertTokenizer.from_pretrained('camembert-base')
+model = CamembertForSequenceClassification.from_pretrained(
+    'camembert-base',
+    num_labels=3  # Environnemental=0, Social=1, Gouvernance=2
+)
+
+5.4 Pré-annotation automatique avec Ollama (optionnel)
+import ollama
+import pandas as pd
+
+def annoter_paragraphe(texte):
+    response = ollama.chat(
+        model='mistral',
+        messages=[{
+            'role': 'user',
+            'content': f'''Classifie ce texte ESG en UN seul mot:
+            Environnemental / Social / Gouvernance
+            Texte: {texte}'''
+        }]
+    )
+    return response['message']['content'].strip()
+
+df = pd.read_csv('paragraphes.csv')
+df['label'] = df['texte'].apply(annoter_paragraphe)
+# IMPORTANT: Vérifier manuellement les labels après annotation automatique !
+df.to_csv('paragraphes_annotes.csv', index=False)
+
+6. MODULE 4 — NER (Extraction d'entités)
+Ce module extrait les chiffres clés, unités et années des paragraphes ESG.
+
+6.1 Entités à extraire
+
+6.2 Format IOB2 pour annotation
+TLF        O
+a          O
+réduit     B-TENDANCE
+ses        O
+émissions  O
+de         O
+15         B-VALEUR
+%          B-UNITE
+en         O
+2023       B-ANNEE
+
+6.3 Dataset requis
+
+6.4 Code du modèle NER
+from transformers import CamembertForTokenClassification
+
+label_list = ['O', 'B-VALEUR', 'B-UNITE', 'B-ANNEE', 'B-TENDANCE', 'B-REFERENCE_GRI']
+model_ner = CamembertForTokenClassification.from_pretrained(
+    'camembert-base',
+    num_labels=len(label_list)
+)
+
+7. MODULE 5 — CHROMADB (Base vectorielle RAG)
+ChromaDB stocke les paragraphes sous forme de vecteurs mathématiques pour permettre une recherche sémantique efficace.
+
+7.1 Concept du RAG
+# RAG = Retrieval Augmented Generation
+# 1. STOCKER: Paragraphes ESG → vecteurs → ChromaDB
+# 2. RÉCUPÉRER: Question → ChromaDB cherche passages similaires
+# 3. GÉNÉRER: Passages + Question → Mistral génère réponse
+
+7.2 Code d'initialisation ChromaDB
+import chromadb
+from chromadb.utils import embedding_functions
+
+client = chromadb.PersistentClient(path='./chroma_db')
+
+sentence_transformer_ef = embedding_functions.SentenceTransformerEmbeddingFunction(
+    model_name='paraphrase-multilingual-mpnet-base-v2'
+)
+
+collection = client.get_or_create_collection(
+    name='esg_rapports',
+    embedding_function=sentence_transformer_ef
+)
+
+7.3 Code d'insertion des données
+def stocker_paragraphes(paragraphes, labels, metadonnees):
+    collection.add(
+        documents=paragraphes,
+        metadatas=[{
+            'label': label,
+            'page': meta['page'],
+            'rapport': meta['rapport'],
+            'annee': meta['annee']
+        } for label, meta in zip(labels, metadonnees)],
+        ids=[f'doc_{i}' for i in range(len(paragraphes))]
+    )
+
+7.4 Code de recherche sémantique
+def rechercher(question, n_resultats=5, filtre_label=None):
+    where = {'label': filtre_label} if filtre_label else None
+    resultats = collection.query(
+        query_texts=[question],
+        n_results=n_resultats,
+        where=where
+    )
+    # Vérifier le score de similarité
+    if resultats['distances'][0][0] > 0.7:
+        return None  # Pas de résultat pertinent
+    return resultats
+
+8. MODULE 6 — MISTRAL 7B (Génération de réponses)
+Mistral 7B est le modèle de langage qui génère les réponses en français basées uniquement sur les passages trouvés par ChromaDB.
+
+8.1 Installation Ollama
+# Installer Ollama
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Télécharger Mistral 7B
+ollama pull mistral
+
+8.2 Prompt anti-hallucination
+SYSTEM_PROMPT = '''
+Tu es un assistant spécialisé en analyse de rapports ESG.
+
+RÈGLES STRICTES:
+1. Réponds UNIQUEMENT avec les informations du contexte fourni
+2. Si l'information n'est PAS dans le contexte → dis 'Information non disponible dans les rapports chargés'
+3. TOUJOURS citer la page source: (Source: page X)
+4. JAMAIS inventer ou approximer des chiffres
+5. Réponds en français
+'''
+
+8.3 Code de génération
+import ollama
+
+def generer_reponse(question, contexte):
+    if not contexte:
+        return 'Information non disponible dans les rapports chargés.'
+    
+    prompt = f'''
+    Contexte extrait des rapports ESG:
+    {contexte}
+    
+    Question: {question}
+    
+    Réponds UNIQUEMENT avec le contexte ci-dessus.
+    '''
+    
+    response = ollama.chat(
+        model='mistral',
+        messages=[
+            {'role': 'system', 'content': SYSTEM_PROMPT},
+            {'role': 'user', 'content': prompt}
+        ]
+    )
+    return response['message']['content']
+
+9. BACKEND — FASTAPI
+
+9.1 Structure des endpoints
+
+9.2 Code FastAPI principal
+from fastapi import FastAPI, UploadFile, File
+from pydantic import BaseModel
+
+app = FastAPI(title='ESG Chatbot API')
+
+class Question(BaseModel):
+    texte: str
+    rapport: str = None
+
+@app.post('/upload-rapport')
+async def upload_rapport(file: UploadFile = File(...)):
+    # 1. Sauvegarder le PDF
+    # 2. CNN filtre les pages ESG
+    # 3. Extraire le texte
+    # 4. CamemBERT classe les paragraphes
+    # 5. NER extrait les entités
+    # 6. Stocker dans ChromaDB
+    return {'message': 'Rapport traité avec succès'}
+
+@app.post('/question')
+async def poser_question(q: Question):
+    # 1. Rechercher dans ChromaDB
+    # 2. Générer réponse avec Mistral
+    return {'reponse': reponse, 'source': source}
+
+10. INTERFACE — STREAMLIT
+
+10.1 Fonctionnalités de l'interface
+
+10.2 Code Streamlit principal
+import streamlit as st
+import requests
+
+st.title('🤖 Chatbot ESG Intelligent')
+
+# Upload PDF
+uploaded_file = st.file_uploader('Charger un rapport ESG (PDF)', type='pdf')
+if uploaded_file:
+    response = requests.post('/upload-rapport', files={'file': uploaded_file})
+    st.success('Rapport chargé avec succès!')
+
+# Interface de chat
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+for msg in st.session_state.messages:
+    with st.chat_message(msg['role']):
+        st.write(msg['content'])
+
+if question := st.chat_input('Posez votre question ESG...'):
+    response = requests.post('/question', json={'texte': question})
+    reponse = response.json()['reponse']
+    st.session_state.messages.append({'role': 'user', 'content': question})
+    st.session_state.messages.append({'role': 'assistant', 'content': reponse})
+
+11. DÉPLOIEMENT — DOCKER COMPOSE
+
+11.1 Fichier docker-compose.yml
+version: '3.8'
+services:
+  streamlit:
+    build: ./frontend
+    ports: ['8501:8501']
+    depends_on: [fastapi]
+
+  fastapi:
+    build: ./backend
+    ports: ['8000:8000']
+    depends_on: [chromadb, ollama]
+
+  chromadb:
+    image: chromadb/chroma
+    ports: ['8002:8000']
+    volumes: ['./chroma_data:/chroma/chroma']
+
+  ollama:
+    image: ollama/ollama
+    ports: ['11434:11434']
+    volumes: ['./ollama_data:/root/.ollama']
+
+11.2 Commande de lancement
+docker-compose up --build
+# Puis accéder à: http://localhost:8501
+
+12. STRUCTURE DU PROJET
+esg-chatbot/
+├── frontend/
+│   ├── app.py              # Interface Streamlit
+│   └── Dockerfile
+├── backend/
+│   ├── main.py             # FastAPI
+│   ├── cnn_module.py       # Module CNN
+│   ├── ml_module.py        # Module CamemBERT
+│   ├── ner_module.py       # Module NER
+│   ├── rag_module.py       # Module ChromaDB + Mistral
+│   └── Dockerfile
+├── models/
+│   ├── cnn_model.pth       # Modèle CNN entraîné
+│   ├── camembert_ml.pth    # Modèle CamemBERT entraîné
+│   └── camembert_ner.pth   # Modèle NER entraîné
+├── data/
+│   ├── images/             # Images pour CNN
+│   ├── ml_dataset.csv      # Dataset ML
+│   └── ner_dataset.txt     # Dataset NER IOB2
+├── rapports/               # PDFs ESG
+└── docker-compose.yml
+
+13. DONNÉES D'ENTRAÎNEMENT REQUISES
+
+13.1 Rapports ESG à utiliser
+Le système accepte n importe quel rapport ESG en PDF. Aucune liste fixe imposée. L utilisateur peut charger autant de rapports qu il souhaite depuis n importe quelle entreprise.
+
+13.2 Résumé des annotations
+Les quantités indiquées sont des minimums. Plus tu annotes, meilleur sera le modèle.
+
+14. OBJECTIFS DE PERFORMANCE
+
+15. RÉSULTAT FINAL ATTENDU
+L'utilisateur final interagit avec une interface web simple :
+
+┌─────────────────────────────────────────┐
+│        🤖 Chatbot ESG Intelligent        │
+├─────────────────────────────────────────┤
+│ 📄 Rapport chargé: TLF_ESG_2024.pdf     │
+├─────────────────────────────────────────┤
+│ 👤 Quelles sont les émissions CO₂ ?      │
+│                                         │
+│ 🤖 Selon le rapport TLF 2024, les       │
+│    émissions CO₂ s'élèvent à 1 200      │
+│    tCO₂e en 2024, soit -8% vs 2023.     │
+│    📄 Source: page 23                   │
+└─────────────────────────────────────────┘
+
+Ce chatbot permet d'interroger n'importe quel rapport ESG en langage naturel, avec des réponses précises, sourcées et fiables. Il fonctionne entièrement en local, garantissant la confidentialité des données.

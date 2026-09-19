@@ -1,0 +1,344 @@
+
+
+
+NOUVELLES FONCTIONNALITÉS À AJOUTER
+Chatbot ESG Intelligent — PFE 2025/2026
+
+
+
+
+0. VUE D'ENSEMBLE DES 5 NOUVELLES FONCTIONNALITÉS
+Ces 5 fonctionnalités s'ajoutent au pipeline existant (CNN + NLP + RAG + Chatbot + Conformité) sans le modifier en profondeur. Elles réutilisent les données déjà extraites (indicateurs_esg en SQLite) et le moteur Mistral déjà en place.
+
+
+Total estimé : 7 jours de développement pour les 5 fonctionnalités combinées.
+
+1. RÉSUMÉ AUTOMATIQUE DU RAPPORT
+  📝  RÉSUMÉ AUTOMATIQUE DU RAPPORT  
+
+▌ 1.1  Pourquoi cette fonctionnalité
+Dès qu'un rapport est uploadé et analysé (CNN + NLP + NER), l'utilisateur doit poser une question pour obtenir la moindre information. Un résumé automatique affiché immédiatement donne une vue d'ensemble sans effort, avant même de commencer à dialoguer avec le chatbot.
+
+▌ 1.2  Ce qui est généré
+3-4 points clés Environnementaux (les indicateurs GRI/ESRS les plus significatifs trouvés)
+3-4 points clés Sociaux
+2-3 points clés Gouvernance
+Le score de conformité global (déjà calculé par le module de conformité existant)
+
+▌ 1.3  Comment ça marche techniquement
+Après l'extraction NER et le calcul de conformité, on regroupe les indicateurs_esg par dimension, on sélectionne les plus pertinents (valeur numérique présente + confiance élevée), et on envoie cette liste à Mistral avec un prompt court demandant un résumé en 8-10 lignes maximum, en français, factuel, sans invention.
+
+2. COMPARAISON DE DEUX RAPPORTS
+  ⚖️  COMPARAISON DE DEUX RAPPORTS  
+
+▌ 2.1  Pourquoi cette fonctionnalité
+Un consultant RSE compare souvent deux entreprises ou la même entreprise sur deux années différentes. Automatiser cette comparaison évite un travail manuel fastidieux de recherche croisée dans deux PDFs.
+
+▌ 2.2  Ce qui est généré
+Un tableau comparatif indicateur par indicateur (émissions, énergie, effectifs, diversité...)
+Le score de conformité GRI/ESRS de chaque rapport côte à côte
+Une phrase de synthèse indiquant quel rapport est le plus performant sur chaque dimension
+
+▌ 2.3  Comment ça marche techniquement
+L'utilisateur uploade un second rapport dans une nouvelle session. Le système récupère les indicateurs_esg des deux session_id depuis SQLite, aligne les indicateurs qui portent le même reference_gri, et construit un tableau différentiel. Mistral reçoit ce tableau et rédige la phrase de synthèse.
+
+3. DÉTECTION DE TENDANCES TEMPORELLES
+  📈  DÉTECTION DE TENDANCES TEMPORELLES  
+
+▌ 3.1  Pourquoi cette fonctionnalité
+Beaucoup de rapports RSE présentent plusieurs années de données (2021, 2022, 2023) pour le même indicateur. Détecter automatiquement si un indicateur progresse ou régresse donne une lecture immédiate de la trajectoire de l'entreprise, sans que l'utilisateur ait à comparer les chiffres lui-même.
+
+▌ 3.2  Ce qui est généré
+Pour chaque indicateur avec plusieurs années détectées : une flèche de tendance (hausse/baisse/stable) et le pourcentage de variation
+Un graphique simple (ligne ou barres) affiché dans Streamlit via matplotlib ou plotly
+Une alerte visuelle si une tendance environnementale va dans le mauvais sens (ex: émissions en hausse)
+
+▌ 3.3  Comment ça marche techniquement
+La table indicateurs_esg contient déjà la colonne annee extraite par le NER. On regroupe les enregistrements par reference_gri, on trie par année, et on calcule la variation entre la première et la dernière année disponible. Le seuil de ±3% définit ce qui est considéré comme 'stable'.
+
+4. SCORE ESG GLOBAL SUR 100
+  🎯  SCORE ESG GLOBAL SUR 100  
+
+▌ 4.1  Pourquoi cette fonctionnalité
+Le module de conformité donne déjà des scores GRI et ESRS en pourcentage par dimension. Cette fonctionnalité les combine en une seule note globale sur 100, plus facile à communiquer à un dirigeant non technique, avec une pondération explicite par pilier ESG.
+
+▌ 4.2  La pondération retenue
+
+▌ 4.3  Comment ça marche techniquement
+Score = (score_gri_environnemental/100 × 40) + (score_gri_social/100 × 35) + (score_gri_gouvernance/100 × 25). Si une dimension n'a aucune donnée, elle affiche 'Non calculé' plutôt que 0, pour éviter de fausser artificiellement la note globale (principe déjà appliqué dans le module carbone existant).
+
+5. RECOMMANDATIONS AUTOMATIQUES
+  💡  RECOMMANDATIONS AUTOMATIQUES  
+
+▌ 5.1  Pourquoi cette fonctionnalité
+Connaître son score de conformité ne dit pas quoi faire pour l'améliorer. Cette fonctionnalité transforme les indicateurs manquants (déjà identifiés par le module de conformité) en actions concrètes et priorisées, ce qui donne une vraie valeur de conseil ESG au chatbot.
+
+▌ 5.2  Ce qui est généré
+3 recommandations classées par priorité, chacune citant l'indicateur GRI/ESRS manquant concerné et une action suggérée en une phrase.
+
+▌ 5.3  Comment ça marche techniquement
+La liste des indicateurs manquants est déjà produite par calculer_score_conformite() du module de conformité existant. On trie cette liste par dimension la plus faible en score, on prend les 3 premiers indicateurs manquants, et on demande à Mistral de rédiger une recommandation actionnable pour chacun, en français, en une phrase courte.
+
+6. PROMPT COMPLET POUR ANTIGRAVITY
+Copie l'intégralité du texte ci-dessous et colle-le directement dans Antigravity pour qu'il implémente les 5 fonctionnalités.
+
+
+# ════════════════════════════════════════════════════════════════════
+# PROMPT POUR ANTIGRAVITY — 5 NOUVELLES FONCTIONNALITÉS CHATBOT ESG
+# ════════════════════════════════════════════════════════════════════
+
+## CONTEXTE DU PROJET
+
+Le chatbot ESG existant (PFE 2025/2026) dispose déjà des modules suivants,
+qu'il ne faut PAS casser :
+- Module 1 CNN (ResNet-50) : filtrage ESG/NON_ESG des pages PDF
+- Module 2 NLP : CamemBERT/Random Forest (classification E/S/G) + spaCy NER
+  (extraction VALEUR, UNITE, ANNEE, TENDANCE, REFERENCE_GRI)
+- Module 3 RAG : ChromaDB + MiniLM embeddings + Mistral 7B via Ollama
+- Module 4 Chatbot Streamlit : interface, mémoire conversationnelle, export PDF
+- Module de conformité ESG : app/gri_referentiel.py + app/compliance_checker.py
+  qui calculent déjà des scores GRI et ESRS par dimension (E/S/G) et
+  identifient les indicateurs manquants (fonction calculer_score_conformite())
+
+Toutes les valeurs extraites sont stockées dans la table SQLite
+indicateurs_esg avec les colonnes : id, session_id, rapport_name,
+reference_gri, valeur, unite, annee, dimension, confiance, created_at.
+
+═══════════════════════════════════════════════════════════════════════
+OBJECTIF GLOBAL
+═══════════════════════════════════════════════════════════════════════
+
+Ajouter 5 fonctionnalités indépendantes qui réutilisent le pipeline
+existant SANS le modifier en profondeur. Chaque fonctionnalité doit
+pouvoir être testée séparément.
+
+═══════════════════════════════════════════════════════════════════════
+FONCTIONNALITÉ 1 — RÉSUMÉ AUTOMATIQUE DU RAPPORT
+═══════════════════════════════════════════════════════════════════════
+
+Fichier à créer : app/rapport_summary.py
+
+Fonction : generer_resume_rapport(session_id) -> str
+- Se connecte à SQLite, récupère tous les indicateurs_esg du session_id
+- Regroupe par dimension (Environnemental, Social, Gouvernance)
+- Pour chaque dimension, sélectionne les 3-4 indicateurs avec la
+  confiance la plus élevée
+- Récupère le score de conformité global déjà calculé via
+  compliance_checker.calculer_score_conformite()
+- Construit un prompt pour Mistral (via le client Ollama existant dans
+  llm_mistral.py) demandant un résumé de 8-10 lignes en français,
+  structuré en 3 paragraphes (E, S, G), strictement basé sur les
+  indicateurs fournis, sans invention de chiffres
+- Retourne le texte généré
+
+Intégration dans app/main.py :
+- Nouvel endpoint POST /rapport/resume qui prend session_id et retourne
+  le résumé généré
+- Ce résumé doit être calculé automatiquement et mis en cache (table
+  SQLite ou simple dict en mémoire) juste après la fin du traitement
+  NER d'un nouvel upload, pour éviter tout recalcul
+
+Intégration dans chatbot_app.py (Streamlit) :
+- Dès qu'un rapport est chargé et analysé, afficher ce résumé dans un
+  st.info() ou st.container() en haut de la zone de chat, avant le
+  premier message
+
+═══════════════════════════════════════════════════════════════════════
+FONCTIONNALITÉ 2 — COMPARAISON DE DEUX RAPPORTS
+═══════════════════════════════════════════════════════════════════════
+
+Fichier à créer : app/rapport_comparateur.py
+
+Fonction : comparer_rapports(session_id_a, session_id_b) -> dict
+- Récupère les indicateurs_esg des deux sessions
+- Normalise les reference_gri (réutiliser la fonction de normalisation
+  déjà présente dans compliance_checker.py)
+- Construit un dictionnaire des indicateurs communs aux deux rapports :
+  {reference_gri: {"rapport_a": valeur, "rapport_b": valeur, "unite": ...}}
+- Calcule aussi le score de conformité GRI/ESRS de chaque rapport via
+  compliance_checker existant
+- Retourne :
+```python
+{
+    "indicateurs_communs": {...},
+    "score_a": {"gri": 92.0, "esrs": 75.0},
+    "score_b": {"gri": 75.0, "esrs": 58.0},
+    "nom_rapport_a": "...", "nom_rapport_b": "..."
+}
+```
+
+Fonction : generer_synthese_comparaison(resultat_comparaison) -> str
+- Envoie le dictionnaire ci-dessus à Mistral avec un prompt demandant
+  une synthèse de 5-6 lignes indiquant quel rapport est le plus
+  performant par dimension, en français, factuel
+
+Intégration dans app/main.py :
+- Nouvel endpoint POST /rapport/comparer qui prend session_id_a et
+  session_id_b, retourne le dictionnaire de comparaison + la synthèse
+
+Intégration dans chatbot_app.py :
+- Nouvelle page ou section (via st.tabs ou un mode "Comparaison"
+  activable dans la sidebar) permettant de choisir deux sessions
+  existantes (deux rapports déjà uploadés dans l'historique SQLite)
+  et affichant :
+    - Un st.dataframe ou tableau avec les indicateurs communs côte à
+      côte
+    - Les deux scores de conformité avec st.columns(2)
+    - Le texte de synthèse généré par Mistral
+
+═══════════════════════════════════════════════════════════════════════
+FONCTIONNALITÉ 3 — DÉTECTION DE TENDANCES TEMPORELLES
+═══════════════════════════════════════════════════════════════════════
+
+Fichier à créer : app/tendances_detector.py
+
+Fonction : detecter_tendances(session_id) -> list[dict]
+- Récupère les indicateurs_esg du session_id groupés par reference_gri
+- Pour chaque reference_gri ayant plusieurs enregistrements avec des
+  colonnes annee différentes :
+    - Trie par année croissante
+    - Calcule la variation en % entre la première et la dernière année :
+      variation = (valeur_derniere - valeur_premiere) / valeur_premiere * 100
+    - Détermine le sens : "hausse" si variation > 3%, "baisse" si
+      variation < -3%, sinon "stable"
+    - Pour les indicateurs environnementaux (dimension="Environnemental"),
+      une "hausse" des émissions/déchets doit être signalée avec un
+      indicateur d'alerte (car c'est négatif), alors qu'une hausse du
+      recyclage est positive — gérer cette nuance via une liste de
+      indicateurs "où hausse = négatif" (ex: GRI 305 émissions, GRI 306
+      déchets non recyclés) versus "où hausse = positif"
+- Retourne une liste de dictionnaires :
+```python
+[
+    {
+        "reference_gri": "GRI 305",
+        "description": "Émissions de GES",
+        "annees": [2021, 2022, 2023],
+        "valeurs": [52000, 48000, 45200],
+        "variation_pct": -13.1,
+        "sens": "baisse",
+        "alerte": False  # baisse d'émissions = positif
+    },
+    ...
+]
+```
+
+Intégration dans app/main.py :
+- Nouvel endpoint GET /rapport/tendances?session_id=X
+
+Intégration dans chatbot_app.py :
+- Nouvelle section dans la sidebar ou un onglet "📈 Tendances"
+- Pour chaque tendance détectée, afficher :
+    - Le nom de l'indicateur et la flèche (⬆️/⬇️/➡️) avec le pourcentage
+    - Une couleur rouge si alerte=True, verte si évolution positive
+    - Un petit graphique en ligne (via st.line_chart avec les données
+      annees/valeurs) sous chaque indicateur ayant au moins 2 points
+
+═══════════════════════════════════════════════════════════════════════
+FONCTIONNALITÉ 4 — SCORE ESG GLOBAL SUR 100
+═══════════════════════════════════════════════════════════════════════
+
+Fichier à modifier : app/compliance_checker.py (ajouter une fonction)
+
+Fonction : calculer_score_esg_global_100(rapport_conformite) -> dict
+- Prend en entrée le dictionnaire déjà retourné par
+  calculer_score_conformite() (qui contient déjà les scores GRI par
+  dimension dans rapport_conformite["dimensions"][dim]["gri"]["score"])
+- Applique la pondération :
+    - Environnemental : poids 40
+    - Social : poids 35
+    - Gouvernance : poids 25
+- Si une dimension a un score de 0% ET aucun indicateur trouvé (à
+  distinguer d'un score de 0% avec des indicateurs partiellement
+  trouvés), retourner "Non calculé" pour cette dimension et exclure
+  son poids du calcul total (recalculer les poids des dimensions
+  restantes proportionnellement)
+- Retourne :
+```python
+{
+    "score_environnemental_100": 32.0,  # ou None si non calculé
+    "score_social_100": 26.25,
+    "score_gouvernance_100": 12.5,
+    "score_global_100": 70.75,
+    "poids_utilises": {"Environnemental": 40, "Social": 35, "Gouvernance": 25},
+    "dimensions_non_calculees": []
+}
+```
+
+Intégration dans app/main.py :
+- Ajouter ce score dans la réponse de l'endpoint /conformity/check
+  existant (champ supplémentaire "score_esg_100")
+
+Intégration dans chatbot_app.py :
+- Afficher ce score comme une grosse métrique visuelle en haut de la
+  sidebar (st.metric avec une taille de police augmentée via CSS
+  personnalisé existant), avec un code couleur : vert >= 70,
+  orange 40-69, rouge < 40
+
+═══════════════════════════════════════════════════════════════════════
+FONCTIONNALITÉ 5 — RECOMMANDATIONS AUTOMATIQUES
+═══════════════════════════════════════════════════════════════════════
+
+Fichier à créer : app/recommandations_generator.py
+
+Fonction : generer_recommandations(session_id) -> list[str]
+- Appelle compliance_checker.calculer_score_conformite() pour récupérer
+  la liste des indicateurs manquants par dimension (champ "manquants"
+  déjà présent dans la structure existante)
+- Trie les dimensions par score croissant (la plus faible en premier)
+- Sélectionne les 3 premiers indicateurs manquants au global (en
+  parcourant les dimensions dans cet ordre)
+- Pour chacun, construit un prompt Mistral demandant une recommandation
+  actionnable en une phrase, en français, du type :
+  "Pour combler l'indicateur {code} ({description}), il est recommandé
+  de {action suggérée par le LLM}"
+- Retourne la liste des 3 phrases de recommandation
+
+Intégration dans app/main.py :
+- Nouvel endpoint GET /rapport/recommandations?session_id=X
+
+Intégration dans chatbot_app.py :
+- Nouvelle section "💡 Recommandations prioritaires" dans la sidebar,
+  affichée sous forme de 3 st.warning() ou st.container() numérotés,
+  visible uniquement si le score de conformité global est < 100%
+
+Intégration dans export_pdf.py :
+- Ajouter les 3 recommandations à la fin du rapport PDF exporté, après
+  la page de synthèse de conformité déjà existante
+
+═══════════════════════════════════════════════════════════════════════
+EXIGENCES TRANSVERSALES
+═══════════════════════════════════════════════════════════════════════
+
+- Tout le code commenté en français avec docstrings, cohérent avec le
+  style pédagogique déjà utilisé dans ml1_camembert.py, ner_camembert.py
+  et compliance_checker.py
+- Aucune de ces 5 fonctionnalités ne doit modifier le comportement
+  existant du chatbot pour les questions RAG classiques déjà en place
+- Gérer les cas limites sans lever d'exception : session inexistante,
+  aucun indicateur trouvé, un seul rapport disponible pour la
+  comparaison (afficher un message clair à l'utilisateur dans ce cas)
+- Réutiliser au maximum les fonctions déjà existantes dans
+  compliance_checker.py plutôt que de dupliquer la logique de
+  normalisation des références GRI
+- Ajouter des tests unitaires simples dans scratch/ pour les fonctions
+  de calcul (tendances, score sur 100), sur le modèle de
+  scratch/test_compliance.py déjà existant
+
+═══════════════════════════════════════════════════════════════════════
+LIVRABLES ATTENDUS
+═══════════════════════════════════════════════════════════════════════
+
+1. app/rapport_summary.py (nouveau)
+2. app/rapport_comparateur.py (nouveau)
+3. app/tendances_detector.py (nouveau)
+4. app/compliance_checker.py (modifié — ajout calculer_score_esg_global_100)
+5. app/recommandations_generator.py (nouveau)
+6. app/main.py (modifié — 4 nouveaux endpoints)
+7. modules/module4_chatbot/chatbot_app.py (modifié — affichage des 5 features)
+8. modules/module4_chatbot/export_pdf.py (modifié — ajout recommandations)
+9. scratch/test_nouvelles_fonctionnalites.py (nouveau — tests unitaires)
+
+═══════════════════════════════════════════════════════════════════════
+FIN DU PROMPT
+═══════════════════════════════════════════════════════════════════════

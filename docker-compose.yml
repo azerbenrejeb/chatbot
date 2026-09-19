@@ -1,0 +1,72 @@
+# ============================================================
+# DOCKER COMPOSE — Chatbot ESG (Nouveau CDC)
+# ============================================================
+# 4 services : Streamlit, FastAPI, ChromaDB, Ollama
+# Lancement : docker-compose up --build
+# Accès : http://localhost:8501
+# ============================================================
+
+version: '3.8'
+
+services:
+  # --- Frontend Streamlit ---
+  streamlit:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: esg_streamlit
+    ports:
+      - "8501:8501"
+    depends_on:
+      - fastapi
+    environment:
+      - FASTAPI_URL=http://fastapi:8000
+
+  # --- Backend FastAPI ---
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: esg_fastapi
+    ports:
+      - "8000:8000"
+    depends_on:
+      - chromadb
+      - ollama
+    environment:
+      - OLLAMA_URL=http://ollama:11434
+      - CHROMA_URL=http://chromadb:8000
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./rapports:/app/rapports
+
+  # --- ChromaDB (Base vectorielle) ---
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: esg_chromadb
+    ports:
+      - "8002:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  # --- Ollama (LLM Mistral 7B) ---
+  ollama:
+    image: ollama/ollama:latest
+    container_name: esg_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # Si GPU NVIDIA disponible, décommenter :
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
+
+volumes:
+  chroma_data:
+  ollama_data:

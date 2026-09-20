@@ -65,23 +65,27 @@ def get_session_data(session_id: str) -> dict:
                     except Exception as e:
                         print(f"[WARN] Impossible d'extraire le texte du PDF : {e}")
 
-    # Récupérer les entités NER
+    # Récupérer les entités NER (priorité à indicateurs_esg déjà stocké en base)
     entities = []
     try:
         cursor.execute("""
-            SELECT entity_label, entity_text FROM ner_entities
-            WHERE session_id = ?
-        """, (session_id,))
-        entities = [{"label": r[0], "text": r[1]} for r in cursor.fetchall()]
-    except sqlite3.OperationalError:
-        # Fallback : Extraire dynamiquement les entités avec le modèle spaCy NER existant
-        if text:
-            try:
-                from modules.module2_nlp.ml2_ner_spacy import extraire_entites
-                raw_entities = extraire_entites(text)
-                entities = [{"label": e["label"], "text": e["texte"]} for e in raw_entities]
-            except Exception as e:
-                print(f"[WARN] Erreur extraction NER : {e}")
+            SELECT valeur FROM indicateurs_esg
+            WHERE (session_id = ? OR rapport_name = ?) AND valeur IS NOT NULL
+        """, (session_id, rapport_name))
+        for r in cursor.fetchall():
+            if r[0]:
+                entities.append({"label": "VALEUR", "text": str(r[0])})
+    except Exception:
+        pass
+
+    if not entities and text:
+        try:
+            from modules.module2_nlp.ml2_ner_spacy import extraire_entites
+            # Limiter à 50 000 caractères pour une réponse quasi-instantanée
+            raw_entities = extraire_entites(text[:50000])
+            entities = [{"label": e["label"], "text": e["texte"]} for e in raw_entities]
+        except Exception as e:
+            print(f"[WARN] Erreur extraction NER : {e}")
 
     conn.close()
     return {"text": text, "entities": entities}

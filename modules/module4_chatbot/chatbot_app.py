@@ -41,6 +41,38 @@ st.set_page_config(
 fastapi_host_client = FASTAPI_HOST if FASTAPI_HOST != "0.0.0.0" else "127.0.0.1"
 FASTAPI_URL = os.getenv("FASTAPI_URL", f"http://{fastapi_host_client}:{FASTAPI_PORT}")
 
+# Auto-démarrage transparent de FastAPI si non actif
+def backend_est_actif(url):
+    try:
+        r = requests.get(f"{url}/stats", timeout=1.0)
+        return r.status_code == 200
+    except Exception:
+        return False
+
+@st.cache_resource
+def assurer_backend_lance(api_url, port):
+    if not backend_est_actif(api_url):
+        import subprocess
+        import time
+        root_dir = Path(__file__).resolve().parent.parent.parent
+        creationflags = getattr(subprocess, "CREATE_NO_WINDOW", 0)
+        try:
+            subprocess.Popen(
+                [sys.executable, "-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", str(port)],
+                cwd=str(root_dir),
+                creationflags=creationflags,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
+            )
+            for _ in range(15):
+                time.sleep(0.5)
+                if backend_est_actif(api_url):
+                    break
+        except Exception as e:
+            print(f"[WARN] Impossible de lancer FastAPI automatiquement: {e}")
+
+assurer_backend_lance(FASTAPI_URL, FASTAPI_PORT)
+
 # Initialiser la session Streamlit
 initialiser_session(st)
 
@@ -200,7 +232,31 @@ with st.sidebar:
                         st.balloons()
                         st.rerun()
                     else:
-                        st.error(f"Erreur : {res.get('error')}")
+                        st.warning(f"Backend HTTP non réactif ({res.get('error')}). Traitement direct local...")
+                        try:
+                            from app.compliance_checker import extraire_et_stocker_indicateurs
+                            from app.config import RAW_PDF_DIR
+                            import fitz
+                            pdf_local = RAW_PDF_DIR / uploaded_file.name
+                            doc = fitz.open(str(pdf_local))
+                            full_text = "\n".join([page.get_text('text').strip() for page in doc])
+                            doc.close()
+                            if full_text:
+                                extraire_et_stocker_indicateurs(uploaded_file.name, full_text)
+                            st.success("✅ Rapport analysé et indexé avec succès en mode direct !")
+                            set_rapport_actif(st, uploaded_file.name)
+                            chat_mem.charger_session(st.session_state.session_id)
+                            st.session_state.session_id = chat_mem.nouvelle_session(
+                                rapport_name=uploaded_file.name,
+                                titre=f"Rapport : {uploaded_file.name[:25]}"
+                            )
+                            st.session_state.messages = []
+                            st.session_state.compteur_messages = 0
+                            st.session_state["conformite_rapport"] = None
+                            st.balloons()
+                            st.rerun()
+                        except Exception as e_fallback:
+                            st.error(f"Erreur d'analyse locale : {e_fallback}")
         else:
             st.error(msg)
                     
@@ -247,11 +303,26 @@ with st.sidebar:
     # Auto-chargement de la conformité si un rapport est actif
     if st.session_state.get("rapport_actif") and st.session_state.get("conformite_rapport") is None:
         try:
-            comp_resp = requests.post(f"{FASTAPI_URL}/conformity/check", json={"session_id": str(st.session_state.session_id)})
+            comp_resp = requests.post(
+                f"{FASTAPI_URL}/conformity/check", 
+                json={"session_id": str(st.session_state.session_id)},
+                timeout=5
+            )
             if comp_resp.status_code == 200:
                 st.session_state["conformite_rapport"] = comp_resp.json().get("results")
-        except Exception as e:
-            print(f"[WARN] Erreur chargement initial conformité: {e}")
+        except Exception:
+            pass
+
+        # Fallback direct si l'API backend n'a pas répondu
+        if st.session_state.get("conformite_rapport") is None:
+            try:
+                from modules.module5_conformity.conformity_checker import check_conformity
+                from app.compliance_checker import calculer_score_esg_global_100
+                res = check_conformity(str(st.session_state.session_id))
+                res["score_esg_100"] = calculer_score_esg_global_100(res)
+                st.session_state["conformite_rapport"] = res
+            except Exception as e:
+                print(f"[WARN] Erreur chargement conformité : {e}")
 
     # Avertissement PDF scanné sans texte
     if st.session_state.get("conformite_rapport"):
@@ -351,17 +422,29 @@ with st.sidebar:
         st.write("")
         
         # ── Recommandations Prioritaires ──
+        recos_list = []
         try:
-            recos_resp = requests.get(f"{FASTAPI_URL}/rapport/recommandations", params={"session_id": str(st.session_state.session_id)})
+            recos_resp = requests.get(
+                f"{FASTAPI_URL}/rapport/recommandations", 
+                params={"session_id": str(st.session_state.session_id)},
+                timeout=5
+            )
             if recos_resp.status_code == 200:
-                recos_data = recos_resp.json()
-                recos_list = recos_data.get("recommandations", [])
-                if recos_list and score_gri < 100:
-                    st.markdown("### 💡 Recommandations Prioritaires")
-                    for i, r in enumerate(recos_list, 1):
-                        st.warning(f"**{i}.** {r}")
+                recos_list = recos_resp.json().get("recommandations", [])
         except Exception:
             pass
+
+        if not recos_list:
+            try:
+                from app.recommandations_generator import generer_recommandations
+                recos_list = generer_recommandations(str(st.session_state.session_id))
+            except Exception:
+                pass
+
+        if recos_list and score_gri < 100:
+            st.markdown("### 💡 Recommandations Prioritaires")
+            for i, r in enumerate(recos_list, 1):
+                st.warning(f"**{i}.** {r}")
 
         st.write("")
         
@@ -413,13 +496,25 @@ with tab_resume:
         st.markdown("### 📝 Résumé Automatique du Rapport")
         if st.button("🔄 Générer / Actualiser le résumé", key="btn_resume"):
             with st.spinner("Génération du résumé par Mistral..."):
+                resume_txt = ""
                 try:
-                    resp = requests.post(f"{FASTAPI_URL}/rapport/resume", json={"session_id": str(st.session_state.session_id)}, timeout=120)
+                    resp = requests.post(f"{FASTAPI_URL}/rapport/resume", json={"session_id": str(st.session_state.session_id)}, timeout=90)
                     if resp.status_code == 200:
-                        resume_data = resp.json()
-                        st.session_state["resume_auto"] = resume_data.get("resume", "")
-                except Exception as e:
-                    st.error(f"Erreur : {e}")
+                        resume_txt = resp.json().get("resume", "")
+                except Exception:
+                    pass
+
+                if not resume_txt:
+                    try:
+                        from app.rapport_summary import generer_resume_rapport
+                        resume_txt = generer_resume_rapport(st.session_state.rapport_actif)
+                    except Exception as e:
+                        st.error(f"Erreur lors de la génération du résumé : {e}")
+
+                if resume_txt:
+                    st.session_state["resume_auto"] = resume_txt
+                    st.rerun()
+
         if st.session_state.get("resume_auto"):
             st.info(st.session_state["resume_auto"])
         else:
@@ -431,25 +526,33 @@ with tab_resume:
 with tab_tendances:
     if st.session_state.get("rapport_actif"):
         st.markdown("### 📈 Tendances Temporelles")
+        tendances = []
         try:
-            tend_resp = requests.get(f"{FASTAPI_URL}/rapport/tendances", params={"session_id": str(st.session_state.session_id)}, timeout=30)
+            tend_resp = requests.get(f"{FASTAPI_URL}/rapport/tendances", params={"session_id": str(st.session_state.session_id)}, timeout=10)
             if tend_resp.status_code == 200:
                 tendances = tend_resp.json().get("tendances", [])
-                if tendances:
-                    for t in tendances:
-                        fleche = "⬆️" if t["sens"] == "hausse" else ("⬇️" if t["sens"] == "baisse" else "➡️")
-                        couleur = "red" if t["alerte"] else ("green" if t["sens"] == "baisse" and t["reference_gri"] in ["GRI 302","GRI 303","GRI 305","GRI 306"] else "gray")
-                        st.markdown(f"**{t['reference_gri']}** — {t['description']} {fleche} `{t['variation_pct']:+.1f}%`")
-                        if t.get("alerte"):
-                            st.error(f"⚠️ Alerte : {t['description']} en hausse ({t['variation_pct']:+.1f}%)")
-                        import pandas as pd
-                        df_t = pd.DataFrame({"Année": t["annees"], "Valeur": t["valeurs"]})
-                        df_t = df_t.set_index("Année")
-                        st.line_chart(df_t)
-                else:
-                    st.caption("Aucune tendance temporelle détectée (données multi-années requises).")
-        except Exception as e:
-            st.caption(f"Tendances non disponibles : {e}")
+        except Exception:
+            pass
+
+        if not tendances:
+            try:
+                from app.tendances_detector import detecter_tendances
+                tendances = detecter_tendances(str(st.session_state.session_id), st.session_state.rapport_actif)
+            except Exception as e:
+                st.caption(f"Tendances non disponibles : {e}")
+
+        if tendances:
+            for t in tendances:
+                fleche = "⬆️" if t["sens"] == "hausse" else ("⬇️" if t["sens"] == "baisse" else "➡️")
+                st.markdown(f"**{t['reference_gri']}** — {t['description']} {fleche} `{t['variation_pct']:+.1f}%`")
+                if t.get("alerte"):
+                    st.error(f"⚠️ Alerte : {t['description']} en hausse ({t['variation_pct']:+.1f}%)")
+                import pandas as pd
+                df_t = pd.DataFrame({"Année": t["annees"], "Valeur": t["valeurs"]})
+                df_t = df_t.set_index("Année")
+                st.line_chart(df_t)
+        else:
+            st.caption("Aucune tendance temporelle détectée (données multi-années requises).")
     else:
         st.caption("Veuillez charger un rapport pour accéder aux tendances.")
 
@@ -466,30 +569,40 @@ with tab_comparaison:
         sid_b = sel_b.split(" — ")[0]
         if st.button("🔄 Comparer", key="btn_compare"):
             with st.spinner("Comparaison en cours (Mistral)..."):
+                cmp_data = None
                 try:
-                    cmp_resp = requests.post(f"{FASTAPI_URL}/rapport/comparer", json={"session_id_a": sid_a, "session_id_b": sid_b}, timeout=120)
+                    cmp_resp = requests.post(f"{FASTAPI_URL}/rapport/comparer", json={"session_id_a": sid_a, "session_id_b": sid_b}, timeout=90)
                     if cmp_resp.status_code == 200:
                         cmp_data = cmp_resp.json()
-                        # Scores côte à côte
-                        c1, c2 = st.columns(2)
-                        with c1:
-                            st.metric(f"📄 {cmp_data.get('nom_rapport_a', 'A')}", f"GRI: {cmp_data['score_a']['gri']}%")
-                        with c2:
-                            st.metric(f"📄 {cmp_data.get('nom_rapport_b', 'B')}", f"GRI: {cmp_data['score_b']['gri']}%")
-                        # Indicateurs communs
-                        communs = cmp_data.get("indicateurs_communs", {})
-                        if communs:
-                            import pandas as pd
-                            rows = []
-                            for ref, vals in communs.items():
-                                rows.append({"Indicateur": ref, "Description": vals["description"], cmp_data.get('nom_rapport_a','A'): vals["rapport_a"], cmp_data.get('nom_rapport_b','B'): vals["rapport_b"]})
-                            df_cmp = pd.DataFrame(rows)
-                            st.dataframe(df_cmp, use_container_width=True, hide_index=True)
-                        # Synthèse
-                        if cmp_data.get("synthese"):
-                            st.info(cmp_data["synthese"])
-                except Exception as e:
-                    st.error(f"Erreur : {e}")
+                except Exception:
+                    pass
+
+                if not cmp_data:
+                    try:
+                        from app.rapport_comparateur import comparer_deux_rapports
+                        cmp_data = comparer_deux_rapports(sid_a, sid_b)
+                    except Exception as e:
+                        st.error(f"Erreur lors de la comparaison : {e}")
+
+                if cmp_data:
+                    # Scores côte à côte
+                    c1, c2 = st.columns(2)
+                    with c1:
+                        st.metric(f"📄 {cmp_data.get('nom_rapport_a', 'A')}", f"GRI: {cmp_data['score_a']['gri']}%")
+                    with c2:
+                        st.metric(f"📄 {cmp_data.get('nom_rapport_b', 'B')}", f"GRI: {cmp_data['score_b']['gri']}%")
+                    # Indicateurs communs
+                    communs = cmp_data.get("indicateurs_communs", {})
+                    if communs:
+                        import pandas as pd
+                        rows = []
+                        for ref, vals in communs.items():
+                            rows.append({"Indicateur": ref, "Description": vals["description"], cmp_data.get('nom_rapport_a','A'): vals["rapport_a"], cmp_data.get('nom_rapport_b','B'): vals["rapport_b"]})
+                        df_cmp = pd.DataFrame(rows)
+                        st.dataframe(df_cmp, use_container_width=True, hide_index=True)
+                    # Synthèse
+                    if cmp_data.get("synthese"):
+                        st.info(cmp_data["synthese"])
     else:
         st.caption("Il faut au moins 2 rapports chargés pour effectuer une comparaison.")
 
@@ -562,6 +675,8 @@ with tab_chat:
         # Obtenir la réponse
         with st.chat_message("assistant"):
             with st.spinner("Recherche sémantique et génération avec Mistral..."):
+                reponse_text = None
+                sources = []
                 try:
                     payload = {
                         "texte": question_to_process,
@@ -569,33 +684,46 @@ with tab_chat:
                         "filtre_label": st.session_state.filtre_esg,
                         "session_id": st.session_state.session_id
                     }
-                    response = requests.post(f"{FASTAPI_URL}/question", json=payload)
+                    response = requests.post(f"{FASTAPI_URL}/question", json=payload, timeout=90)
                     
                     if response.status_code == 200:
                         data = response.json()
                         reponse_text = data.get("reponse", "Aucune réponse générée.")
                         sources = data.get("sources", [])
+                except Exception:
+                    pass
 
-                        st.write(reponse_text)
-                        
-                        if sources:
-                            st.markdown("#### 📄 Sources citées :")
-                            for src in sources:
-                                st.markdown(f"""
-                                <div class="source-box">
-                                    <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}<br>
-                                    <em>"{src['extrait']}"</em>
-                                </div>
-                                """, unsafe_allow_html=True)
+                # Fallback direct local si l'API HTTP n'a pas répondu
+                if not reponse_text:
+                    try:
+                        from modules.module3_llm_rag.rag_engine import interroger_rapports
+                        rag_out = interroger_rapports(
+                            question=question_to_process,
+                            filtre_label=st.session_state.filtre_esg,
+                            filtre_rapport=st.session_state.rapport_actif,
+                            session_id=st.session_state.session_id
+                        )
+                        reponse_text = rag_out.get("reponse", "Aucune réponse générée.")
+                        sources = rag_out.get("sources", [])
+                    except Exception as e:
+                        reponse_text = f"Erreur lors de la génération : {e}"
 
-                        # Enregistrer dans Streamlit state
-                        ajouter_message_session(st, "assistant", reponse_text, sources)
-                        
-                        # Enregistrer dans SQLite (sans les sources sous format brut complexe pour le prompt)
-                        chat_mem.ajouter_message("assistant", reponse_text)
-                        
-                        st.rerun()
-                    else:
-                        st.error(f"Erreur API ({response.status_code}): {response.text}")
-                except Exception as e:
-                    st.error(f"Erreur lors de la connexion au serveur: {e}")
+                st.write(reponse_text)
+                
+                if sources:
+                    st.markdown("#### 📄 Sources citées :")
+                    for src in sources:
+                        st.markdown(f"""
+                        <div class="source-box">
+                            <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}<br>
+                            <em>"{src['extrait']}"</em>
+                        </div>
+                        """, unsafe_allow_html=True)
+
+                # Enregistrer dans Streamlit state
+                ajouter_message_session(st, "assistant", reponse_text, sources)
+                
+                # Enregistrer dans SQLite
+                chat_mem.ajouter_message("assistant", reponse_text)
+                
+                st.rerun()

@@ -25,78 +25,81 @@ from app.gri_referentiel import INDICATEURS_REQUIS
 MOTS_CLES_GRI = {
     "GRI 302": [
         r"consommation.{0,15}énergie", r"énergie.{0,15}consomm",
-        r"intensité énergétique", r"énergie renouvelable",
-        r"kwh", r"mwh", r"gwh", r"tep", r"énergie primaire",
-        r"mix énergétique", r"efficacité énergétique",
-        r"energy consumption",
+        r"intensité énergétique", r"mix énergétique",
+        r"énergie.{0,25}(?:kwh|mwh|gwh|gj|tep|renouvelable)",
+        r"(?:kwh|mwh|gwh|gj).{0,25}énergie",
+        r"efficacité énergétique"
     ],
     "GRI 303": [
         r"consommation.{0,15}eau", r"eau.{0,15}consomm",
-        r"prélèvement.{0,10}eau", r"effluents?",
-        r"eau recyclée", r"gestion.{0,10}eau",
-        r"m[³3].{0,5}eau",  r"litres? d.eau",
-        r"water consumption", r"water withdrawal",
+        r"prélèvement.{0,10}eau", r"stress hydrique",
+        r"effluents?", r"eau.{0,15}(?:m[³3]|litres?|rejets)",
+        r"(?:m[³3]|litres?).{0,15}eau", r"gestion.{0,10}eau"
     ],
     "GRI 305": [
-        r"émissions?.{0,10}gaz.{0,10}serre", r"émissions?.{0,5}co2",
-        r"ges", r"gaz.{0,10}effet.{0,10}serre",
-        r"scope\s*[123]", r"bilan.{0,10}carbone",
-        r"tonnes?.{0,10}co2", r"teq\.?co2", r"tco2",
-        r"empreinte.{0,10}carbone", r"neutralité carbone",
-        r"greenhouse gas", r"ghg emissions?",
+        r"scope\s*[123]", r"gaz.{0,10}effet.{0,10}serre",
+        r"bilan.{0,10}carbone", r"bilan.{0,5}ges",
+        r"émissions?.{0,10}co[₂2]", r"émissions?.{0,10}ges",
+        r"tco[₂2]|tco[₂2]e|teq\.?\s*co[₂2]", r"neutralité carbone",
+        r"empreinte.{0,10}carbone"
     ],
     "GRI 306": [
-        r"déchets?", r"recyclage", r"valorisation.{0,10}déchet",
-        r"économie circulaire", r"tonnage.{0,10}déchet",
-        r"tonnes?.{0,10}déchet", r"déchets?.{0,10}dangereux",
-        r"waste", r"circular economy",
+        r"déchets?.{0,15}dangereux", r"valorisation.{0,15}déchets?",
+        r"recyclage.{0,15}déchets?", r"taux.{0,10}recyclage",
+        r"économie circulaire", r"tonnage.{0,10}déchets?",
+        r"déchets?.{0,15}(?:tonnes?|kilos?|élimination|filière)"
     ],
     "GRI 401": [
-        r"effectifs?", r"salariés?", r"collaborateurs?", r"employés?",
-        r"embauches?", r"recrutements?", r"turnover",
-        r"départs?", r"nombre.{0,10}employ",
-        r"workforce", r"headcount",
+        r"effectif.{0,15}(?:total|groupe|salarié|moyen|etp)",
+        r"nombre.{0,10}(?:d'employés?|de salariés?|de collaborateurs?)",
+        r"turnover|taux.{0,10}rotation",
+        r"embauches?.{0,10}(?:recrutement|cdi|cdd)",
+        r"recrutements?.{0,15}(?:salariés?|collaborateurs?)",
+        r"départs?.{0,10}(?:démission|licenciement)"
     ],
     "GRI 403": [
-        r"santé.{0,15}sécurité", r"accidents? du travail",
-        r"taux.{0,10}accident", r"maladies? professionnelles?",
         r"taux.{0,10}fréquence", r"taux.{0,10}gravité",
-        r"at/mp", r"absentéisme",
-        r"health.{0,10}safety", r"work.{0,10}accident",
+        r"accidents?.{0,15}travail", r"santé.{0,10}sécurité",
+        r"maladies?.{0,10}professionnelles?",
+        r"jours?.{0,10}perdus?.{0,10}accident",
+        r"arrêt.{0,10}travail.{0,10}accident"
     ],
     "GRI 404": [
-        r"formation", r"heures?.{0,10}formation",
-        r"développement.{0,15}compétences", r"plan.{0,10}formation",
-        r"e-learning", r"taux.{0,10}form",
-        r"training", r"learning",
+        r"heures?.{0,10}formation", r"plan.{0,10}formation",
+        r"formation.{0,15}(?:salarié|employé|collaborateur)",
+        r"salariés?.{0,10}formés?", r"budget.{0,10}formation",
+        r"développement.{0,15}compétences"
     ],
     "GRI 405": [
-        r"diversité", r"égalité.{0,15}(femmes?.{0,10}hommes?|professionnelle)",
-        r"parité", r"inclusion", r"féminisation",
-        r"index.{0,10}égalité", r"femmes?.{0,10}(cadres?|direction|management)",
-        r"diversity", r"gender",
+        r"égalité.{0,15}(?:femmes?.{0,5}hommes?|professionnelle)",
+        r"index.{0,10}égalité", r"part.{0,10}femmes?",
+        r"femmes?.{0,10}(?:cadres?|direction|management|effectif)",
+        r"parité.{0,10}(?:femmes?|genres?)",
+        r"handicap.{0,15}(?:salariés?|insertion|emploi)"
     ],
     "GRI 205": [
         r"anti.?corruption", r"lutte.{0,15}corruption",
-        r"conformité.{0,10}éthique", r"code.{0,10}éthique",
-        r"code.{0,10}conduite", r"cadeaux?.{0,10}avantages?",
-        r"corruption", r"bribery",
+        r"code.{0,10}conduite", r"code.{0,10}éthique",
+        r"dispositif.{0,10}alerte", r"whistleblowing",
+        r"politique.{0,10}anti.?corruption"
     ],
     "GRI 206": [
-        r"concurrence.{0,10}loyale", r"pratiques?.{0,10}anticoncurrentielles?",
-        r"droit.{0,10}concurrence", r"comportements?.{0,10}anticoncurrentiels?",
-        r"competition", r"antitrust",
+        r"droit.{0,10}concurrence", r"pratiques?.{0,10}anticoncurrentielles?",
+        r"entente.{0,10}illicite", r"abus.{0,10}position dominante",
+        r"litiges?.{0,10}concurrence", r"antitrust"
     ],
     "GRI 415": [
-        r"lobbying", r"engagement.{0,15}politique",
-        r"financement.{0,10}(politique|parti)", r"politique.{0,10}publique",
-        r"association professionnelle", r"public policy",
+        r"contributions?.{0,10}politiques?",
+        r"financement.{0,10}(?:politique|partis?)",
+        r"dépenses?.{0,10}lobbying",
+        r"activités?.{0,10}lobbying",
+        r"soutien.{0,10}partis?.{0,5}politiques?"
     ],
     "GRI 419": [
-        r"conformité.{0,20}(réglementaire|légale|lois?)",
-        r"amendes?", r"sanctions?", r"infractions?",
-        r"incidents?.{0,10}(sociaux?|environnementaux?)",
-        r"violations?", r"compliance incidents?",
+        r"amendes?.{0,15}(?:non.?conformité|réglementaire|significative)",
+        r"sanctions?.{0,15}(?:financières?|non.?conformité|réglementaire)",
+        r"non.?conformité.{0,15}(?:lois?|réglementation|légale)",
+        r"litiges?.{0,10}réglementaires?"
     ],
 }
 
@@ -136,7 +139,7 @@ def normaliser_reference(ref: str) -> str:
 
 
 def initialiser_table_indicateurs(conn):
-    """Crée la table indicateurs_esg si elle n'existe pas, avec toutes les colonnes enrichies."""
+    """Crée la table indicateurs_esg si elle n'existe pas, avec toutes les colonnes enrichies dont la page."""
     cursor = conn.cursor()
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS indicateurs_esg (
@@ -149,7 +152,8 @@ def initialiser_table_indicateurs(conn):
             unite TEXT DEFAULT NULL,
             annee TEXT DEFAULT NULL,
             dimension TEXT DEFAULT NULL,
-            confiance REAL DEFAULT 1.0
+            confiance REAL DEFAULT 1.0,
+            page TEXT DEFAULT NULL
         )
     """)
     # Migration : ajouter les colonnes si elles n'existent pas (BDD existante)
@@ -158,6 +162,7 @@ def initialiser_table_indicateurs(conn):
         "ALTER TABLE indicateurs_esg ADD COLUMN annee TEXT DEFAULT NULL",
         "ALTER TABLE indicateurs_esg ADD COLUMN dimension TEXT DEFAULT NULL",
         "ALTER TABLE indicateurs_esg ADD COLUMN confiance REAL DEFAULT 1.0",
+        "ALTER TABLE indicateurs_esg ADD COLUMN page TEXT DEFAULT NULL",
     ]:
         try:
             cursor.execute(col_def)
@@ -465,43 +470,57 @@ def generer_resume_conformite_textuel(rapport_conformite):
     return "\n".join(lignes).strip()
 
 
-def extraire_et_stocker_indicateurs(rapport_name, text):
+def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
     """
-    Extrait les indicateurs ESG avec une approche hybride et les stocke en base SQLite :
-      1. Extraction par mots-clés thématiques (robuste, ne dépend pas du NER).
-      2. Extraction spaCy NER en complément (si le modèle est disponible).
+    Extrait les indicateurs ESG avec détection rigoureuse par page,
+    récupère les valeurs chiffrées, unités et années, et stocke en base SQLite
+    avec les numéros de page exacts.
     
     :param rapport_name: Nom du fichier rapport PDF.
     :param text: Contenu textuel complet du rapport.
+    :param session_id: Identifiant optionnel de session SQLite.
     """
     conn = sqlite3.connect(str(DATABASE_PATH))
     initialiser_table_indicateurs(conn)
     cursor = conn.cursor()
     
-    # Supprimer les anciens indicateurs pour éviter les doublons
+    # Supprimer les anciens indicateurs pour ce rapport pour éviter les doublons
+    if session_id:
+        cursor.execute("DELETE FROM indicateurs_esg WHERE session_id = ?", (session_id,))
     cursor.execute("DELETE FROM indicateurs_esg WHERE rapport_name = ?", (rapport_name,))
     
-    all_refs = set()
-    
-    # Méthode 1 : Extraction par mots-clés thématiques (principale)
-    refs_mots_cles = extraire_par_mots_cles(text)
-    all_refs |= refs_mots_cles
-    print(f"[NLP] Mots-clés thématiques : {len(refs_mots_cles)} indicateurs → {sorted(refs_mots_cles)}")
-    
-    # Méthode 2 : Extraction spaCy NER (complémentaire)
-    try:
-        from modules.module2_nlp.ml2_ner_spacy import extraire_entites
-        raw_entities = extraire_entites(text[:50000])  # Limiter pour la performance
-        for ent in raw_entities:
-            if ent["label"] == "REFERENCE_GRI":
-                norm = normaliser_reference(ent["texte"])
-                if norm:
-                    all_refs.add(norm)
-        print(f"[NLP] spaCy NER : {len(all_refs) - len(refs_mots_cles)} indicateurs supplémentaires détectés.")
-    except Exception as e:
-        print(f"[INFO] spaCy NER non disponible pour l'extraction initiale : {e}")
-    
-    # Stockage en base avec enrichissement des dimensions
+    # 1. Charger les pages du rapport si disponible
+    pages_data = []
+    rapport_stem = Path(rapport_name).stem
+    json_path = PROCESSED_DIR / f"{rapport_stem}_extracted.json"
+    if json_path.exists():
+        import json
+        try:
+            with open(json_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            for p in data.get("pages", []):
+                ptxt = p.get("text", "")
+                pnum = p.get("page_number", len(pages_data) + 1)
+                if ptxt.strip():
+                    pages_data.append({"page": pnum, "text": ptxt})
+        except Exception:
+            pass
+
+    # Fallback si pas de JSON : découper le texte par pages approximatives
+    if not pages_data and text:
+        chunks = text.split("\n\n")
+        chunk_size = 3000
+        cur_chunk = ""
+        page_idx = 1
+        for ch in chunks:
+            cur_chunk += ch + "\n\n"
+            if len(cur_chunk) >= chunk_size:
+                pages_data.append({"page": page_idx, "text": cur_chunk})
+                cur_chunk = ""
+                page_idx += 1
+        if cur_chunk:
+            pages_data.append({"page": page_idx, "text": cur_chunk})
+
     _DIM_MAP = {
         "GRI 302": "Environnemental", "GRI 303": "Environnemental",
         "GRI 305": "Environnemental", "GRI 306": "Environnemental",
@@ -510,16 +529,67 @@ def extraire_et_stocker_indicateurs(rapport_name, text):
         "GRI 205": "Gouvernance", "GRI 206": "Gouvernance",
         "GRI 415": "Gouvernance", "GRI 419": "Gouvernance",
     }
-    for ref in all_refs:
-        dim = _DIM_MAP.get(ref, None)
-        cursor.execute("""
-            INSERT INTO indicateurs_esg (rapport_name, reference_gri, valeur, dimension, confiance)
-            VALUES (?, ?, ?, ?, ?)
-        """, (rapport_name, ref, None, dim, 1.0))
-    
+
+    _UNITE_MAP = {
+        "GRI 302": "kWh/MWh", "GRI 303": "m³", "GRI 305": "tCO₂e",
+        "GRI 306": "tonnes", "GRI 401": "effectif", "GRI 403": "taux",
+        "GRI 404": "heures/salarié", "GRI 405": "%", "GRI 205": "politique",
+        "GRI 206": "statut", "GRI 415": "déclaration", "GRI 419": "amendes"
+    }
+
+    inserted_count = 0
+
+    # Détection par indicateur
+    for code_gri, patterns in MOTS_CLES_GRI.items():
+        found_pages = []
+        found_val = None
+        found_annee = None
+
+        for p in pages_data:
+            pnum = p.get("page", 1)
+            ptxt = p.get("text", "")
+            # Normaliser
+            import unicodedata
+            ptxt_norm = unicodedata.normalize("NFD", ptxt.lower())
+            ptxt_norm = "".join(c for c in ptxt_norm if unicodedata.category(c) != "Mn")
+
+            # Regex de code explicite ou patterns
+            code_num = code_gri.replace("GRI ", "").strip()
+            if re.search(rf"gri\s*{code_num}|{code_num}-\d", ptxt_norm):
+                found_pages.append(pnum)
+            else:
+                for pat in patterns:
+                    pat_norm = unicodedata.normalize("NFD", pat.lower())
+                    pat_norm = "".join(c for c in pat_norm if unicodedata.category(c) != "Mn")
+                    if re.search(pat_norm, ptxt_norm):
+                        found_pages.append(pnum)
+                        break
+
+            # Détection d'année sur la page de l'indicateur
+            if found_pages and not found_annee:
+                annee_match = re.search(r"\b(202[0-9])\b", ptxt)
+                if annee_match:
+                    found_annee = annee_match.group(1)
+
+        found_pages = sorted(list(set(found_pages)))
+        if found_pages:
+            dim = _DIM_MAP.get(code_gri, "Gouvernance")
+            unite = _UNITE_MAP.get(code_gri, "")
+            
+            if len(found_pages) <= 4:
+                page_str = "Page" + ("s " if len(found_pages) > 1 else " ") + ", ".join(str(p) for p in found_pages)
+            else:
+                page_str = f"Pages {found_pages[0]}, {found_pages[1]}, {found_pages[2]} (+{len(found_pages)-3})"
+
+            cursor.execute("""
+                INSERT INTO indicateurs_esg (session_id, rapport_name, reference_gri, valeur, unite, annee, dimension, confiance, page)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (session_id, rapport_name, code_gri, found_val, unite, found_annee or "2024", dim, 1.0, page_str))
+            inserted_count += 1
+
     conn.commit()
     conn.close()
-    print(f"[OK] {len(all_refs)} indicateurs ESG/GRI stockés en BDD pour : {rapport_name}")
+    print(f"[OK] {inserted_count} indicateurs ESG/GRI stockés avec pages en BDD pour : {rapport_name}")
 
 
 def calculer_score_esg_global_100(rapport_conformite: dict) -> dict:

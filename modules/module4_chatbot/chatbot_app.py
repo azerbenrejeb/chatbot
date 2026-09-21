@@ -404,23 +404,55 @@ with st.sidebar:
                 st.write(f"**ESRS :** {esrs_dim.get('score', 0)}%")
                 st.progress(max(0.0, min(1.0, esrs_dim.get('score', 0.0) / 100.0)))
                 
-                # Indicateurs manquants
-                if gri_dim.get("manquants"):
-                    st.markdown("**🇬 Indicateurs GRI manquants :**")
-                    for m in gri_dim["manquants"]:
-                        st.caption(f"❌ **{m['code']}** : {m['description']}")
-                else:
-                    st.caption("✅ Tous les indicateurs GRI requis sont présents !")
-                    
-                if esrs_dim.get("manquants"):
-                    st.markdown("**🇪🇺 Indicateurs ESRS manquants :**")
-                    for m in esrs_dim["manquants"]:
-                        st.caption(f"❌ **{m['code']}** : {m['description']}")
-                else:
-                    st.caption("✅ Tous les indicateurs ESRS requis sont présents !")
+                # ── Indicateurs identifiés avec numéros de page ──
+                trouves = gri_dim.get("trouves", [])
+                if trouves:
+                    st.markdown("**✅ Indicateurs identifiés :**")
+                    for t in trouves:
+                        if isinstance(t, dict):
+                            code = t.get("code", "")
+                            nom = t.get("nom", "")
+                            pg = t.get("pages_str", "")
+                            badge_pg = f" `[{pg}]`" if pg else ""
+                            st.caption(f"✅ **{code}** ({nom}){badge_pg}")
+                        else:
+                            st.caption(f"✅ **{t}**")
+
+                # ── Indicateurs manquants ──
+                manquants = gri_dim.get("manquants", [])
+                if manquants:
+                    st.markdown("**❌ Indicateurs manquants :**")
+                    for m in manquants:
+                        code = m.get("code", "") if isinstance(m, dict) else m
+                        desc = m.get("nom") or m.get("description", "") if isinstance(m, dict) else ""
+                        st.caption(f"❌ **{code}** : {desc}")
+                elif not trouves:
+                    st.caption("Aucune donnée disponible pour cette dimension.")
                     
         st.write("")
         
+        # ── Téléchargement du Rapport d'Audit ESG en PDF ──
+        try:
+            from modules.module5_conformity.conformity_report import generate_conformity_pdf
+            pdf_audit_path = generate_conformity_pdf(
+                str(st.session_state.session_id),
+                conf,
+                rapport_name=st.session_state.rapport_actif or ""
+            )
+            with open(pdf_audit_path, "rb") as fh:
+                st.download_button(
+                    label="📥 Télécharger Rapport de Conformité (PDF)",
+                    data=fh,
+                    file_name=Path(pdf_audit_path).name,
+                    mime="application/pdf",
+                    use_container_width=True,
+                    key="btn_dl_audit_pdf"
+                )
+        except Exception as e:
+            st.caption(f"Export PDF audit : {e}")
+
+        st.write("")
+
         # ── Recommandations Prioritaires ──
         recos_list = []
         try:
@@ -525,7 +557,7 @@ with tab_resume:
 # ── Onglet Tendances Temporelles ──
 with tab_tendances:
     if st.session_state.get("rapport_actif"):
-        st.markdown("### 📈 Tendances Temporelles")
+        st.markdown(f"### 📈 Tendances Temporelles Pluri-Annuelles — `{st.session_state.rapport_actif}`")
         tendances = []
         try:
             tend_resp = requests.get(f"{FASTAPI_URL}/rapport/tendances", params={"session_id": str(st.session_state.session_id)}, timeout=10)
@@ -537,41 +569,80 @@ with tab_tendances:
         if not tendances:
             try:
                 from app.tendances_detector import detecter_tendances
-                tendances = detecter_tendances(str(st.session_state.session_id), st.session_state.rapport_actif)
+                tendances = detecter_tendances(st.session_state.session_id, st.session_state.rapport_actif)
             except Exception as e:
                 st.caption(f"Tendances non disponibles : {e}")
 
         if tendances:
+            st.success(f"🎯 **{len(tendances)} séries temporelles historiques** identifiées dans ce rapport.")
+            import pandas as pd
             for t in tendances:
-                fleche = "⬆️" if t["sens"] == "hausse" else ("⬇️" if t["sens"] == "baisse" else "➡️")
-                st.markdown(f"**{t['reference_gri']}** — {t['description']} {fleche} `{t['variation_pct']:+.1f}%`")
+                is_hausse = t["sens"] == "hausse"
+                is_baisse = t["sens"] == "baisse"
+                fleche = "📈" if is_hausse else ("📉" if is_baisse else "➡️")
+                
+                # Couleurs et badges selon impact RSE
                 if t.get("alerte"):
-                    st.error(f"⚠️ Alerte : {t['description']} en hausse ({t['variation_pct']:+.1f}%)")
-                import pandas as pd
-                df_t = pd.DataFrame({"Année": t["annees"], "Valeur": t["valeurs"]})
-                df_t = df_t.set_index("Année")
-                st.line_chart(df_t)
-        else:
-            st.caption("Aucune tendance temporelle détectée (données multi-années requises).")
-    else:
-        st.caption("Veuillez charger un rapport pour accéder aux tendances.")
+                    badge_color = "#dc2626"
+                    badge_txt = f"⚠️ Augmentation préoccupante ({t['variation_pct']:+.1f}%)"
+                else:
+                    badge_color = "#16a34a" if is_baisse or t["reference_gri"] == "GRI 404" else "#0284c7"
+                    badge_txt = f"✅ Évolution favorable ({t['variation_pct']:+.1f}%)" if is_baisse or t["reference_gri"] == "GRI 404" else f"Tendance ({t['variation_pct']:+.1f}%)"
 
-# ── Onglet Comparaison ──
+                with st.container():
+                    st.markdown(f"""
+                    <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid {badge_color}; margin-top:12px; margin-bottom:8px;'>
+                        <span style='font-size:1.05rem; font-weight:700;'>{fleche} {t['reference_gri']} — {t['description']}</span><br/>
+                        <span style='font-size:0.85rem; color:{badge_color}; font-weight:600;'>{badge_txt}</span> &nbsp;|&nbsp;
+                        <span style='font-size:0.85rem; color:#94a3b8;'>Période : {t['annees'][0]} ➔ {t['annees'][-1]}</span>
+                    </div>
+                    """, unsafe_allow_html=True)
+
+                    df_t = pd.DataFrame({"Année": [str(a) for a in t["annees"]], "Valeur": t["valeurs"]})
+                    df_t = df_t.set_index("Année")
+                    st.line_chart(df_t)
+        else:
+            st.info("ℹ️ Aucune donnée pluri-annuelle consolidée détectée dans ce rapport. Les tendances nécessitent des séries de données sur au moins 2 exercices.")
+    else:
+        st.info("👈 Veuillez sélectionner un rapport dans le volet latéral pour analyser ses tendances temporelles.")
+
+# ── Onglet Comparaison Idéale de Deux Rapports ──
 with tab_comparaison:
-    st.markdown("### ⚖️ Comparaison de Deux Rapports")
-    sessions_list = chat_mem.get_toutes_sessions()
-    sessions_avec_rapport = [s for s in sessions_list if s.get("rapport_name")]
-    if len(sessions_avec_rapport) >= 2:
-        noms_a = [f"{s['id']} — {s['rapport_name']}" for s in sessions_avec_rapport]
-        sel_a = st.selectbox("Rapport A :", noms_a, index=0, key="comp_a")
-        sel_b = st.selectbox("Rapport B :", noms_a, index=min(1, len(noms_a)-1), key="comp_b")
-        sid_a = sel_a.split(" — ")[0]
-        sid_b = sel_b.split(" — ")[0]
-        if st.button("🔄 Comparer", key="btn_compare"):
-            with st.spinner("Comparaison en cours (Mistral)..."):
+    st.markdown("### ⚖️ Comparateur d'Audit ESG Multi-Rapports")
+    st.caption("Comparez deux rapports d'entreprises différentes ou deux millésimes successifs sur les standards GRI 2021 et ESRS.")
+
+    # Récupérer l'ensemble des rapports disponibles (sessions + fichiers analysés)
+    from pathlib import Path
+    fichiers_disponibles = set()
+    for s in chat_mem.get_toutes_sessions():
+        if s.get("rapport_name"):
+            fichiers_disponibles.add(s["rapport_name"])
+    for f in list(Path("data/processed").glob("*_extracted.json")):
+        raw_name = f.stem.replace("_extracted", "") + ".pdf"
+        fichiers_disponibles.add(raw_name)
+    for p in list(Path("rapport_non _annoté").glob("*.pdf")):
+        fichiers_disponibles.add(p.name)
+
+    liste_rapports_comp = sorted(list(fichiers_disponibles))
+
+    if len(liste_rapports_comp) >= 2:
+        col_ca, col_cb = st.columns(2)
+        with col_ca:
+            default_a = 0
+            if st.session_state.get("rapport_actif") in liste_rapports_comp:
+                default_a = liste_rapports_comp.index(st.session_state.rapport_actif)
+            sel_a = st.selectbox("📄 Premier Rapport (A) :", liste_rapports_comp, index=default_a, key="comp_sel_a")
+        with col_cb:
+            default_b = min(1, len(liste_rapports_comp) - 1)
+            if default_b == default_a and len(liste_rapports_comp) > 1:
+                default_b = (default_a + 1) % len(liste_rapports_comp)
+            sel_b = st.selectbox("📄 Second Rapport (B) :", liste_rapports_comp, index=default_b, key="comp_sel_b")
+
+        if st.button("⚖️ Lancer la Comparaison ESG Détaillée", key="btn_compare_exec", use_container_width=True):
+            with st.spinner("Audit comparatif des standards GRI et ESRS en cours..."):
                 cmp_data = None
                 try:
-                    cmp_resp = requests.post(f"{FASTAPI_URL}/rapport/comparer", json={"session_id_a": sid_a, "session_id_b": sid_b}, timeout=90)
+                    cmp_resp = requests.post(f"{FASTAPI_URL}/rapport/comparer", json={"session_id_a": sel_a, "session_id_b": sel_b}, timeout=90)
                     if cmp_resp.status_code == 200:
                         cmp_data = cmp_resp.json()
                 except Exception:
@@ -579,32 +650,71 @@ with tab_comparaison:
 
                 if not cmp_data:
                     try:
-                        from app.rapport_comparateur import comparer_deux_rapports
-                        cmp_data = comparer_deux_rapports(sid_a, sid_b)
+                        from app.rapport_comparateur import comparer_rapports, generer_synthese_comparaison
+                        cmp_data = comparer_rapports(sel_a, sel_b)
+                        cmp_data["synthese"] = generer_synthese_comparaison(cmp_data)
                     except Exception as e:
                         st.error(f"Erreur lors de la comparaison : {e}")
 
                 if cmp_data:
-                    # Scores côte à côte
-                    c1, c2 = st.columns(2)
-                    with c1:
-                        st.metric(f"📄 {cmp_data.get('nom_rapport_a', 'A')}", f"GRI: {cmp_data['score_a']['gri']}%")
-                    with c2:
-                        st.metric(f"📄 {cmp_data.get('nom_rapport_b', 'B')}", f"GRI: {cmp_data['score_b']['gri']}%")
-                    # Indicateurs communs
-                    communs = cmp_data.get("indicateurs_communs", {})
-                    if communs:
-                        import pandas as pd
-                        rows = []
-                        for ref, vals in communs.items():
-                            rows.append({"Indicateur": ref, "Description": vals["description"], cmp_data.get('nom_rapport_a','A'): vals["rapport_a"], cmp_data.get('nom_rapport_b','B'): vals["rapport_b"]})
-                        df_cmp = pd.DataFrame(rows)
-                        st.dataframe(df_cmp, use_container_width=True, hide_index=True)
-                    # Synthèse
-                    if cmp_data.get("synthese"):
-                        st.info(cmp_data["synthese"])
+                    st.session_state["comparaison_active"] = cmp_data
+
+        if st.session_state.get("comparaison_active"):
+            cmp_data = st.session_state["comparaison_active"]
+
+            st.markdown("---")
+            # 1. Cartes de Scores Globaux
+            c1, c2 = st.columns(2)
+            with c1:
+                st.markdown(f"""
+                <div style='background:rgba(255,255,255,0.03); padding:14px; border-radius:10px; border-left:5px solid #0284c7; text-align:center;'>
+                    <span style='font-size:0.9rem; color:#94a3b8;'>📄 {cmp_data.get('nom_rapport_a', 'Rapport A')}</span><br/>
+                    <span style='font-size:1.8rem; font-weight:800; color:#38bdf8;'>GRI: {cmp_data['score_a']['gri']}%</span> &nbsp;|&nbsp;
+                    <span style='font-size:1.1rem; color:#cbd5e1;'>ESRS: {cmp_data['score_a']['esrs']}%</span>
+                </div>
+                """, unsafe_allow_html=True)
+            with c2:
+                st.markdown(f"""
+                <div style='background:rgba(255,255,255,0.03); padding:14px; border-radius:10px; border-left:5px solid #10b981; text-align:center;'>
+                    <span style='font-size:0.9rem; color:#94a3b8;'>📄 {cmp_data.get('nom_rapport_b', 'Rapport B')}</span><br/>
+                    <span style='font-size:1.8rem; font-weight:800; color:#34d399;'>GRI: {cmp_data['score_b']['gri']}%</span> &nbsp;|&nbsp;
+                    <span style='font-size:1.1rem; color:#cbd5e1;'>ESRS: {cmp_data['score_b']['esrs']}%</span>
+                </div>
+                """, unsafe_allow_html=True)
+
+            # 2. Graphique comparatif par dimension
+            st.markdown("#### 📊 Comparaison des Scores par Dimension")
+            s_dims = cmp_data.get("scores_dimensions", {})
+            import pandas as pd
+            df_dims = pd.DataFrame({
+                "Dimension": ["Environnemental", "Social", "Gouvernance"],
+                cmp_data.get('nom_rapport_a', 'Rapport A')[:20]: [
+                    s_dims.get("Environnemental", {}).get("score_a", 0.0),
+                    s_dims.get("Social", {}).get("score_a", 0.0),
+                    s_dims.get("Gouvernance", {}).get("score_a", 0.0),
+                ],
+                cmp_data.get('nom_rapport_b', 'Rapport B')[:20]: [
+                    s_dims.get("Environnemental", {}).get("score_b", 0.0),
+                    s_dims.get("Social", {}).get("score_b", 0.0),
+                    s_dims.get("Gouvernance", {}).get("score_b", 0.0),
+                ]
+            })
+            df_dims = df_dims.set_index("Dimension")
+            st.bar_chart(df_dims)
+
+            # 3. Tableau comparatif détaillé des 12 indicateurs GRI
+            st.markdown("#### 📋 Matrice Comparative des 12 Indicateurs GRI")
+            tbl = cmp_data.get("tableau_comparatif", [])
+            if tbl:
+                df_tab = pd.DataFrame(tbl)
+                st.dataframe(df_tab, use_container_width=True, hide_index=True)
+
+            # 4. Synthèse rédigée
+            if cmp_data.get("synthese"):
+                st.markdown("#### 🧠 Synthèse Comparative Experte")
+                st.info(cmp_data["synthese"])
     else:
-        st.caption("Il faut au moins 2 rapports chargés pour effectuer une comparaison.")
+        st.info("ℹ️ Il faut au moins 2 rapports disponibles pour effectuer une comparaison.")
 
 # ── Onglet Chat (contenu principal) ──
 with tab_chat:

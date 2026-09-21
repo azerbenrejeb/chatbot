@@ -1,4 +1,6 @@
 import sqlite3
+import re
+import unicodedata
 from pathlib import Path
 import sys
 
@@ -9,63 +11,72 @@ from modules.module5_conformity.gri_rules import GRI_RULES, CONFORMITY_THRESHOLD
 
 DATABASE_PATH = BASE_DIR / "data" / "chatbot_history.db"
 
+
+def _clean_text(text: str) -> str:
+    """Supprime les accents et passe en minuscules pour une comparaison robuste."""
+    if not text:
+        return ""
+    norm = unicodedata.normalize("NFD", text.lower())
+    return "".join(c for c in norm if unicodedata.category(c) != "Mn")
+
+
 def get_session_data(session_id: str) -> dict:
     """
-    Récupère le texte extrait et extrait les entités NER
-    pour le rapport lié à la session donnée.
+    Récupère le texte découpé par page et les entités pour le rapport lié à la session donnée.
+    Retourne : {"rapport_name": str, "pages": [{"page": int, "text": str}], "text": str, "entities": list}
     """
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
-    # Essayer de lire depuis analysis_sessions si existant
+    rapport_name = ""
+    # Récupérer le nom du rapport lié à la session
     try:
-        cursor.execute("""
-            SELECT full_text FROM analysis_sessions
-            WHERE session_id = ?
-        """, (session_id,))
+        cursor.execute("SELECT rapport_name FROM sessions WHERE id = ?", (session_id,))
         row = cursor.fetchone()
-        text = row[0] if row else ""
-    except sqlite3.OperationalError:
-        # Fallback : Récupérer le nom du rapport lié à la session
-        cursor.execute("""
-            SELECT rapport_name FROM sessions
-            WHERE id = ?
-        """, (session_id,))
-        row = cursor.fetchone()
-        rapport_name = row[0] if row else ""
-        text = ""
+        if row and row[0]:
+            rapport_name = row[0]
+    except Exception:
+        pass
 
-        if rapport_name:
-            # Charger depuis le fichier json extrait
-            rapport_stem = Path(rapport_name).stem
-            json_path = PROCESSED_DIR / f"{rapport_stem}_extracted.json"
-            if json_path.exists():
-                import json
+    pages_data = []
+    full_text = ""
+
+    if rapport_name:
+        rapport_stem = Path(rapport_name).stem
+        json_path = PROCESSED_DIR / f"{rapport_stem}_extracted.json"
+        
+        # 1. Charger depuis le JSON extrait s'il existe
+        if json_path.exists():
+            import json
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    d = json.load(f)
+                for p in d.get("pages", []):
+                    ptxt = p.get("text", "")
+                    pnum = p.get("page_number", len(pages_data) + 1)
+                    if ptxt.strip():
+                        pages_data.append({"page": pnum, "text": ptxt})
+                full_text = "\n".join(p["text"] for p in pages_data)
+            except Exception as e:
+                print(f"[WARN] Erreur lecture JSON extrait : {e}")
+
+        # 2. Fallback direct : extraction PyMuPDF page par page
+        if not pages_data:
+            pdf_path = RAW_PDF_DIR / rapport_name
+            if pdf_path.exists():
                 try:
-                    with open(json_path, 'r', encoding='utf-8') as f:
-                        data = json.load(f)
-                    pages = data.get('pages', [])
-                    text_parts = [p.get('text', '') for p in pages if p.get('text')]
-                    text = "\n".join(text_parts)
+                    import fitz
+                    doc = fitz.open(str(pdf_path))
+                    for idx, page in enumerate(doc):
+                        ptxt = page.get_text("text").strip()
+                        if ptxt:
+                            pages_data.append({"page": idx + 1, "text": ptxt})
+                    doc.close()
+                    full_text = "\n".join(p["text"] for p in pages_data)
                 except Exception as e:
-                    print(f"[WARN] Erreur chargement JSON extrait: {e}")
+                    print(f"[WARN] Erreur extraction PDF : {e}")
 
-            # Fallback ultime : extraction directe depuis le PDF brut avec PyMuPDF
-            if not text:
-                pdf_path = RAW_PDF_DIR / rapport_name
-                if pdf_path.exists():
-                    try:
-                        import fitz
-                        doc = fitz.open(str(pdf_path))
-                        text_parts = [page.get_text('text').strip() for page in doc]
-                        text = "\n".join(p for p in text_parts if p)
-                        doc.close()
-                        if text:
-                            print(f"[OK] Conformity checker : texte extrait du PDF ({len(text)} car.)")
-                    except Exception as e:
-                        print(f"[WARN] Impossible d'extraire le texte du PDF : {e}")
-
-    # Récupérer les entités NER (priorité à indicateurs_esg déjà stocké en base)
+    # Récupérer les entités déjà enregistrées en base
     entities = []
     try:
         cursor.execute("""
@@ -78,51 +89,79 @@ def get_session_data(session_id: str) -> dict:
     except Exception:
         pass
 
-    if not entities and text:
-        try:
-            from modules.module2_nlp.ml2_ner_spacy import extraire_entites
-            # Limiter à 50 000 caractères pour une réponse quasi-instantanée
-            raw_entities = extraire_entites(text[:50000])
-            entities = [{"label": e["label"], "text": e["texte"]} for e in raw_entities]
-        except Exception as e:
-            print(f"[WARN] Erreur extraction NER : {e}")
-
     conn.close()
-    return {"text": text, "entities": entities}
+    return {
+        "rapport_name": rapport_name,
+        "pages": pages_data,
+        "text": full_text,
+        "entities": entities
+    }
 
 
-def is_indicator_present(indicator_code: str, text: str, entities: list) -> bool:
+def detect_indicator(indicator_code: str, pages_data: list) -> dict:
     """
-    Vérifie si un indicateur GRI est présent dans le rapport.
-    Utilise les mots-clés ET les entités NER déjà extraites.
+    Détecte précisément si un indicateur GRI est présent en scannant page par page.
+    Retourne :
+      {
+        "present": bool,
+        "pages": list[int],
+        "pages_str": str,
+        "snippet": str
+      }
     """
-    rules = GRI_RULES[indicator_code]
-    text_lower = text.lower()
+    rules = GRI_RULES.get(indicator_code)
+    if not rules:
+        return {"present": False, "pages": [], "pages_str": "", "snippet": ""}
 
-    # Vérification des mots-clés
-    keyword_found = any(
-        kw.lower() in text_lower
-        for kw in rules["keywords"]
-    )
+    code_regex = rules.get("code_regex", "")
+    patterns = rules.get("patterns", [])
+    found_pages = []
+    snippet = ""
 
-    if not keyword_found:
-        return False
+    for p in pages_data:
+        pnum = p.get("page", 1)
+        raw_text = p.get("text", "")
+        clean = _clean_text(raw_text)
 
-    # Si valeur numérique requise, vérifier dans les entités NER
-    if rules["requires_value"]:
-        has_value = any(
-            e["label"] == "VALEUR"
-            for e in entities
-        )
-        return keyword_found and has_value
+        matched = False
+        # 1. Vérifier si le code explicite apparaît (ex: GRI 302, 302-1)
+        if code_regex and re.search(code_regex, clean):
+            matched = True
+        else:
+            # 2. Vérifier les motifs contextuels stricts
+            for pat in patterns:
+                pat_clean = _clean_text(pat)
+                if re.search(pat_clean, clean):
+                    matched = True
+                    break
 
-    return keyword_found
+        if matched:
+            found_pages.append(pnum)
+            if not snippet:
+                # Extraire un extrait court représentatif
+                lines = [l.strip() for l in raw_text.split("\n") if len(l.strip()) > 15]
+                snippet = lines[0] if lines else ""
+
+    found_pages = sorted(list(set(found_pages)))
+    is_present = len(found_pages) > 0
+
+    pages_str = ""
+    if is_present:
+        if len(found_pages) <= 4:
+            pages_str = "Page" + ("s " if len(found_pages) > 1 else " ") + ", ".join(str(p) for p in found_pages)
+        else:
+            pages_str = f"Pages {found_pages[0]}, {found_pages[1]}, {found_pages[2]} (+{len(found_pages)-3})"
+
+    return {
+        "present": is_present,
+        "pages": found_pages,
+        "pages_str": pages_str,
+        "snippet": snippet
+    }
 
 
 def get_conformity_status(score: float) -> dict:
-    """
-    Retourne le statut, la couleur et l'emoji selon le score.
-    """
+    """Retourne le statut, la couleur et l'emoji selon le score."""
     if score >= CONFORMITY_THRESHOLDS["CONFORME"]:
         return {
             "label": "CONFORME",
@@ -145,19 +184,16 @@ def get_conformity_status(score: float) -> dict:
 
 def check_conformity(session_id: str) -> dict:
     """
-    Fonction principale.
-    Vérifie la conformité GRI 2021 d'un rapport
-    en utilisant les données déjà extraites ou chargées.
-    Retourne un dictionnaire hybride compatible avec chatbot_app.py
-    (clés score_global_gri, score_global_esrs, dimensions) ET
-    avec conformity_widget.py (clés Global, Environnemental, etc.).
+    Fonction principale de vérification de conformité GRI & ESRS.
+    Analyse page par page avec précision, identifie les pages exactes de chaque indicateur,
+    et synchronise la base SQLite.
     """
-
-    # Récupérer données existantes depuis SQLite / fichiers
     data = get_session_data(session_id)
-    has_text = bool(data["text"].strip()) if data["text"] else False
+    pages_data = data.get("pages", [])
+    rapport_name = data.get("rapport_name", "")
+    has_text = bool(data.get("text", "").strip())
 
-    # Grouper les indicateurs par dimension
+    # Dimensions réglementaires GRI Standards
     dimensions = {
         "Environnemental": ["GRI 302", "GRI 303", "GRI 305", "GRI 306"],
         "Social":          ["GRI 401", "GRI 403", "GRI 404", "GRI 405"],
@@ -165,34 +201,47 @@ def check_conformity(session_id: str) -> dict:
     }
 
     resultats = {}
-    # Structure "dimensions" compatible avec chatbot_app.py
     dimensions_compat = {}
     total_presents = 0
     total_indicateurs = 0
+
+    all_detected_records = []
 
     for dimension, indicateurs in dimensions.items():
         presents = []
         manquants = []
 
         for gri_code in indicateurs:
-            if is_indicator_present(gri_code, data["text"], data["entities"]):
-                presents.append({
+            det = detect_indicator(gri_code, pages_data)
+            info = GRI_RULES[gri_code]
+
+            if det["present"]:
+                item = {
                     "code": gri_code,
-                    "nom": GRI_RULES[gri_code]["nom"]
-                })
+                    "nom": info["nom"],
+                    "pages": det["pages"],
+                    "pages_str": det["pages_str"],
+                    "snippet": det["snippet"]
+                }
+                presents.append(item)
                 total_presents += 1
+                all_detected_records.append({
+                    "reference_gri": gri_code,
+                    "dimension": dimension,
+                    "page": det["pages_str"],
+                    "pages_list": det["pages"]
+                })
             else:
                 manquants.append({
                     "code": gri_code,
-                    "nom": GRI_RULES[gri_code]["nom"],
-                    "description": GRI_RULES[gri_code]["description"]
+                    "nom": info["nom"],
+                    "description": info["description"]
                 })
             total_indicateurs += 1
 
-        score = len(presents) / len(indicateurs) * 100
+        score = (len(presents) / len(indicateurs) * 100) if indicateurs else 0.0
         status = get_conformity_status(score)
 
-        # Format original pour conformity_widget.py
         resultats[dimension] = {
             "score": round(score, 1),
             "presents": presents,
@@ -201,79 +250,89 @@ def check_conformity(session_id: str) -> dict:
             "total": len(indicateurs)
         }
 
-        # Format compatible chatbot_app.py (sous-clés gri/esrs)
-        gri_trouves = [p["code"] for p in presents]
-        gri_manquants = [{"code": m["code"], "description": m["description"]} for m in manquants]
+        # Format structuré compatible Streamlit
         dimensions_compat[dimension] = {
             "gri": {
                 "score": round(score, 1),
-                "trouves": gri_trouves,
-                "manquants": gri_manquants
+                "trouves": presents,  # liste d'objets avec code, nom, pages_str
+                "manquants": manquants
             },
             "esrs": {
                 "score": round(score, 1),
-                "trouves": gri_trouves,
-                "manquants": gri_manquants
+                "trouves": presents,
+                "manquants": manquants
             }
         }
 
-    # Score global
-    score_global = total_presents / total_indicateurs * 100 if total_indicateurs > 0 else 0
+    score_global = (total_presents / total_indicateurs * 100) if total_indicateurs > 0 else 0.0
+    
     resultats["Global"] = {
         "score": round(score_global, 1),
         "presents_count": total_presents,
         "total_count": total_indicateurs,
         "status": get_conformity_status(score_global),
-        "has_text": has_text
+        "has_text": has_text,
+        "rapport_name": rapport_name
     }
 
-    # Clés compatibles chatbot_app.py
     resultats["score_global_gri"] = round(score_global, 1)
     resultats["score_global_esrs"] = round(score_global, 1)
     resultats["dimensions"] = dimensions_compat
     resultats["has_text"] = has_text
+    resultats["rapport_name"] = rapport_name
 
-    # Recommandations automatiques
+    # Recommandations automatiques basées sur les indicateurs manquants
     resultats["recommandations"] = generate_recommendations(resultats)
+
+    # Synchroniser les pages détectées dans la table indicateurs_esg en SQLite
+    if rapport_name and all_detected_records:
+        try:
+            conn = sqlite3.connect(DATABASE_PATH)
+            cur = conn.cursor()
+            for rec in all_detected_records:
+                cur.execute("""
+                    UPDATE indicateurs_esg 
+                    SET page = ?
+                    WHERE (rapport_name = ? OR session_id = ?) AND reference_gri = ?
+                """, (rec["page"], rapport_name, session_id, rec["reference_gri"]))
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print(f"[WARN] Erreur mise à jour pages dans BDD : {e}")
 
     return resultats
 
 
 def generate_recommendations(resultats: dict) -> list:
-    """
-    Génère une liste de recommandations
-    basée sur les indicateurs manquants.
-    """
+    """Génère des recommandations ciblées basées sur les indicateurs manquants."""
     recommandations = []
 
     RECOMMANDATIONS_MAP = {
-        "GRI 302": "Ajouter les données de consommation énergétique (kWh/GJ) par source",
-        "GRI 303": "Inclure les données de consommation et recyclage d'eau (m³)",
-        "GRI 305": "Déclarer les émissions GES Scope 1, 2 et 3 en tCO₂e",
-        "GRI 306": "Rapporter la production de déchets et les taux de recyclage (tonnes)",
-        "GRI 401": "Indiquer les effectifs totaux, recrutements et départs",
-        "GRI 403": "Publier les taux d'accidents du travail et de maladies professionnelles",
-        "GRI 404": "Déclarer les heures de formation par employé",
-        "GRI 405": "Inclure les données de diversité (% femmes, parité salariale)",
-        "GRI 205": "Décrire la politique anti-corruption et les formations associées",
-        "GRI 206": "Mentionner les procédures liées à la concurrence loyale",
-        "GRI 415": "Déclarer les contributions politiques et activités de lobbying",
-        "GRI 419": "Rapporter les amendes et sanctions réglementaires"
+        "GRI 302": "Publier les données consolidées de consommation d'énergie totale (kWh/MWh) et le mix énergétique renouvelable.",
+        "GRI 303": "Intégrer le bilan des prélèvements et rejets d'eau (m³) ainsi que l'évaluation du stress hydrique des sites.",
+        "GRI 305": "Quantifier précisément les émissions de gaz à effet de serre selon le protocole GHG (Scope 1 direct et Scope 2 indirect en tCO₂e).",
+        "GRI 306": "Documenter la production totale de déchets (tonnes), la part valorisée/recyclée et les filières agréées d'élimination.",
+        "GRI 401": "Détailler les effectifs totaux (ETP), les taux de recrutement et de rotation du personnel (turnover) sur l'exercice.",
+        "GRI 403": "Déclarer les statistiques de santé et sécurité au travail : taux de fréquence et de gravité des accidents du travail.",
+        "GRI 404": "Indiquer le nombre moyen d'heures de formation dispensées par salarié et par catégorie socioprofessionnelle.",
+        "GRI 405": "Fournir les indicateurs de mixité et de parité : % de femmes dans le management et index d'égalité professionnelle.",
+        "GRI 205": "Formaliser une politique anti-corruption, un code de conduite éthique et un dispositif d'alerte professionnelle (whistleblowing).",
+        "GRI 206": "Déclarer la conformité aux règles de concurrence loyale et les éventuelles procédures juridiques antitrust.",
+        "GRI 415": "Déclarer explicitement la politique de l'entreprise concernant le lobbying et les contributions financières aux partis politiques.",
+        "GRI 419": "Publier l'état des éventuelles amendes ou sanctions administratives ou juridiques pour non-conformité réglementaire."
     }
 
-    for dimension, data in resultats.items():
-        if not isinstance(data, dict):
-            continue
-        if dimension == "Global" or dimension == "recommandations" or dimension == "dimensions":
-            continue
-        for manquant in data.get("manquants", []):
-            code = manquant["code"]
-            if code in RECOMMANDATIONS_MAP:
-                recommandations.append({
-                    "dimension": dimension,
-                    "indicateur": code,
-                    "nom": manquant["nom"],
-                    "action": RECOMMANDATIONS_MAP[code]
-                })
+    dimensions = ["Environnemental", "Social", "Gouvernance"]
+    for dim in dimensions:
+        dim_data = resultats.get(dim, {})
+        for m in dim_data.get("manquants", []):
+            code = m["code"]
+            action = RECOMMANDATIONS_MAP.get(code, f"Intégrer le reporting relatif à {m['nom']}")
+            recommandations.append({
+                "dimension": dim,
+                "indicateur": code,
+                "nom": m["nom"],
+                "action": action
+            })
 
     return recommandations

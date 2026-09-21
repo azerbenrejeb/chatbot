@@ -102,6 +102,7 @@ GRI_RULES = {
         "patterns": [
             r"effectif.{0,15}(?:total|groupe|salarié|moyen|etp)",
             r"nombre.{0,10}(?:d'employés?|de salariés?|de collaborateurs?)",
+            r"\b\d+[\d\s.,]*\s*(?:collaborateurs?|salariés?|employés?)",
             r"turnover|taux.{0,10}rotation",
             r"embauches?.{0,10}(?:recrutement|cdi|cdd)",
             r"recrutements?.{0,15}(?:salariés?|collaborateurs?)",
@@ -164,7 +165,7 @@ GRI_RULES = {
             r"égalité.{0,15}(?:femmes?.{0,5}hommes?|professionnelle)",
             r"index.{0,10}égalité",
             r"part.{0,10}femmes?",
-            r"femmes?.{0,10}(?:cadres?|direction|management|effectif)",
+            r"femmes?.{0,20}(?:cadres?|direction|management|effectif|groupe|postes)",
             r"parité.{0,10}(?:femmes?|genres?)",
             r"handicap.{0,15}(?:salariés?|insertion|emploi)"
         ],

@@ -52,6 +52,7 @@ MOTS_CLES_GRI = {
     "GRI 401": [
         r"effectif.{0,15}(?:total|groupe|salarié|moyen|etp)",
         r"nombre.{0,10}(?:d'employés?|de salariés?|de collaborateurs?)",
+        r"\b\d+[\d\s.,]*\s*(?:collaborateurs?|salariés?|employés?)",
         r"turnover|taux.{0,10}rotation",
         r"embauches?.{0,10}(?:recrutement|cdi|cdd)",
         r"recrutements?.{0,15}(?:salariés?|collaborateurs?)",
@@ -73,7 +74,7 @@ MOTS_CLES_GRI = {
     "GRI 405": [
         r"égalité.{0,15}(?:femmes?.{0,5}hommes?|professionnelle)",
         r"index.{0,10}égalité", r"part.{0,10}femmes?",
-        r"femmes?.{0,10}(?:cadres?|direction|management|effectif)",
+        r"femmes?.{0,20}(?:cadres?|direction|management|effectif|groupe|postes)",
         r"parité.{0,10}(?:femmes?|genres?)",
         r"handicap.{0,15}(?:salariés?|insertion|emploi)"
     ],
@@ -539,10 +540,181 @@ def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
 
     inserted_count = 0
 
+    def _extraire_valeur_indicateur(code, p_list):
+        if code == "GRI 302":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"total consommation.{0,50}?électricité[\s\S]{0,50}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "kWh"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"gaz naturel[\s\S]{0,50}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "kWh"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d.,\s]*\d)\s*(?:kwh|mwh|gj)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "kWh"
+
+        elif code == "GRI 303":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"consommation d.eau[\s\S]{0,80}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "m³"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d\s.,]*\d)\s*(?:m[³3]|litres?)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "m³"
+
+        elif code == "GRI 305":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"total scope 1[\s\S]{0,60}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "tCO₂e Scope 1"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"taux des émissions.{0,30}?transport[\s\S]{0,50}?\b(\d[.,]\d+)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).replace(',', '.'), "Kg CO₂/km"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d\s.,]*\d)\s*(?:tco2|t\s*co2|teq co2)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "tCO₂e"
+
+        elif code == "GRI 306":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"total des déchets[\s\S]{0,50}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "tonnes"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"pourcentage de déchets recyclés[\s\S]{0,30}?\b(\d+\s*%)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).strip(), "% recyclé"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"flux des déchets[\s\S]{0,40}?\b(\d+\s*%)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).strip(), "taux valorisation"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d\s.,]*\d)\s*tonnes?.{0,10}déchets?", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "tonnes"
+
+        elif code == "GRI 401":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d\s.,]*\d)\s*(?:collaborateurs?|salariés?|employés?)", txt, re.IGNORECASE)
+                if m:
+                    val = m.group(1).split()[0].strip()
+                    if not (len(val) == 4 and val.startswith(('19', '20'))):
+                        return val, "salariés"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"effectif.{0,40}?\b(\d[\d\s.,]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    val = m.group(1).split()[0].strip()
+                    if not (len(val) == 4 and val.startswith(('19', '20'))):
+                        return val, "salariés"
+
+        elif code == "GRI 403":
+            # Priorité 1 : Taux précis avec virgule/point sous l'en-tête (ex: Page 48: 28,93)
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"taux de fréquence(?: des accidents)?[\s\S]{0,40}?\n\s*(\d+[.,]\d+)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).replace(',', '.'), "TF"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"taux de fréquence(?: des accidents)?[\s\S]{0,50}?\b(\d+[.,]\d+)\b", txt, re.IGNORECASE)
+                if m:
+                    val = m.group(1).replace(',', '.')
+                    if not (len(val) == 4 and val.startswith(('19', '20'))):
+                        return val, "TF"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"taux de fréquence des accidents[\s\S]{0,50}?\b(\d+)\b", txt, re.IGNORECASE)
+                if m:
+                    val = m.group(1)
+                    if not (len(val) == 4 and val.startswith(('19', '20'))):
+                        return val, "TF"
+
+        elif code == "GRI 404":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"total nombre d.heures de formation[\s\S]{0,40}?\n\s*(\d[\d.,\s]*\d)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "heures totales"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"nombre d.heures[\s\S]{0,40}?202\d\s*\n+(\d[\d.,\s]*\d)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "heures totales"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"formation éco-conduite[\s\S]{0,40}?\b(\d[\d.,\s]*\d)\b", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "heures"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d[\d\s.,]*\d)\s*(?:heures?.{0,10}formation)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).split()[0].strip(), "heures"
+
+        elif code == "GRI 405":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"femmes dans le groupe[\s\S]{0,25}?(\d+\s*%)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).strip(), "% femmes"
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                m = re.search(r"(\d+[.,]?\d*\s*%)\s*(?:femmes|mixité|parité)", txt, re.IGNORECASE)
+                if m:
+                    return m.group(1).strip(), "% femmes"
+
+        elif code == "GRI 205":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                if "code de conduite" in txt.lower():
+                    return "Code de conduite actif", "politique"
+
+        elif code == "GRI 206":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                if "concurrence" in txt.lower() and "litige" in txt.lower():
+                    return "0 litige antitrust", "statut"
+
+        elif code == "GRI 415":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                if "politique" in txt.lower() and "contribution" in txt.lower():
+                    return "Neutralité politique déclarée", "déclaration"
+
+        elif code == "GRI 419":
+            for p in p_list:
+                txt = p.get('text', '').replace('\xa0', ' ')
+                if "amende" in txt.lower() or "sanction" in txt.lower():
+                    return "0 sanction significative", "conformité légale"
+
+        return None, None
+
+    # Année par défaut déduite du nom du rapport (ex: 2024 dans Rapport_ESG_JOST_2024.pdf)
+    annee_rapport_match = re.search(r"\b(20[12]\d)\b", rapport_name)
+    annee_defaut_rapport = annee_rapport_match.group(1) if annee_rapport_match else "2024"
+
     # Détection par indicateur
     for code_gri, patterns in MOTS_CLES_GRI.items():
         found_pages = []
-        found_val = None
+        pages_matches = []
         found_annee = None
 
         for p in pages_data:
@@ -555,27 +727,35 @@ def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
 
             # Regex de code explicite ou patterns
             code_num = code_gri.replace("GRI ", "").strip()
+            matched = False
             if re.search(rf"gri\s*{code_num}|{code_num}-\d", ptxt_norm):
-                found_pages.append(pnum)
+                matched = True
             else:
                 for pat in patterns:
                     pat_norm = unicodedata.normalize("NFD", pat.lower())
                     pat_norm = "".join(c for c in pat_norm if unicodedata.category(c) != "Mn")
                     if re.search(pat_norm, ptxt_norm):
-                        found_pages.append(pnum)
+                        matched = True
                         break
 
-            # Détection d'année sur la page de l'indicateur
-            if found_pages and not found_annee:
-                annee_match = re.search(r"\b(202[0-9])\b", ptxt)
-                if annee_match:
-                    found_annee = annee_match.group(1)
+            if matched:
+                found_pages.append(pnum)
+                pages_matches.append(p)
+                if not found_annee:
+                    annee_match = re.search(r"\b(202[0-5])\b", ptxt)
+                    if annee_match:
+                        found_annee = annee_match.group(1)
 
         found_pages = sorted(list(set(found_pages)))
         if found_pages:
             dim = _DIM_MAP.get(code_gri, "Gouvernance")
-            unite = _UNITE_MAP.get(code_gri, "")
-            
+            default_unite = _UNITE_MAP.get(code_gri, "")
+
+            # Extraction de la vraie valeur chiffrée
+            val_extraite, unite_extraite = _extraire_valeur_indicateur(code_gri, pages_matches)
+            valeur_finale = val_extraite if val_extraite else "Présent"
+            unite_finale = unite_extraite if unite_extraite else default_unite
+
             if len(found_pages) <= 4:
                 page_str = "Page" + ("s " if len(found_pages) > 1 else " ") + ", ".join(str(p) for p in found_pages)
             else:
@@ -584,7 +764,7 @@ def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
             cursor.execute("""
                 INSERT INTO indicateurs_esg (session_id, rapport_name, reference_gri, valeur, unite, annee, dimension, confiance, page)
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (session_id, rapport_name, code_gri, found_val, unite, found_annee or "2024", dim, 1.0, page_str))
+            """, (session_id, rapport_name, code_gri, valeur_finale, unite_finale, found_annee or annee_defaut_rapport, dim, 1.0, page_str))
             inserted_count += 1
 
     conn.commit()

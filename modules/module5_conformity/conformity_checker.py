@@ -20,23 +20,28 @@ def _clean_text(text: str) -> str:
     return "".join(c for c in norm if unicodedata.category(c) != "Mn")
 
 
-def get_session_data(session_id: str) -> dict:
+def get_session_data(session_id: str = None, rapport_name: str = None) -> dict:
     """
-    Récupère le texte découpé par page et les entités pour le rapport lié à la session donnée.
+    Récupère le texte découpé par page et les entités pour le rapport lié à la session donnée
+    ou directement pour le nom de fichier du rapport.
     Retourne : {"rapport_name": str, "pages": [{"page": int, "text": str}], "text": str, "entities": list}
     """
     conn = sqlite3.connect(DATABASE_PATH)
     cursor = conn.cursor()
 
-    rapport_name = ""
-    # Récupérer le nom du rapport lié à la session
-    try:
-        cursor.execute("SELECT rapport_name FROM sessions WHERE id = ?", (session_id,))
-        row = cursor.fetchone()
-        if row and row[0]:
-            rapport_name = row[0]
-    except Exception:
-        pass
+    # Si rapport_name n'est pas fourni, chercher à partir de session_id
+    if not rapport_name and session_id is not None:
+        s_val = str(session_id).strip()
+        if s_val.lower().endswith(".pdf") or not s_val.isdigit():
+            rapport_name = s_val
+        else:
+            try:
+                cursor.execute("SELECT rapport_name FROM sessions WHERE id = ?", (session_id,))
+                row = cursor.fetchone()
+                if row and row[0]:
+                    rapport_name = row[0]
+            except Exception:
+                pass
 
     pages_data = []
     full_text = ""
@@ -182,13 +187,13 @@ def get_conformity_status(score: float) -> dict:
         }
 
 
-def check_conformity(session_id: str) -> dict:
+def check_conformity(session_id: str = None, rapport_name: str = None) -> dict:
     """
     Fonction principale de vérification de conformité GRI & ESRS.
     Analyse page par page avec précision, identifie les pages exactes de chaque indicateur,
     et synchronise la base SQLite.
     """
-    data = get_session_data(session_id)
+    data = get_session_data(session_id=session_id, rapport_name=rapport_name)
     pages_data = data.get("pages", [])
     rapport_name = data.get("rapport_name", "")
     has_text = bool(data.get("text", "").strip())
@@ -283,6 +288,13 @@ def check_conformity(session_id: str) -> dict:
 
     # Recommandations automatiques basées sur les indicateurs manquants
     resultats["recommandations"] = generate_recommendations(resultats)
+
+    # Note ESG pondérée sur 100
+    try:
+        from app.compliance_checker import calculer_score_esg_global_100
+        resultats["score_esg_100"] = calculer_score_esg_global_100(resultats)
+    except Exception:
+        resultats["score_esg_100"] = {"note_globale_100": round(score_global, 1)}
 
     # Synchroniser les pages détectées dans la table indicateurs_esg en SQLite
     if rapport_name and all_detected_records:

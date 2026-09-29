@@ -114,7 +114,8 @@ def evaluer_classification():
     if camembert_path.exists():
         print("\n--- Évaluation Deep Learning CamemBERT ---")
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        tokenizer = CamembertTokenizer.from_pretrained(ML_MODEL_NAME)
+        from transformers import AutoTokenizer
+        tokenizer = AutoTokenizer.from_pretrained(ML_MODEL_NAME)
         model = CamembertForSequenceClassification.from_pretrained(ML_MODEL_NAME, num_labels=3)
         model.load_state_dict(torch.load(str(camembert_path), map_location=device, weights_only=True))
         model = model.to(device)
@@ -124,7 +125,7 @@ def evaluer_classification():
         # Parcourir les textes par petits paquets pour l'évaluation sur CPU/GPU
         for i in range(0, len(test_texts), 32):
             batch_texts = test_texts[i:i+32]
-            encoding = tokenizer(batch_texts, max_length=ML_MAX_LENGTH, padding='max_length',
+            encoding = tokenizer(batch_texts, max_length=128, padding='max_length',
                                  truncation=True, return_tensors='pt').to(device)
             with torch.no_grad():
                 outputs = model(**encoding)

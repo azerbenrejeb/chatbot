@@ -7,7 +7,7 @@ Le modèle utilisé est 'camembert-base' (modèle pré-entraîné de type BERT a
 """
 import torch
 from torch.utils.data import Dataset, DataLoader
-from transformers import CamembertTokenizer, CamembertForSequenceClassification
+from transformers import AutoTokenizer, CamembertForSequenceClassification
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from pathlib import Path
@@ -91,16 +91,15 @@ def charger_dataset():
     return df['texte'].tolist(), df['label_idx'].tolist()
 
 
-def get_dataloaders():
+def get_dataloaders(batch_size=ML_BATCH_SIZE, max_length=ML_MAX_LENGTH):
     """
     Crée les instances DataLoader (Train/Val/Test) à l'aide du découpage stratifié.
     La stratification permet de conserver la proportion d'exemples E, S, G dans chaque partition.
     """
     textes, labels = charger_dataset()
 
-    # Initialisation du Tokenizer CamemBERT
-    # Il utilise le modèle d'encodage SentencePiece entraîné sur le corpus français OSCAR.
-    tokenizer = CamembertTokenizer.from_pretrained(ML_MODEL_NAME)
+    # Initialisation du Tokenizer CamemBERT (version rapide compatible Fast)
+    tokenizer = AutoTokenizer.from_pretrained(ML_MODEL_NAME)
 
     # Découpage stratifié : Train = 70%, Test = 30%
     train_texts, test_texts, train_labels, test_labels = train_test_split(
@@ -112,17 +111,17 @@ def get_dataloaders():
     )
 
     # Instanciation de nos datasets PyTorch personnalisés
-    train_dataset = ESGTextDataset(train_texts, train_labels, tokenizer, ML_MAX_LENGTH)
-    val_dataset = ESGTextDataset(val_texts, val_labels, tokenizer, ML_MAX_LENGTH)
-    test_dataset = ESGTextDataset(test_texts, test_labels, tokenizer, ML_MAX_LENGTH)
+    train_dataset = ESGTextDataset(train_texts, train_labels, tokenizer, max_length)
+    val_dataset = ESGTextDataset(val_texts, val_labels, tokenizer, max_length)
+    test_dataset = ESGTextDataset(test_texts, test_labels, tokenizer, max_length)
 
     # Création des DataLoader qui gèrent le chargement par batchs (paquets de données),
     # et mélange (shuffle) les données d'entraînement pour éviter les biais d'apprentissage.
-    train_loader = DataLoader(train_dataset, batch_size=ML_BATCH_SIZE, shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=ML_BATCH_SIZE, shuffle=False)
-    test_loader = DataLoader(test_dataset, batch_size=ML_BATCH_SIZE, shuffle=False)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
 
-    print(f"[OK] Dataloaders CamemBERT: Train={len(train_dataset)}, Val={len(val_dataset)}, Test={len(test_dataset)}")
+    print(f"[OK] Dataloaders CamemBERT: Train={len(train_dataset)}, Val={len(val_dataset)}, Test={len(test_dataset)} (max_len={max_length})")
     return train_loader, val_loader, test_loader, tokenizer
 
 
@@ -138,28 +137,27 @@ def get_model():
     return model
 
 
-def train_camembert():
+def train_camembert(epochs=ML_EPOCHS, batch_size=ML_BATCH_SIZE, max_length=ML_MAX_LENGTH, lr=ML_LEARNING_RATE):
     """
     Boucle d'entraînement principale du modèle CamemBERT de classification de paragraphes ESG.
     Optimise les poids en fonction de la perte CrossEntropy.
     """
-    print("[STAT] Lancement de l'entraînement CamemBERT...")
+    print(f"[STAT] Lancement de l'entraînement CamemBERT (epochs={epochs}, batch={batch_size}, max_len={max_length}, lr={lr})...")
 
     # Utilise la carte graphique (GPU CUDA) si disponible, sinon se rabat sur le processeur (CPU)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Appareil cible pour l'entraînement : {device}")
 
-    train_loader, val_loader, _, tokenizer = get_dataloaders()
+    train_loader, val_loader, _, tokenizer = get_dataloaders(batch_size=batch_size, max_length=max_length)
     model = get_model().to(device)
 
     # Optimiseur AdamW (Adam avec correction de la décroissance des poids ou weight decay)
-    # Recommandé pour l'apprentissage profond sur Transformer avec un taux d'apprentissage faible.
-    optimizer = torch.optim.AdamW(model.parameters(), lr=ML_LEARNING_RATE)
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr)
     
     best_val_loss = float('inf')
     model_path = MODELS_DIR / "camembert_ml.pth"
 
-    for epoch in range(ML_EPOCHS):
+    for epoch in range(epochs):
         # 1. PHASE D'ENTRAÎNEMENT (Train)
         model.train()
         total_loss = 0
@@ -229,14 +227,14 @@ def train_camembert():
     print("[OK] Entraînement CamemBERT complété !")
 
 
-def predire(texte, model=None, tokenizer=None):
+def predire(texte, model=None, tokenizer=None, max_length=128):
     """
     Effectue l'inférence (prédiction en temps réel) sur un paragraphe ESG unique.
     """
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     if tokenizer is None:
-        tokenizer = CamembertTokenizer.from_pretrained(ML_MODEL_NAME)
+        tokenizer = AutoTokenizer.from_pretrained(ML_MODEL_NAME)
     if model is None:
         model = get_model()
         model_path = MODELS_DIR / "camembert_ml.pth"
@@ -248,7 +246,7 @@ def predire(texte, model=None, tokenizer=None):
     model.eval()
     encoding = tokenizer(
         texte,
-        max_length=ML_MAX_LENGTH,
+        max_length=max_length,
         padding='max_length',
         truncation=True,
         return_tensors='pt'

@@ -30,3 +30,7 @@ data/chroma_db/
 Thumbs.db
 Desktop.ini
 .DS_Store
+
+# Heavy trained model weights (>100MB)
+models/camembert_ml.pth
+*.pth.large

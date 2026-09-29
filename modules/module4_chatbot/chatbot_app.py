@@ -884,8 +884,8 @@ with tab_performance:
     with col_p2:
         st.markdown("""
         <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid #10b981; text-align:center;'>
-            <span style='font-size:0.8rem; color:#94a3b8;'>🌲 NLP Random Forest</span><br/>
-            <span style='font-size:1.6rem; font-weight:800; color:#10b981;'>90.7%</span><br/>
+            <span style='font-size:0.8rem; color:#94a3b8;'>🤖 CamemBERT Transformer</span><br/>
+            <span style='font-size:1.6rem; font-weight:800; color:#10b981;'>90.9%</span><br/>
             <span style='font-size:0.75rem; color:#cbd5e1;'>Accuracy Classification E/S/G</span>
         </div>
         """, unsafe_allow_html=True)
@@ -908,17 +908,18 @@ with tab_performance:
 
     st.markdown("---")
 
-    # 2. Section détaillée NLP : Comparaison des Classifieurs E/S/G
+    # 2. Section détaillée NLP : Comparaison des Classifieurs E/S/G (Baseline vs Random Forest vs CamemBERT)
     col_c1, col_c2 = st.columns(2)
     with col_c1:
-        st.markdown("#### 📊 Benchmark des Classifieurs E/S/G")
+        st.markdown("#### 📊 Benchmark Comparatif des 3 Classifieurs E/S/G")
         import pandas as pd
         df_models_classif = pd.DataFrame({
-            "Modèle": ["Baseline TF-IDF + LogReg", "Random Forest Optimisé"],
-            "Accuracy (%)": [89.33, 90.71],
-            "F1-Score Macro (%)": [89.08, 90.73]
+            "Modèle": ["Baseline TF-IDF + LogReg", "Random Forest (100 arbres)", "CamemBERT (Transformer)"],
+            "Accuracy (%)": [89.33, 90.71, 90.88],
+            "F1-Score Macro (%)": [89.08, 90.73, 90.84]
         }).set_index("Modèle")
         st.bar_chart(df_models_classif)
+        st.caption("Progression scientifique : Baseline (89.3%) ➔ Random Forest (90.7%) ➔ CamemBERT (90.9%).")
 
     with col_c2:
         st.markdown("#### 🏷️ Performance de l'Extraction d'Entités (NER)")
@@ -927,6 +928,7 @@ with tab_performance:
             "Score (%)": [95.36, 96.58, 95.97]
         }).set_index("Métrique")
         st.bar_chart(df_ner)
+        st.caption("Évaluation sur 3 888 phrases annotées (VALEUR, ANNEE, UNITE).")
 
     st.markdown("---")
 

@@ -8,6 +8,7 @@ router = APIRouter(prefix="/conformity", tags=["Conformité GRI"])
 
 class ConformityRequest(BaseModel):
     session_id: str
+    rapport_name: str | None = None
 
 @router.post("/check")
 async def check_gri_conformity(request: ConformityRequest):
@@ -16,7 +17,7 @@ async def check_gri_conformity(request: ConformityRequest):
     Utilise les données déjà extraites par les modules 1 et 2.
     """
     try:
-        results = check_conformity(request.session_id)
+        results = check_conformity(session_id=request.session_id, rapport_name=request.rapport_name)
         # Ajouter le score ESG global sur 100 (pondéré E:40, S:35, G:25)
         from app.compliance_checker import calculer_score_esg_global_100
         results["score_esg_100"] = calculer_score_esg_global_100(results)

@@ -61,7 +61,7 @@
     \rule{\linewidth}{0.5mm}
 
     \vspace{0.8cm}
-    {\large \textit{Architecture hybride combinant Vision par Ordinateur (CNN Léger Custom), Transformers (CamemBERT), Reconnaissance d'Entités (spaCy NER), Recherche Vectorielle (ChromaDB), LLM Local (Mistral 7B) et Moteur d'Audit Réglementaire Hybride}}
+    {\large \textit{Architecture hybride combinant Vision par Ordinateur (CNN Custom), Transformers (CamemBERT), Reconnaissance d'Entités (spaCy NER), Recherche Vectorielle (ChromaDB), LLM Local (Mistral 7B) et Moteur d'Audit Réglementaire Hybride}}
 
     \vfill
 
@@ -124,7 +124,7 @@ Enfin, je remercie très respectueusement les membres du jury pour le temps cons
 
 L'évaluation de la performance extra-financière des entreprises est devenue une priorité sous la pression des cadres réglementaires internationaux (GRI Standards 2021, directive européenne CSRD et normes ESRS). Cependant, les rapports RSE (Responsabilité Sociétale des Entreprises) publiés par les organisations représentent des documents volumineux (souvent plus de 150 pages), denses et hétérogènes, rendant leur analyse manuelle complexe et exposée aux erreurs d'omission.\\
 
-Ce projet de fin d'études présente la conception et le déploiement d'un système d'aide à la décision complet dédié à l'analyse intelligente des rapports RSE et à l'audit de conformité ESG. Notre contribution s'articule autour des avancées majeures suivantes :
+Ce projet de fin d'études présente la conception et le déploiement d'un système d'aide à la décision complet dédié à l'analyse intelligente des rapports RSE et à l'audit de conformité ESG, mené selon la méthodologie éprouvée CRISP-DM. Notre contribution s'articule autour des avancées majeures suivantes :
 \begin{enumerate}
     \item \textbf{Vision par Ordinateur (CNN) :} Conception d'une architecture convolutive dédiée, dotée d'une fonction de \textbf{scoring continu softmax} ($0.0 \rightarrow 1.0$) préservant 100\,\% des pages et éliminant le risque de faux négatif silencieux ;
     \item \textbf{Corpus d'apprentissage annoté de référence :} Réalisation d'une \textbf{annotation manuelle intégrale et méticuleuse de 3\,872 paragraphes} selon les piliers ESG (1\,639 Environnemental, 1\,260 Social, 973 Gouvernance) ;
@@ -136,14 +136,14 @@ Ce projet de fin d'études présente la conception et le déploiement d'un syst�
 
 Le système est déployé via une API REST FastAPI et mis à disposition des auditeurs à travers un tableau de bord Streamlit interactif.
 
-\textbf{Mots-clés :} RSE, ESG, CNN Léger, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
+\textbf{Mots-clés :} RSE, ESG, Méthodologie CRISP-DM, CNN, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
 
 \chapter*{Abstract}
 \addcontentsline{toc}{chapter}{Abstract}
 
 Evaluating corporate extra-financial performance has become a strategic necessity driven by international regulations (GRI Standards 2021, EU CSRD directive, and ESRS standards). However, corporate CSR (Corporate Social Responsibility) reports are voluminous (frequently exceeding 150 pages), dense, and heterogeneous, making manual review time-consuming and error-prone.\\
 
-This graduation project delivers an end-to-end intelligent decision-support system designed for automated CSR report analysis and ESG regulatory compliance auditing. Our main engineering contributions include:
+This graduation project delivers an end-to-end intelligent decision-support system designed for automated CSR report analysis and ESG regulatory compliance auditing, developed following the CRISP-DM methodology. Our main engineering contributions include:
 \begin{enumerate}
     \item \textbf{Computer Vision (CNN):} A dedicated convolutional neural network operating with continuous softmax probability scoring ($0.0 \rightarrow 1.0$) to avoid hard page elimination and prevent data loss;
     \item \textbf{Curated Gold-Standard Dataset:} An \textbf{exhaustive manual annotation of 3,872 paragraphs} across ESG dimensions (1,639 Environmental, 1,260 Social, 973 Governance);
@@ -155,7 +155,7 @@ This graduation project delivers an end-to-end intelligent decision-support syst
 
 The solution is orchestrated via a FastAPI backend and delivered through an ergonomic Streamlit dashboard.
 
-\textbf{Keywords:} CSR, ESG, CNN, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
+\textbf{Keywords:} CSR, ESG, CRISP-DM Methodology, CNN, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
 
 % ═══════════════════════════════════════════════════════════════════
 % TABLES
@@ -207,7 +207,7 @@ L'exploitation des rapports RSE au sein de RSE Time reposait sur une lecture man
 \section{Objectifs du projet}
 Les objectifs majeurs fixés pour ce travail d'ingénieur sont :
 \begin{enumerate}
-    \item Concevoir un composant de \textbf{Vision par Ordinateur léger} capable de scorer la densité ESG des pages sans perte destructive d'information ;
+    \item Concevoir un composant de \textbf{Vision par Ordinateur (CNN)} capable de scorer la densité ESG des pages sans perte destructive d'information ;
     \item Bâtir un \textbf{corpus d'apprentissage de référence de 3\,872 paragraphes}, rigoureusement annoté à la main sur les trois piliers E, S et G ;
     \item Entraîner et comparer trois architectures de classification NLP (Baseline, Random Forest, CamemBERT) ;
     \item Développer un module \textbf{spaCy NER} pour l'extraction automatique des grandeurs physiques et des indicateurs ;
@@ -215,38 +215,69 @@ Les objectifs majeurs fixés pour ce travail d'ingénieur sont :
     \item Déployer un \textbf{filet de sécurité sémantique} pour fiabiliser le contrôle de conformité GRI Standards 2021.
 \end{enumerate}
 
-\section{Méthodologie adoptée : CRISP-DM}
-Pour structurer notre démarche d'ingénieur, nous avons adopté le cycle méthodologique \textbf{CRISP-DM} (\textit{Cross-Industry Standard Process for Data Mining}), découpé en 6 phases itératives comme le montre la figure~\ref{fig:crisp_dm}.
+\section{Méthodologie de gestion de projet adoptée : CRISP-DM}
+
+\subsection{Justification du choix méthodologique}
+La gestion d'un projet d'ingénierie mêlant Traitement Automatique du Langage Naturel (NLP), Vision par Ordinateur et Modèles de Langage Génératifs (LLM) impose des contraintes spécifiques que les méthodologies logicielles traditionnelles (telles que le modèle en cascade \textit{Waterfall} ou \textit{Scrum} pur) ne peuvent adresser seules. En effet, un projet d'Intelligence Artificielle repose sur une exploration itérative des données, des cycles d'expérimentation d'hyperparamètres et une validation empirique continue.\\
+
+Comme l'illustre la figure~\ref{fig:methodologies}, le standard international \textbf{CRISP-DM} (\textit{Cross-Industry Standard Process for Data Mining}) demeure la méthodologie la plus largement plébiscitée dans l'industrie pour les projets de Data Science et d'IA (représentant 44\,\% des projets, devant Scrum et les approches hybrides) en raison de sa structure circulaire, itérative et centrée sur la donnée.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/fig_methodologies_ia.png}
+    \caption{Taux d'adoption des frameworks de gestion de projet en IA et Data Science}
+    \label{fig:methodologies}
+\end{figure}
+
+\subsection{Les six phases du cycle CRISP-DM appliquées au projet}
+Le cycle de vie CRISP-DM s'articule autour de six phases interdépendantes, rythmées par des boucles de rétroaction comme le montre la figure~\ref{fig:crisp_dm} :
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth]{figures/fig_crisp_dm.png}
-    \caption{Démarche méthodologique CRISP-DM adaptée au cycle de vie de l'IA ESG}
+    \caption{Cycle itératif de la méthodologie CRISP-DM adapté au projet Chatbot ESG}
     \label{fig:crisp_dm}
 \end{figure}
 
-Le tableau~\ref{tab:cadrage_crisp} résume l'application concrète des 6 phases dans notre projet :
+\begin{enumerate}
+    \item \textbf{Compréhension métier (\textit{Business Understanding}) :} Définition des besoins opérationnels des auditeurs de RSE Time, étude des standards de divulgation extra-financière (GRI Standards 2021, directive européenne CSRD et normes ESRS) et formulation des critères d'évaluation des réponses générées ;
+    \item \textbf{Compréhension des données (\textit{Data Understanding}) :} Collecte et exploration d'un corpus réel de 33 rapports RSE internationaux au format PDF. Évaluation de la diversité des mises en page, de la présence de graphiques et des caractéristiques textuelles ;
+    \item \textbf{Préparation des données (\textit{Data Preparation}) :} Développement du pipeline d'ingestion multimodale (extraction vectorielle native avec \texttt{pdfplumber} et OCR de secours via \texttt{EasyOCR}), nettoyage lexical, segmentation en paragraphes de 80 à 900 caractères et \textbf{annotation manuelle intégrale de 3\,872 paragraphes} selon les piliers E, S et G ;
+    \item \textbf{Modélisation (\textit{Modeling}) :} Conception et entraînement des cinq modules d'intelligence artificielle du système :
+    \begin{itemize}
+        \item Réseau Convolutif (CNN) pour le scoring visuel de densité ESG des pages ($0.0 \rightarrow 1.0$) ;
+        \item Benchmark comparatif de trois classifieurs (Baseline TF-IDF, Random Forest et fine-tuning de CamemBERT) ;
+        \item Entraînement du modèle spaCy NER pour la reconnaissance d'entités clés ;
+        \item Configuration de la base vectorielle ChromaDB et du LLM Mistral 7B via Ollama ;
+        \item Développement du moteur de conformité hybride associant regex et filet sémantique.
+    \end{itemize}
+    \item \textbf{Évaluation (\textit{Evaluation}) :} Mesure rigoureuse des performances sur un jeu de test indépendant ($n=581$), analyse des matrices de confusion, calcul des F1-scores macro et validation empirique du gain de couverture réglementaire (+25,0\,\% d'indicateurs récupérés) ;
+    \item \textbf{Déploiement (\textit{Deployment}) :} Encapsulation des modèles au sein d'une architecture micro-services animée par une API REST FastAPI et intégration dans une interface utilisateur interactive Streamlit offrant l'export des synthèses en PDF.
+\end{enumerate}
+
+\subsection{Tableau synoptique de cadrage du projet selon CRISP-DM}
+Le tableau~\ref{tab:cadrage_crisp} résume les objectifs, tâches techniques et livrables d'ingénierie associés à chacune des six phases de la démarche CRISP-DM :
 
 \begin{table}[H]
     \centering
-    \begin{tabular}{|p{4.5cm}|p{9.5cm}|}
+    \begin{tabular}{|p{3.5cm}|p{4cm}|p{4.2cm}|p{3.3cm}|}
         \hline
-        \textbf{Phase CRISP-DM} & \textbf{Actions menées dans le projet} \\
+        \textbf{Phase CRISP-DM} & \textbf{Objectifs} & \textbf{Tâches principales} & \textbf{Livrables} \\
         \hline
-        1. Compréhension métier & Étude des exigences GRI Standards 2021 et CSRD/ESRS \\
+        \textbf{1. Compréhension Métier} & Cadrer les exigences réglementaires et besoins d'audit & Analyse GRI 2021, CSRD/ESRS, définition des KPIs et cas d'usage & Spécifications fonctionnelles \\
         \hline
-        2. Compréhension des données & Analyse d'un corpus réel de 33 rapports RSE internationaux \\
+        \textbf{2. Compréhension Données} & Évaluer la faisabilité sur documents réels & Collecte de 33 rapports PDF, audit de lisibilité et structure & Corpus brut de 3\,500+ pages \\
         \hline
-        3. Préparation des données & Extraction multimodale, nettoyage, segmentation et annotation manuelle experte de 3 872 paragraphes \\
+        \textbf{3. Préparation Données} & Bâtir le jeu d'apprentissage annoté de référence & Pipeline d'extraction OCR/vectoriel, segmentation et annotation manuelle & Dataset de 3\,872 paragraphes E/S/G \\
         \hline
-        4. Modélisation & Entraînement du modèle CNN, fine-tuning de CamemBERT, entraînement de spaCy NER et intégration RAG \\
+        \textbf{4. Modélisation} & Entraîner et optimiser les architectures IA & Entraînement CNN, fine-tuning CamemBERT, spaCy NER, indexation RAG & Poids des modèles entraînés \\
         \hline
-        5. Évaluation & Validation sur test set indépendant ($n=581$), matrice de confusion et mesures de gain du filet sémantique \\
+        \textbf{5. Évaluation} & Valider scientifiquement les performances & Test set indépendant ($n=581$), matrices de confusion, tests d'audit & Rapports d'évaluation et 11 graphiques \\
         \hline
-        6. Déploiement & Architecture FastAPI, dashboard Streamlit et génération de rapports PDF \\
+        \textbf{6. Déploiement} & Industrialiser la solution pour les utilisateurs & Backend FastAPI asynchrone, dashboard Streamlit, export PDF & Application complète opérationnelle \\
         \hline
     \end{tabular}
-    \caption{Cadrage opérationnel du projet selon le référentiel CRISP-DM}
+    \caption{Cadrage exhaustif des phases, tâches et livrables de la méthodologie CRISP-DM}
     \label{tab:cadrage_crisp}
 \end{table}
 
@@ -573,7 +604,7 @@ La figure~\ref{fig:g11_seuil} expose la calibration scientifique du seuil de sim
 \chapter{Conclusion générale et perspectives}
 
 \section{Conclusion}
-Ce projet de fin d'études a permis de concevoir, réaliser et valider expérimentalement un système d'intelligence artificielle complet dédié à l'analyse automatisée de rapports RSE et à l'audit de conformité ESG.\\
+Ce projet de fin d'études a permis de concevoir, réaliser et valider expérimentalement un système d'intelligence artificielle complet dédié à l'analyse automatisée de rapports RSE et à l'audit de conformité ESG. Mené selon la rigueur du cycle de vie \textbf{CRISP-DM}, le travail a articulé de manière fluide et itérative compréhension métier, exploration et préparation experte des données, modélisations multi-niveaux, évaluation empirique et déploiement applicatif.\\
 
 L'ensemble des objectifs fixés a été atteint :
 \begin{itemize}

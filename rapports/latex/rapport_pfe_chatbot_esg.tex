@@ -844,11 +844,12 @@ Comme l'illustrent les figures~\ref{fig:g1_comparaison} et~\ref{fig:benchmarks_r
 \subsection{Définition de l'ontologie d'entités extra-financières}
 La seule classification thématique d'un paragraphe ne suffit pas à l'auditeur : celui-ci a besoin d'extraire instantanément la grandeur mesurée, l'unité physique associée et la période temporelle de référence. Nous avons développé un composant NER personnalisé sous le framework \textbf{spaCy 3.7}, entraîné à reconnaître cinq catégories d'entités spécifiques :
 \begin{itemize}
-    \item \texttt{METRIC\_NUM} : Valeurs numériques entières ou décimales représentant des mesures physiques ou financières (ex: « 2,4 », « 4 850 », « 30 \% ») ;
-    \item \texttt{UNIT} : Unités de mesure physiques et comptables (ex: « tCO2e », « GWh », « millions d'euros », « \% ») ;
-    \item \texttt{YEAR} : Années d'exercice ou de référence (ex: « 2019 », « 2023 », « 2030 ») ;
+    \item \texttt{VALEUR} / \texttt{METRIC\_NUM} : Grandeurs numériques entières ou décimales (ex: « 2,4 », « 4 850 », « 30 \% ») ;
+    \item \texttt{UNITE} : Unités de mesure physiques et comptables (ex: « tCO2e », « GWh », « millions d'euros », « \% ») ;
+    \item \texttt{ANNEE} : Années d'exercice ou de référence historique (ex: « 2019 », « 2022 », « 2023 », « 2030 ») ;
+    \item \texttt{TENDANCE} : Sens de la dynamique et inflexion d'évolution (ex: « baisse », « réduction », « hausse », « progression », « stabilisation ») ;
     \item \texttt{ESG\_TOPIC} : Thématiques directes de durabilité (ex: « Scope 1 », « accidents du travail », « biodiversité ») ;
-    \item \texttt{GRI\_REF} : Codes formels d'indicateurs de la Global Reporting Initiative (ex: « GRI 305-1 », « GRI 403 »).
+    \item \texttt{REFERENCE\_GRI} : Codes formels d'indicateurs de la Global Reporting Initiative (ex: « GRI 305-1 », « GRI 403 »).
 \end{itemize}
 
 \subsection{Performance de l'extracteur NER}
@@ -969,6 +970,13 @@ L'écran d'audit de conformité (figure~\ref{fig:ui_conformite}) génère automa
     \caption{Interface utilisateur Streamlit : Matrice d'audit réglementaire et détection hybride GRI}
     \label{fig:ui_conformite}
 \end{figure}
+
+\subsection{Module d'analyse des tendances temporelles pluri-annuelles}
+Un volet majeur de l'application Streamlit est dédié à l'analyse des séries chronologiques historiques (\textit{Onglet Tendances}). Ce module interroge le backend (\texttt{GET /rapport/tendances}) pour consolider les données multi-exercices (2022, 2023, 2024) sur les indicateurs fondamentaux (consommations d'énergie GRI 302, intensité carbone GRI 305, prélèvements d'eau GRI 303 et formation GRI 404). Le système calcule automatiquement la variation relative :
+\begin{equation}
+    \Delta\% = \frac{V_{\text{récent}} - V_{\text{initial}}}{V_{\text{initial}}} \times 100
+\end{equation}
+Il classe la dynamique en \textit{hausse} ($> +2\,\%$), \textit{baisse} ($< -2\,\%$) ou \textit{stable}, et déclenche des alertes ciblées en cas de dérive environnementale défavorable ou de réduction du volume de formation des collaborateurs.
 
 \section{Conclusion du chapitre}
 La réalisation logicielle sous FastAPI et Streamlit offre une expérience utilisateur moderne, fluide et sécurisée. Les consultants de RSE Time disposent ainsi d'une solution prête à l'emploi. Le chapitre 7 expose à présent l'évaluation expérimentale approfondie et la discussion critique des résultats obtenus.

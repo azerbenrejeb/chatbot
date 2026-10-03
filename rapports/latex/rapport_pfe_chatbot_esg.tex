@@ -1,0 +1,578 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{amsmath,amssymb}
+\usepackage{subcaption}
+
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+\onehalfspacing
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Chatbot intelligent d'analyse de rapports RSE}
+\fancyhead[R]{\thepage}
+
+\titleformat{\chapter}[display]
+{\normalfont\bfseries\Large}
+{\chaptername\ \thechapter}
+{10pt}
+{\Huge}
+
+\begin{document}
+
+% ═══════════════════════════════════════════════════════════════════
+% PAGE DE GARDE
+% ═══════════════════════════════════════════════════════════════════
+\begin{titlepage}
+    \centering
+    \vspace*{0.5cm}
+
+    {\Large \textbf{République Tunisienne}\\}
+    {\Large \textbf{Ministère de l'Enseignement Supérieur et de la Recherche Scientifique}\\}
+
+    \vspace{1.5cm}
+
+    {\Huge \textbf{Rapport de Projet de Fin d'Études}\\}
+    {\Large Pour l'obtention du Diplôme National d'Ingénieur en Informatique\\}
+
+    \vspace{1.2cm}
+    \rule{\linewidth}{0.5mm}\\[0.4cm]
+    {\LARGE \textbf{Conception et Réalisation d'un Chatbot Intelligent Multi-Modèles pour l'Analyse Automatisée des Rapports RSE et l'Audit de Conformité ESG}\\}
+    \rule{\linewidth}{0.5mm}
+
+    \vspace{0.8cm}
+    {\large \textit{Approche hybride combinant Vision par Ordinateur (CNN), Transformers (CamemBERT), NER (spaCy), Recherche Vectorielle (ChromaDB), Modèle de Langage (Mistral 7B) et Audit Réglementaire GRI/ESRS}}
+
+    \vfill
+
+    \begin{minipage}{0.48\textwidth}
+        \begin{flushleft} \large
+            \textbf{Réalisé par :}\\
+            Azer \textsc{Ben Rejeb}
+        \end{flushleft}
+    \end{minipage}
+    \begin{minipage}{0.48\textwidth}
+        \begin{flushright} \large
+            \textbf{Organisme d'accueil :}\\
+            \textsc{RSE Time}
+        \end{flushright}
+    \end{minipage}
+
+    \vspace{1.2cm}
+
+    \begin{flushleft} \large
+        \textbf{Encadrant académique :} À compléter\\
+        \textbf{Encadrant professionnel :} À compléter\\
+        \textbf{Année universitaire :} 2025 / 2026
+    \end{flushleft}
+
+    \vfill
+\end{titlepage}
+
+\pagenumbering{roman}
+
+% ═══════════════════════════════════════════════════════════════════
+% DÉDICACES & REMERCIEMENTS
+% ═══════════════════════════════════════════════════════════════════
+\chapter*{Dédicaces}
+\addcontentsline{toc}{chapter}{Dédicaces}
+
+À mes très chers parents, pour leurs sacrifices constants, leur soutien indéfectible et leur amour qui m'ont guidé tout au long de mon parcours universitaire.\\
+
+À mes frères et sœurs, ainsi qu'à tous mes amis et collègues pour leurs encouragements continus.\\
+
+Que ce travail soit le témoignage de ma profonde reconnaissance et de mon affection.
+
+\chapter*{Remerciements}
+\addcontentsline{toc}{chapter}{Remerciements}
+
+Au terme de ce travail de fin d'études, je tiens à exprimer ma profonde gratitude à toutes les personnes qui ont contribué de près ou de loin à la réussite de ce projet.\\
+
+Je remercie chaleureusement mon encadrant académique pour sa disponibilité, ses précieux conseils scientifiques et ses orientations méthodologiques tout au long de ce projet.\\
+
+Mes sincères remerciements s'adressent également à la direction et à toute l'équipe de \textbf{RSE Time} pour m'avoir accueilli au sein de leur structure, pour la confiance qu'ils m'ont accordée et pour la mise à disposition des données et ressources indispensables à l'accomplissement de ce travail.\\
+
+Enfin, j'adresse mes vifs remerciements aux membres du jury qui me font l'honneur d'évaluer ce travail d'ingénieur.
+
+% ═══════════════════════════════════════════════════════════════════
+% RÉSUMÉ & ABSTRACT
+% ═══════════════════════════════════════════════════════════════════
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+L'évaluation de la performance extra-financière des entreprises est devenue un enjeu stratégique sous l'impulsion des réglementations internationales (GRI Standards 2021, directive européenne CSRD et normes ESRS). Cependant, les rapports RSE (Responsabilité Sociétale des Entreprises) publiés par les organisations représentent des documents volumineux (souvent plus de 150 pages), hétérogènes et denses en tableaux et graphiques, rendant leur analyse manuelle particulièrement fastidieuse et sujette aux erreurs d'omission.\\
+
+Ce projet de fin d'études présente la conception et le déploiement d'un système intelligent de bout en bout pour l'analyse automatisée de rapports RSE et l'audit de conformité ESG. Notre contribution repose sur un pipeline multi-modèles combinant :
+\begin{enumerate}
+    \item Un modèle de Vision par Ordinateur basé sur un CNN ResNet-50 entraîné avec une fonction de scoring continu (softmax) évitant l'élimination arbitraire des pages ;
+    \item Un corpus d'apprentissage rigoureux de 3\,872 paragraphes minutieusement annotés manuellement selon les trois piliers ESG (1\,639 Environnemental, 1\,260 Social, 973 Gouvernance) ;
+    \item Un benchmark expérimental démontrant la supériorité progressive d'une Baseline TF-IDF (89,33\,\%), d'un Random Forest (90,71\,\%) et d'un modèle Transformer CamemBERT fine-tuné atteignant \textbf{90,88\,\% d'accuracy} et \textbf{90,84\,\% de F1-macro} ;
+    \item Un modèle spaCy NER personnalisé extrayant les entités clés (chiffres, unités, années, tendances, références GRI) avec un \textbf{F1-score de 95,97\,\%} ;
+    \item Une architecture RAG (\textit{Retrieval-Augmented Generation}) couplant ChromaDB (embeddings multilingues MiniLM) et le LLM Mistral 7B via Ollama, garantissant des réponses contextualisées et sourcées ;
+    \item Un moteur d'audit de conformité hybride associant des expressions régulières à un \textbf{filet de sécurité sémantique}, permettant un gain de couverture de \textbf{+25,0\,\%} sur 12 indicateurs GRI essentiels.
+\end{enumerate}
+
+L'ensemble du système est orchestré via un backend FastAPI et mis à disposition des auditeurs à travers une interface web Streamlit intuitive.
+
+\textbf{Mots-clés :} RSE, Critères ESG, CamemBERT, ResNet-50, NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{Abstract}
+
+Evaluating corporate extra-financial performance has become a major strategic challenge driven by international disclosure regulations (GRI Standards 2021, EU Corporate Sustainability Reporting Directive - CSRD, and ESRS standards). However, corporate CSR (Corporate Social Responsibility) reports are lengthy (frequently exceeding 150 pages), structurally heterogeneous, and dense in tabular data, making manual inspection highly labor-intensive and prone to omission errors.\\
+
+This graduation project delivers an end-to-end intelligent system designed for automated CSR report analysis and ESG regulatory compliance auditing. Our main engineering contributions rely on a multi-model pipeline integrating:
+\begin{enumerate}
+    \item A Computer Vision module based on ResNet-50 CNN operating with continuous softmax probability scoring to prevent catastrophic information loss;
+    \item A curated gold-standard dataset of 3,872 paragraphs thoroughly annotated by hand across the three ESG dimensions (1,639 Environmental, 1,260 Social, 973 Governance);
+    \item A comparative benchmark establishing the progression from a TF-IDF Baseline (89.33\%), to Random Forest (90.71\%), up to a fine-tuned CamemBERT Transformer achieving \textbf{90.88\% accuracy} and \textbf{90.84\% macro F1-score};
+    \item A custom spaCy NER model extracting key numerical values, units, fiscal years, and GRI indicators with a \textbf{95.97\% F1-score};
+    \item A Retrieval-Augmented Generation (RAG) framework pairing ChromaDB with Mistral 7B LLM to deliver grounded, hallucination-free answers citing exact report pages;
+    \item A hybrid compliance engine pairing regex rules with a \textbf{semantic embedding safety net}, yielding a \textbf{+25.0\% increase in GRI coverage} across test corporate reports.
+\end{enumerate}
+
+The overall architecture is encapsulated within a FastAPI backend and delivered through an ergonomic Streamlit dashboard.
+
+\textbf{Keywords:} CSR, ESG, CamemBERT, ResNet-50, NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
+
+% ═══════════════════════════════════════════════════════════════════
+% TABLES DES MATIÈRES & FIGURES
+% ═══════════════════════════════════════════════════════════════════
+\tableofcontents
+\listoffigures
+\listoftables
+
+\clearpage
+\pagenumbering{arabic}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 1 : INTRODUCTION GÉNÉRALE
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Introduction générale et cadre du projet}
+
+\section{Contexte général}
+La Responsabilité Sociétale des Entreprises (RSE) et la prise en compte des critères Environnementaux, Sociaux et de Gouvernance (ESG) se sont imposées au cours de la dernière décennie comme des impératifs déterminants pour la pérennité économique des organisations. Poussées par des exigences réglementaires renforcées — telles que la directive européenne sur la publication d'informations en matière de durabilité par les entreprises (CSRD), les normes ESRS (\textit{European Sustainability Reporting Standards}) et le référentiel international de la \textit{Global Reporting Initiative} (GRI Standards 2021) —, les entreprises ont l'obligation légale de divulguer publiquement leurs données d'impact.\\
+
+Ces divulgations prennent la forme de volumineux rapports annuels de durabilité, comptant régulièrement entre 80 et 350 pages. Si la richesse informationnelle de ces documents est indéniable, leur exploitation pratique par les investisseurs, les auditeurs extra-financiers, les directions RSE et les parties prenantes se heurte à des verrous majeurs :
+\begin{itemize}
+    \item \textbf{Volume et hétérogénéité :} Les rapports mêlent narration marketing, graphiques complexes, tableaux comptables et pages de mise en page graphique ;
+    \item \textbf{Recherche ciblée fastidieuse :} Retrouver un chiffre précis (par exemple le volume d'émissions de gaz à effet de serre de Scope 3 ou le taux de fréquence des accidents) nécessite la lecture de dizaines de pages ;
+    \item \textbf{Vérification de conformité complexe :} Contrôler l'exhaustivité des 12 ou 30 indicateurs réglementaires exigés par les standards demande un temps humain considérable et expose au risque de faux négatifs silencieux.
+\end{itemize}
+
+\section{Présentation de l'organisme d'accueil}
+Ce projet a été réalisé au sein de la société \textbf{RSE Time}, une structure spécialisée dans l'accompagnement des entreprises dans leur transition écologique et leur reporting extra-financier. RSE Time développe des outils d'aide à la décision destinés à simplifier l'audit RSE, l'analyse comparative sectorielle et le suivi des trajectoires de décarbonation des entreprises.
+
+\section{Problématique}
+Face à la prolifération des rapports de durabilité, les analystes de RSE Time consacraient un temps disproportionné à la recherche manuelle d'indicateurs et au contrôle de complétude des documents. La problématique centrale de ce projet de fin d'études se formule ainsi :
+\begin{quote}
+\textit{« Comment concevoir et déployer une architecture logicielle intelligente capable d'extraire, de classifier rigoureusement les contenus ESG, de vérifier automatiquement la conformité réglementaire (GRI/ESRS) et de permettre une interrogation interactive en langage naturel fiable et sourcée ? »}
+\end{quote}
+
+\section{Objectifs du projet}
+Pour répondre à cette problématique, les objectifs techniques et scientifiques suivants ont été fixés :
+\begin{enumerate}
+    \item \textbf{Filtrage visuel des pages par Vision Artificielle (CNN) :} Analyser la mise en page des pages PDF afin d'estimer leur densité en contenu ESG, en adoptant une approche de scoring probabiliste sans élimination destructive ;
+    \item \textbf{Extraction multimodale robuste :} Combiner extraction vectorielle native (\texttt{pdfplumber}) et reconnaissance optique de caractères OCR (\texttt{EasyOCR}) pour les documents scannés ;
+    \item \textbf{Constitution d'un corpus d'apprentissage de référence :} Structurer et annoter manuellement un jeu de données de 3\,872 paragraphes répartis sur les 3 piliers (E, S, G) ;
+    \item \textbf{Benchmark de modèles de classification NLP :} Entraîner et comparer scientifiquement trois architectures : Baseline (TF-IDF + Régression Logistique), Random Forest et le modèle de langue pré-entraîné CamemBERT ;
+    \item \textbf{Extraction d'Entités Nommées (NER) :} Entraîner un modèle spaCy personnalisé pour extraire les valeurs chiffrées, unités, millésimes et indicateurs GRI ;
+    \item \textbf{Pipeline RAG anti-hallucination :} Indexer les passages dans la base vectorielle ChromaDB et orchestrer la génération de réponses contextuelles avec le modèle de langage Mistral 7B ;
+    \item \textbf{Audit de conformité hybride :} Développer un moteur de détection couplant expressions régulières ciblées et filet de sécurité sémantique par similarité cosinus d'embeddings.
+\end{enumerate}
+
+\section{Méthodologie adoptée : CRISP-DM}
+Le projet suit la méthodologie standardisée \textbf{CRISP-DM} (\textit{Cross-Industry Standard Process for Data Mining}), adaptée aux systèmes d'intelligence artificielle modernes :
+\begin{enumerate}
+    \item \textbf{Compréhension du métier :} Analyse des exigences réglementaires GRI Standards 2021 et ESRS ;
+    \item \textbf{Compréhension des données :} Exploration d'un corpus de 33 rapports RSE réels ;
+    \item \textbf{Préparation des données :} Segmentation des textes, nettoyage, normalisation et annotation experte ;
+    \item \textbf{Modélisation :} Entraînement du CNN, fine-tuning de CamemBERT, entraînement de spaCy NER et paramétrage du RAG ;
+    \item \textbf{Évaluation :} Calcul rigoureux des métriques (Accuracy, Précision, Rappel, F1-score macro, matrice de confusion) ;
+    \item \textbf{Déploiement :} Intégration dans une architecture modulaire FastAPI et interface Streamlit.
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 2 : ÉTAT DE L'ART ET FONDEMENTS THÉORIQUES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{État de l'art et fondements théoriques}
+
+\section{Les standards de reporting RSE : GRI et CSRD/ESRS}
+Le reporting de durabilité s'appuie sur des cadres normatifs stricts garantissant la comparabilité et la vérifiabilité des informations publiées.
+\subsection{Le référentiel GRI Standards 2021}
+La \textit{Global Reporting Initiative} est le cadre de référence mondial le plus largement adopté. Les normes universelles et sectorielles définissent des indicateurs codifiés :
+\begin{itemize}
+    \item \textbf{GRI 302 (Énergie) :} Consommations directes et indirectes, part des énergies renouvelables ;
+    \item \textbf{GRI 303 (Eau et effluents) :} Volumes prélevés, zones de stress hydrique ;
+    \item \textbf{GRI 305 (Émissions de GES) :} Émissions de Scope 1 (directes), Scope 2 (électricité) et Scope 3 (chaîne de valeur) en tonnes équivalent $\text{CO}_2$ ($\text{tCO}_2\text{e}$) ;
+    \item \textbf{GRI 306 (Déchets) :} Production totale et taux de recyclage ;
+    \item \textbf{GRI 401 à 405 (Volet Social) :} Effectifs consolidés, taux de rotation, santé et sécurité (taux de fréquence des accidents), volume d'heures de formation, parité femmes-hommes ;
+    \item \textbf{GRI 205, 206, 415, 419 (Gouvernance) :} Dispositifs anti-corruption, respect du droit de la concurrence, neutralité politique et sanctions réglementaires.
+\end{itemize}
+
+\subsection{La directive européenne CSRD et les normes ESRS}
+Applicable depuis l'exercice 2024, la CSRD (\textit{Corporate Sustainability Reporting Directive}) renforce considérablement les obligations européennes sous l'égide de l'EFRAG (\textit{European Financial Reporting Advisory Group}). Les normes ESRS introduisent le principe de \textbf{double matérialité} (matérialité financière et matérialité d'impact) et imposent une correspondance directe avec les indicateurs GRI.
+
+\section{Traitement Automatique du Langage Naturel (NLP) et Transformers}
+\subsection{De la représentation vectorielle classique aux Transformers}
+Les approches traditionnelles de traitement textuel reposent sur des représentations statistiques creuses (\textit{sparse representations}) telles que le modèle sac de mots (\textit{Bag-of-Words}) et la pondération TF-IDF (\textit{Term Frequency - Inverse Document Frequency}) :
+\begin{equation}
+    \text{TF-IDF}(t, d, D) = \text{TF}(t, d) \times \log\left(\frac{|D|}{1 + |\{d' \in D : t \in d'\}|}\right)
+\end{equation}
+Bien que rapides et efficaces comme ligne de base, ces représentations souffrent d'une limite majeure : elles ignorent l'ordre des termes, la syntaxe et le contexte sémantique.
+
+\subsection{L'architecture Transformer et le modèle CamemBERT}
+Introduite par Vaswani et al. en 2017, l'architecture Transformer repose sur le mécanisme d'auto-attention bidirectionnelle (\textit{Self-Attention}) :
+\begin{equation}
+    \text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\end{equation}
+\textbf{CamemBERT} (Martin et al., 2020) est une adaptation du modèle RoBERTa spécifiquement pré-entraînée sur un vaste corpus de texte français (138 Go issu de l'OSCAR). Grâce à sa tokenisation par sous-mots (\textit{SentencePiece}) et son entraînement par masquage de tokens (\textit{Masked Language Modeling}), CamemBERT capture avec une finesse inégalée les subtilités lexicales, techniques et contextuelles de la langue française, ce qui en fait le choix privilégié pour classifier des textes RSE complexes.
+
+\section{Vision par Ordinateur et Réseaux Convolutifs (CNN)}
+Les rapports RSE ne sont pas de simples flux textuels : leur mise en page visuelle (présence de logos, infographies de neutralité carbone, tableaux chiffrés, schémas de gouvernance) porte un signal fort de pertinence. Les réseaux convolutifs (\textit{Convolutional Neural Networks} - CNN), notamment l'architecture \textbf{ResNet-50} (He et al., 2016), permettent d'extraire automatiquement des caractéristiques spatiales et structurelles grâce à des blocs résiduels surmontant le problème de la disparition du gradient :
+\begin{equation}
+    y = \mathcal{F}(x, \{W_i\}) + x
+\end{equation}
+L'utilisation du \textit{Transfer Learning} (poids pré-entraînés sur ImageNet) permet de spécialiser efficacement le réseau sur la détection visuelle de pages à forte teneur ESG.
+
+\section{L'approche RAG : Retrieval-Augmented Generation}
+Les modèles de langage généraux (LLM) sont réputés pour leur éloquence mais souffrent du phénomène d'\textbf{hallucination} (génération d'informations factuellement erronées avec une fausse certitude), inacceptable dans le cadre d'un audit légal. L'architecture RAG (\textit{Retrieval-Augmented Generation}, Lewis et al., 2020) résout ce verrou en dissociant la mémoire factuelle de la génération linguistique :
+\begin{enumerate}
+    \item Une base vectorielle (\textbf{ChromaDB}) indexe des morceaux de texte sous forme d'embeddings denses (384 dimensions calculées par \texttt{paraphrase-multilingual-MiniLM-L12-v2}) ;
+    \item À chaque question utilisateur, les $k$ passages les plus similaires sont extraits par mesure de similarité cosinus :
+    \begin{equation}
+        \text{sim}(u, v) = \frac{u \cdot v}{\|u\|_2 \|v\|_2}
+    \end{equation}
+    \item Un modèle de langage local (\textbf{Mistral 7B}) reçoit un prompt strict lui intimant de répondre \textbf{exclusivement} sur la base du contexte retrouvé en citant les sources et numéros de pages.
+
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 3 : CORPUS ET ANNOTATION EXPERTE DU DATASET
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Constitution du corpus et démarche d'annotation experte}
+
+\section{Constitution du corpus de rapports RSE}
+Pour garantir la représentativité et la robustesse industrielle du système, un corpus de \textbf{33 rapports de durabilité réels} a été rassemblé. Ce jeu de documents couvre des entreprises internationales cotées et des grandes organisations issues de secteurs variés (industrie lourde, télécoms, agroalimentaire, transport, conseil et services technologiques) : Colas, CGI, Sagemcom, Danone, Solvay, Robertet, CAT, Cubico, ENGIE, etc.
+
+\section{Prétraitement et segmentation textuelle}
+L'extraction et le découpage textuel s'articulent en deux étapes rigoureuses :
+\begin{enumerate}
+    \item \textbf{Extraction multimodale :} Utilisation de \texttt{pdfplumber} pour l'extraction vectorielle native. Pour les documents scannés dépourvus de couche textuelle, un fallback automatique vers \texttt{EasyOCR} est déclenché ;
+    \item \textbf{Segmentation en unités d'analyse :} Le texte extrait est normalisé (correction du mojibake d'encodage, suppression des caractères de contrôle ASCII) puis segmenté en paragraphes cohérents d'une longueur minimale de 80 caractères. Les blocs volumineux excédant 900 caractères sont re-segmentés par frontières de phrases (\texttt{re.split}) afin d'éviter le mélange de thématiques disparates au sein d'un même passage.
+\end{enumerate}
+
+Comme l'illustre la figure~\ref{fig:g7_longueur}, la distribution de la longueur des paragraphes segmentés présente une médiane de \textbf{119 mots} et un 95\textsuperscript{e} percentile à \textbf{181 mots}, ce qui s'aligne parfaitement avec la fenêtre contextuelle optimale de nos modèles de classification (128 tokens).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/g7_longueur_paragraphes.png}
+    \caption{Distribution de la longueur des paragraphes du corpus (médiane = 119 mots)}
+    \label{fig:g7_longueur}
+\end{figure}
+
+\section{Démarche d'annotation experte du dataset}
+Afin d'entraîner et d'évaluer les modèles de classification selon les exigences d'un travail d'ingénieur, nous avons entrepris une \textbf{démarche d'annotation manuelle méticuleuse de l'intégralité du corpus d'entraînement}.\\
+
+Chaque paragraphe a fait l'objet d'une analyse approfondie et a été étiqueté selon une grille d'expertise rigoureuse inspirée des normes GRI Standards 2021 :
+\begin{itemize}
+    \item \textbf{Classe Environnemental (E) :} Textes consacrés au changement climatique, aux émissions de GES (Scopes 1, 2, 3), au mix énergétique, à la gestion de la ressource en eau, aux flux de déchets, à l'économie circulaire et à la préservation de la biodiversité ;
+    \item \textbf{Classe Social (S) :} Paragraphes traitant des ressources humaines, du recrutement, de la santé et sécurité au travail (accidents, ergonomie), de la formation continue, de la diversité, de la parité femmes-hommes, de l'inclusion du handicap et des droits humains ;
+    \item \textbf{Classe Gouvernance (G) :} Passages portant sur la composition et le fonctionnement du conseil d'administration, les comités d'audit, les chartes éthiques, la lutte anti-corruption, la conformité légale, la gestion des risques et la protection des données personnelles (RGPD).
+\end{itemize}
+
+Ce travail d'annotation systématique a permis de constituer un dataset consolidé de \textbf{3\,872 paragraphes annotés} avec le plus grand soin. Comme le met en évidence la figure~\ref{fig:g5_distrib}, la répartition est équilibrée et reflète fidèlement la réalité des rapports de durabilité des grandes entreprises :
+\begin{itemize}
+    \item \textbf{Environnemental :} 1\,639 paragraphes (42,3\,\%) ;
+    \item \textbf{Social :} 1\,260 paragraphes (32,5\,\%) ;
+    \item \textbf{Gouvernance :} 973 paragraphes (25,1\,\%).
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/g5_distribution_classes.png}
+    \caption{Distribution équilibrée des 3\,872 paragraphes du dataset annoté}
+    \label{fig:g5_distrib}
+\end{figure}
+
+Le corpus ainsi constitué a ensuite été partitionné selon un découpage stratifié rigoureux :
+\begin{itemize}
+    \item \textbf{Ensemble d'entraînement (\textit{Train set}) :} 2\,710 exemples (70\,\%) ;
+    \item \textbf{Ensemble de validation (\textit{Validation set}) :} 581 exemples (15\,\%) pour le réglage des hyperparamètres et l'arrêt précoce ;
+    \item \textbf{Ensemble de test (\textit{Test set}) :} 581 exemples (15\,\%) strictement isolés pour l'évaluation finale impartiale.
+\end{itemize}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 4 : CONCEPTION ET MODÉLISATION DU SYSTÈME MULTI-MODÈLES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Conception et modélisation du système multi-modèles}
+
+\section{Architecture globale du système}
+Le système est conçu selon une architecture modulaire en couches orchestrant cinq modules d'intelligence artificielle complémentaires :
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/g1_comparaison_modeles.png}
+    \caption{Progression des performances de classification selon les architectures}
+    \label{fig:g1_progression}
+\end{figure}
+
+\section{Module 1 : Vision par Ordinateur CNN (Scoring probabiliste)}
+\subsection{Problématique du filtrage binaire dur}
+Dans la conception initiale classique, un réseau convolutif appliquait une fonction \texttt{argmax} pour décider si une page était « ESG » ou « Non-ESG » :
+\begin{equation}
+    \hat{y} = \arg\max_{c \in \{0, 1\}} P(y = c \mid x)
+\end{equation}
+Si une page était classée « Non-ESG », elle était définitivement supprimée du flux. Cette approche présentait un défaut structurel critique : \textbf{le risque de faux négatif silencieux}. Une page contenant des indicateurs cruciaux mais avec une mise en page atypique disparaissait à jamais du pipeline.
+
+\subsection{Solution innovante : Le scoring probabiliste continu}
+Nous avons transformé ce composant en un \textbf{système d'étiquetage et de scoring probabiliste} :
+\begin{equation}
+    S_{\text{CNN}}(x) = \frac{e^{z_0}}{e^{z_0} + e^{z_1}} \in [0.0, 1.0]
+\end{equation}
+Désormais, \textbf{100\,\% des pages sont conservées dans le pipeline}. Le score $S_{\text{CNN}}$ est associé comme métadonnée à chaque paragraphe dans ChromaDB. Il permet :
+\begin{itemize}
+    \item De pondérer et trier les résultats du chatbot au moment de la recherche ;
+    \item De générer une statistique de densité ESG du rapport (ex: 65\,\% de pages à haute densité) ;
+    \item De garantir qu'aucune information textuelle n'est détruite.
+\end{itemize}
+
+La figure~\ref{fig:g9_cnn} illustre ce comportement mesuré sur les 57 pages du \textit{Rapport Colas 2023}. L'ancien filtre binaire aurait détruit 31 pages (54,4\,\%), alors que notre approche préserve l'intégralité du contenu tout en quantifiant précisément la pertinence visuelle de chaque page.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/g9_scores_cnn.png}
+    \caption{Profil de scoring CNN réel sur le Rapport Colas 2023 (57 pages préservées)}
+    \label{fig:g9_cnn}
+\end{figure}
+
+\section{Module 2 : Classification NLP des dimensions ESG}
+Pour classifier chaque paragraphe dans l'un des trois piliers (Environnemental, Social, Gouvernance), nous avons mené une démarche comparative rigoureuse opposant trois familles d'algorithmes :
+\begin{enumerate}
+    \item \textbf{Baseline (TF-IDF + Régression Logistique) :} Modèle de référence léger reposant sur une vectorisation 1-gram / 2-gram et une régression linéaire avec régularisation $L_2$ ;
+    \item \textbf{Random Forest (Ensemble Learning) :} Forêt de 100 arbres de décision permettant de capturer les interactions non-linéaires complexes entre le vocabulaire spécifique ;
+    \item \textbf{CamemBERT (Transformer fine-tuné) :} Réseau profond pré-entraîné, fine-tuné sur notre corpus avec un optimiseur AdamW ($\text{lr} = 3 \times 10^{-5}$, $\text{weight decay} = 0,01$, gradient clipping à 1.0) sur 2 époques avec une longueur maximale de 128 tokens.
+\end{enumerate}
+
+\section{Module 3 : Reconnaissance d'Entités Nommées (spaCy NER Custom)}
+Pour extraire les métriques chiffrées au cœur de l'audit RSE, nous avons entraîné un composant NER personnalisé avec la bibliothèque spaCy. Le modèle identifie 5 catégories d'entités avec leurs frontières de caractères :
+\begin{itemize}
+    \item \texttt{B-VALEUR} : Quantités numériques (ex: \textit{45 200}, \textit{34,3\,\%}) ;
+    \item \texttt{B-UNITE} : Unités de mesure normalisées (\textit{tCO2e}, \textit{kWh}, \textit{m³}, \textit{salariés}) ;
+    \item \texttt{B-ANNEE} : Années fiscales de référence (\textit{2023}, \textit{2024}) ;
+    \item \texttt{B-TENDANCE} : Termes qualifiant l'évolution (\textit{réduction de}, \textit{progression de}) ;
+    \item \texttt{B-REFERENCE\_GRI} : Codes explicites de normes (\textit{GRI 305}, \textit{GRI 401-1}).
+\end{itemize}
+
+\section{Module 4 : Moteur de Conformité Hybride (Regex + Sémantique)}
+\subsection{Limites des expressions régulières pures}
+Une expression régulière détecte une forme orthographique rigide. Si une entreprise écrit « \textit{4200 tonnes de gaz à effet de serre} » au lieu du motif attendu « \textit{tCO2e} », la regex échoue et l'indicateur est déclaré absent à tort.
+
+\subsection{Architecture hybride à deux niveaux}
+Pour pallier ce défaut, nous avons conçu un \textbf{filet de sécurité sémantique} novateur :
+\begin{enumerate}
+    \item \textbf{Niveau 1 (Regex ultra-rapide) :} Détection prioritaire par motifs regex optimisés sur les codes et le vocabulaire canonique ;
+    \item \textbf{Niveau 2 (Filet de sécurité sémantique) :} Pour tout indicateur non détecté au niveau 1, le système encode les paragraphes du rapport et calcule la similarité cosinus avec la définition officielle du standard GRI à l'aide du modèle d'embedding \texttt{MiniLM}. Si la similarité dépasse le seuil calibré ($\tau = 0,55$), l'indicateur est validé avec la mention \texttt{méthode: sémantique}.
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 5 : RÉALISATION ET IMPLÉMENTATION LOGICIELLE
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Réalisation et implémentation logicielle}
+
+\section{Stack technologique}
+Le projet a été développé en Python 3.13 dans un environnement modulaire respectant les standards de l'ingénierie logicielle :
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|l|p{7cm}|}
+        \hline
+        \textbf{Couche} & \textbf{Technologie} & \textbf{Rôle dans l'architecture} \\
+        \hline
+        Vision & PyTorch / Torchvision & Modèle CNN ResNet-50 et transformations d'images \\
+        \hline
+        NLP & HuggingFace Transformers & Modèle CamemBERT fine-tuné pour la classification \\
+        \hline
+        NER & spaCy 3.8 & Extraction d'entités clés (chiffres, unités, GRI) \\
+        \hline
+        ML Classique & scikit-learn & TF-IDF Vectorizer et Random Forest Classifier \\
+        \hline
+        Embeddings & Sentence-Transformers & Modèle multilingue MiniLM (384 dimensions) \\
+        \hline
+        Base vectorielle & ChromaDB & Stockage persistant et recherche par k-NN \\
+        \hline
+        LLM & Ollama / Mistral 7B & Génération de réponses contextuelles locales \\
+        \hline
+        Backend & FastAPI / Uvicorn & API REST haute performance asynchrone \\
+        \hline
+        Frontend & Streamlit & Tableau de bord interactif pour les auditeurs \\
+        \hline
+        Persistance & SQLite 3 & Historique des sessions et tables d'audit \\
+        \hline
+    \end{tabular}
+    \caption{Stack technologique détaillée du projet}
+    \label{tab:stack}
+\end{table}
+
+\section{Pipeline de traitement de bout en bout}
+Lorsqu'un analyste dépose un rapport RSE sur l'interface, le flux d'exécution automatique suivant se déclenche :
+\begin{enumerate}
+    \item \textbf{Réception & Découpage visuel :} Le fichier PDF est converti en images par page via \texttt{pdf2image} ;
+    \item \textbf{Scoring CNN :} Chaque image est normalisée et transmise au réseau CNN qui calcule la probabilité $P(\text{ESG})$. Le score est consigné ;
+    \item \textbf{Extraction & Découpage :} Le texte vectoriel est extrait via \texttt{pdfplumber} (ou \texttt{EasyOCR} en secours) et segmenté en paragraphes normalisés ;
+    \item \textbf{Classification CamemBERT :} Chaque paragraphe reçoit son étiquette de pilier (Environnemental, Social, Gouvernance) avec la probabilité associée ;
+    \item \textbf{Indexation ChromaDB :} Les paragraphes, accompagnés de leurs métadonnées (page, rapport, pilier, score CNN), sont projetés dans l'espace vectoriel ;
+    \item \textbf{Audit GRI Hybride :} Le moteur de conformité inspecte le document (Regex + filet sémantique) et renseigne la table d'audit SQLite avec les pages sources exactes ;
+    \item \textbf{Disponibilité immédiate :} L'utilisateur peut interroger le document en langage naturel, visualiser les scores et exporter le rapport d'audit en PDF.
+\end{enumerate}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 6 : TESTS, RÉSULTATS EXPÉRIMENTAUX ET ÉVALUATION
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Évaluation expérimentale, tests et résultats}
+
+\section{Protocole expérimental d'évaluation}
+L'évaluation scientifique a été menée sur le jeu de test indépendant de \textbf{581 paragraphes}, strictement préservé de tout entraînement. Les métriques classiques de classification multi-classes ont été calculées :
+\begin{equation}
+    \text{Accuracy} = \frac{\text{VP} + \text{VN}}{\text{Total}}, \quad
+    \text{Précision} = \frac{\text{VP}}{\text{VP} + \text{FP}}, \quad
+    \text{Rappel} = \frac{\text{VP}}{\text{VP} + \text{FN}}
+\end{equation}
+\begin{equation}
+    \text{F1-score} = 2 \times \frac{\text{Précision} \times \text{Rappel}}{\text{Précision} + \text{Rappel}}
+\end{equation}
+
+\section{Benchmark comparatif des modèles de classification E/S/G}
+Le tableau~\ref{tab:resultats_modeles} et la figure~\ref{fig:g1_progression} résument la progression scientifique observée entre les trois architectures évaluées :
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|l|c|c|c|}
+        \hline
+        \textbf{Modèle de classification} & \textbf{Accuracy (\%)} & \textbf{F1-score Macro (\%)} & \textbf{Gain vs Baseline} \\
+        \hline
+        \textbf{Baseline (TF-IDF + Rég. Log.)} & 89,33\,\% & 89,08\,\% & Référence \\
+        \hline
+        \textbf{Random Forest (100 arbres)} & 90,71\,\% & 90,73\,\% & +1,38 point \\
+        \hline
+        \textbf{CamemBERT (Transformer fine-tuné)} & \textbf{90,88\,\%} & \textbf{90,84\,\%} & \textbf{+1,55 point} \\
+        \hline
+    \end{tabular}
+    \caption{Benchmark des performances de classification sur le jeu de test ($n=581$)}
+    \label{tab:resultats_modeles}
+\end{table}
+
+Ce benchmark démontre une progression méthodique : le modèle Random Forest améliore significativement la Baseline grâce à la capture des combinaisons de mots-clés, tandis que CamemBERT s'impose comme le modèle le plus performant et robuste grâce à sa compréhension contextuelle bidirectionnelle.
+
+\section{Analyse fine des résultats de CamemBERT}
+\subsection{Matrice de confusion}
+La figure~\ref{fig:g2_cm} présente la matrice de confusion obtenue par CamemBERT sur les 581 paragraphes de test. Sur 581 exemples, \textbf{528 sont parfaitement prédits} :
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/g2_matrice_confusion_camembert.png}
+    \caption{Matrice de confusion de CamemBERT sur le jeu de test ($n=581$)}
+    \label{fig:g2_cm}
+\end{figure}
+
+La dominance de la diagonale sombre confirme l'excellente capacité de discrimination du modèle :
+\begin{itemize}
+    \item \textbf{Gouvernance (139 / 146 bien classés, Rappel = 95,2\,\%) :} Performance remarquable, le modèle capture la terminologie d'audit et de conformité avec quasi sans faille ;
+    \item \textbf{Social (176 / 189 bien classés, Rappel = 93,1\,\%) :} Reconnaissance robuste des thématiques RH et de santé au travail ;
+    \item \textbf{Environnemental (213 / 246 bien classés, Précision = 95,5\,\%) :} Lorsque CamemBERT prédit la classe environnementale, la prédiction est exacte dans plus de 95\,\% des cas.
+\end{itemize}
+
+\subsection{Performances détaillées par classe}
+La figure~\ref{fig:g3_metriques} détaille la Précision, le Rappel et le F1-score obtenus par CamemBERT pour chaque catégorie ESG. L'équilibre des F1-scores (0,91 pour l'Environnement, 0,91 pour le Social et 0,90 pour la Gouvernance) démontre l'absence de biais envers une classe dominante.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/g3_metriques_par_classe_camembert.png}
+    \caption{Précision, Rappel et F1-score de CamemBERT par pilier ESG}
+    \label{fig:g3_metriques}
+\end{figure}
+
+\section{Évaluation du modèle spaCy NER}
+Le composant d'extraction d'entités nommées a été évalué sur un jeu de test de phrases annotées selon le format IOB2. Comme le montre la figure~\ref{fig:g4_ner}, le modèle atteint un niveau d'exactitude exceptionnel :
+\begin{itemize}
+    \item \textbf{Précision globale :} 95,36\,\% ;
+    \item \textbf{Rappel global :} 96,58\,\% ;
+    \item \textbf{F1-score global :} \textbf{95,97\,\%}.
+\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{figures/g4_ner_spacy.png}
+    \caption{Performances globales du modèle spaCy NER personnalisé}
+    \label{fig:g4_ner}
+\end{figure}
+
+\section{Impact expérimental du filet sémantique de conformité}
+Pour quantifier l'apport concret de notre approche de conformité hybride, nous avons exécuté une campagne de test sur un échantillon de 8 rapports RSE d'entreprises réelles. Sur un total de 96 indicateurs attendus :
+\begin{itemize}
+    \item Les expressions régulières pures en ont détecté 64 ;
+    \item Le filet de sécurité sémantique a permis de récupérer \textbf{16 indicateurs supplémentaires} rédigés sous des formes non anticipées par les regex ;
+    \item Le gain net de couverture réglementaire atteint \textbf{+25,0\,\%}.
+\end{itemize}
+
+La figure~\ref{fig:g10_couverture} illustre ce gain par entreprise, et la figure~\ref{fig:g11_calibration} expose la calibration rigoureuse du seuil de similarité cosinus ($\tau = 0,55$) séparant nettement les indicateurs pertinents du bruit.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth]{figures/g10_regex_vs_semantique.png}
+    \caption{Gain de couverture GRI grâce au filet sémantique (+25,0\,\% d'indicateurs récupérés)}
+    \label{fig:g10_couverture}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{figures/g11_calibration_seuil.png}
+    \caption{Calibration scientifique du seuil de similarité cosinus (seuil optimal $\tau = 0,55$)}
+    \label{fig:g11_calibration}
+\end{figure}
+
+% ═══════════════════════════════════════════════════════════════════
+% CHAPITRE 7 : CONCLUSION GÉNÉRALE ET PERSPECTIVES
+% ═══════════════════════════════════════════════════════════════════
+\chapter{Conclusion générale et perspectives}
+
+\section{Bilan du travail réalisé}
+Ce projet de fin d'études a permis de concevoir, d'implémenter et de valider expérimentalement un système intelligent complet dédié à l'analyse industrielle des rapports de durabilité RSE et à l'audit de conformité ESG.\\
+
+L'ensemble des objectifs initiaux a été atteint avec un haut niveau d'exigence technique et scientifique :
+\begin{itemize}
+    \item \textbf{Vision par Ordinateur sans perte d'information :} Remplacement du filtre binaire CNN par un scoring continu softmax préservant 100\,\% des données textuelles ;
+    \item \textbf{Dataset de référence annoté de haute qualité :} Constitution d'un corpus de 3\,872 paragraphes minutieusement annotés manuellement à travers les 3 dimensions ESG ;
+    \item \textbf{Excellence en classification NLP :} Démonstration de la supériorité de CamemBERT avec \textbf{90,88\,\% d'accuracy} et \textbf{90,84\,\% de F1-macro} ;
+    \item \textbf{Extraction précise des données d'audit :} Modèle spaCy NER validé à \textbf{95,97\,\% de F1-score} ;
+    \item \textbf{RAG sécurisé et sourcé :} Intégration de ChromaDB et de Mistral 7B éliminant les hallucinations en citant systématiquement la page et le score visuel CNN de chaque extrait ;
+    \item \textbf{Audit réglementaire hybride :} Amélioration de \textbf{+25,0\,\%} de la couverture GRI grâce au couplage d'expressions régulières et d'un filet de sécurité sémantique par similarité d'embeddings.
+\end{itemize}
+
+\section{Perspectives d'évolution}
+En vue d'un déploiement à plus large échelle au sein de RSE Time, plusieurs perspectives d'évolution prometteuses peuvent être envisagées :
+\begin{enumerate}
+    \item \textbf{Extension multi-standards CSRD/ESRS :} Étendre la matrice de conformité pour couvrir l'intégralité des \textit{Disclosure Requirements} des 12 normes ESRS obligatoires d'ici 2026 ;
+    \item \textbf{Extraction avancée des tableaux financiers imbriqués :} Intégrer des modèles multimodaux de pointe (tels que Table-Transformer ou LayoutLMv3) pour convertir automatiquement les bilans carbone complexes en tables relationnelles structurées ;
+    \item \textbf{Quantification de l'empreinte carbone de l'inférence :} Mesurer et optimiser la consommation énergétique des modèles déployés (via la quantification 4-bits ou l'élagage de réseau / \textit{pruning}) afin de concevoir une IA éco-responsable cohérente avec les principes de la RSE.
+\end{enumerate}
+
+\end{document}

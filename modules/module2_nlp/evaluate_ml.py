@@ -125,7 +125,8 @@ def evaluer_classification():
         # Parcourir les textes par petits paquets pour l'évaluation sur CPU/GPU
         for i in range(0, len(test_texts), 32):
             batch_texts = test_texts[i:i+32]
-            encoding = tokenizer(batch_texts, max_length=128, padding='max_length',
+            batch_texts_clean = [" ".join(str(t).strip().split()) for t in batch_texts]
+            encoding = tokenizer(batch_texts_clean, max_length=128, padding='max_length',
                                  truncation=True, return_tensors='pt').to(device)
             with torch.no_grad():
                 outputs = model(**encoding)

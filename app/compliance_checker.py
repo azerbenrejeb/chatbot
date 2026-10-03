@@ -154,7 +154,8 @@ def initialiser_table_indicateurs(conn):
             annee TEXT DEFAULT NULL,
             dimension TEXT DEFAULT NULL,
             confiance REAL DEFAULT 1.0,
-            page TEXT DEFAULT NULL
+            page TEXT DEFAULT NULL,
+            methode TEXT DEFAULT 'regex'
         )
     """)
     # Migration : ajouter les colonnes si elles n'existent pas (BDD existante)
@@ -164,6 +165,7 @@ def initialiser_table_indicateurs(conn):
         "ALTER TABLE indicateurs_esg ADD COLUMN dimension TEXT DEFAULT NULL",
         "ALTER TABLE indicateurs_esg ADD COLUMN confiance REAL DEFAULT 1.0",
         "ALTER TABLE indicateurs_esg ADD COLUMN page TEXT DEFAULT NULL",
+        "ALTER TABLE indicateurs_esg ADD COLUMN methode TEXT DEFAULT 'regex'",
     ]:
         try:
             cursor.execute(col_def)
@@ -203,6 +205,93 @@ def extraire_par_mots_cles(text: str) -> set:
                 break  # Un seul mot-clé suffit par indicateur
     
     return detectes
+
+
+# ─────────────────────────────────────────────────────────────────────
+# FILET DE SÉCURITÉ SÉMANTIQUE (complément des regex)
+# ─────────────────────────────────────────────────────────────────────
+# Une regex reconnaît une FORME exacte, pas un SENS : une reformulation non
+# anticipée ("4200 tonnes de gaz à effet de serre") fait conclure "absent" à tort.
+# Pour chaque indicateur NON trouvé par regex, on compare les passages du rapport
+# à une phrase de référence GRI via les embeddings MiniLM (le même modèle que
+# ChromaDB → aucune nouvelle dépendance). La regex reste la méthode principale.
+SEUIL_SEMANTIQUE = 0.55        # Seuil de similarité cosinus (à calibrer sur de vrais rapports)
+MAX_PASSAGES_SEMANTIQUE = 1500  # Plafond pour garder un temps de calcul raisonnable sur CPU
+
+_embedder_cache = {}
+
+
+def _get_embedder():
+    """Charge paresseusement le modèle d'embeddings (une seule fois par processus)."""
+    if "model" not in _embedder_cache:
+        from sentence_transformers import SentenceTransformer
+        from app.config import EMBEDDING_MODEL_NAME
+        _embedder_cache["model"] = SentenceTransformer(EMBEDDING_MODEL_NAME)
+    return _embedder_cache["model"]
+
+
+def get_phrases_reference() -> dict:
+    """Construit une phrase de référence par code GRI à partir du référentiel officiel."""
+    phrases = {}
+    for _dim, indicateurs in INDICATEURS_REQUIS.items():
+        for _nom, info in indicateurs.items():
+            phrases[info["GRI"]] = f"{info['dr_titre']}. {info['description']}"
+    return phrases
+
+
+def _decouper_passages(pages_data, taille_max=500):
+    """Découpe les pages en passages courts (MiniLM tronque au-delà d'~128 tokens)."""
+    passages = []
+    for p in pages_data:
+        for bloc in re.split(r"\n\s*\n", p.get("text", "")):
+            bloc = " ".join(bloc.split())
+            for i in range(0, len(bloc), taille_max):
+                morceau = bloc[i:i + taille_max]
+                if len(morceau) >= 60:
+                    passages.append({"page": p.get("page", 1), "texte": morceau})
+    return passages[:MAX_PASSAGES_SEMANTIQUE]
+
+
+def verifier_semantique(pages_data, codes_manquants, seuil=SEUIL_SEMANTIQUE) -> dict:
+    """
+    Vérifie sémantiquement les indicateurs que la regex n'a pas trouvés.
+
+    :param pages_data: Liste de {"page": int, "text": str}.
+    :param codes_manquants: Codes GRI non détectés par regex (ex: ["GRI 305"]).
+    :param seuil: Similarité cosinus minimale pour considérer l'indicateur présent.
+    :return: {code: {"score": float, "page": int, "passage": str}} pour les codes récupérés.
+    """
+    if not codes_manquants or not pages_data:
+        return {}
+    passages = _decouper_passages(pages_data)
+    if not passages:
+        return {}
+
+    try:
+        from sentence_transformers import util
+        embedder = _get_embedder()
+        phrases = get_phrases_reference()
+        emb_passages = embedder.encode([p["texte"] for p in passages], convert_to_tensor=True,
+                                       batch_size=64, show_progress_bar=False)
+    except Exception as e:
+        print(f"[WARN] Filet sémantique indisponible : {e}")
+        return {}
+
+    recuperes = {}
+    for code in codes_manquants:
+        if code not in phrases:
+            continue
+        emb_ref = embedder.encode(phrases[code], convert_to_tensor=True)
+        sims = util.cos_sim(emb_ref, emb_passages)[0]
+        best_idx = int(sims.argmax())
+        best_score = float(sims[best_idx])
+        if best_score >= seuil:
+            recuperes[code] = {
+                "score": round(best_score, 3),
+                "page": passages[best_idx]["page"],
+                "passage": passages[best_idx]["texte"][:200],
+            }
+    return recuperes
 
 
 def extraire_references_uniques(session_id, rapport_name=None):
@@ -711,7 +800,8 @@ def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
     annee_rapport_match = re.search(r"\b(20[12]\d)\b", rapport_name)
     annee_defaut_rapport = annee_rapport_match.group(1) if annee_rapport_match else "2024"
 
-    # Détection par indicateur
+    # Détection par indicateur (méthode principale : regex)
+    codes_trouves_regex = set()
     for code_gri, patterns in MOTS_CLES_GRI.items():
         found_pages = []
         pages_matches = []
@@ -762,14 +852,28 @@ def extraire_et_stocker_indicateurs(rapport_name, text, session_id=None):
                 page_str = f"Pages {found_pages[0]}, {found_pages[1]}, {found_pages[2]} (+{len(found_pages)-3})"
 
             cursor.execute("""
-                INSERT INTO indicateurs_esg (session_id, rapport_name, reference_gri, valeur, unite, annee, dimension, confiance, page)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-            """, (session_id, rapport_name, code_gri, valeur_finale, unite_finale, found_annee or annee_defaut_rapport, dim, 1.0, page_str))
+                INSERT INTO indicateurs_esg (session_id, rapport_name, reference_gri, valeur, unite, annee, dimension, confiance, page, methode)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (session_id, rapport_name, code_gri, valeur_finale, unite_finale, found_annee or annee_defaut_rapport, dim, 1.0, page_str, "regex"))
             inserted_count += 1
+            codes_trouves_regex.add(code_gri)
+
+    # ── Filet de sécurité sémantique : uniquement pour les indicateurs ratés par la regex ──
+    codes_manquants = [c for c in MOTS_CLES_GRI if c not in codes_trouves_regex]
+    recuperes = verifier_semantique(pages_data, codes_manquants)
+    for code_gri, info in recuperes.items():
+        cursor.execute("""
+            INSERT INTO indicateurs_esg (session_id, rapport_name, reference_gri, valeur, unite, annee, dimension, confiance, page, methode)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, (session_id, rapport_name, code_gri, "Présent (sémantique)", _UNITE_MAP.get(code_gri, ""),
+              annee_defaut_rapport, _DIM_MAP.get(code_gri, "Gouvernance"), info["score"],
+              f"Page {info['page']}", "semantique"))
+        inserted_count += 1
 
     conn.commit()
     conn.close()
-    print(f"[OK] {inserted_count} indicateurs ESG/GRI stockés avec pages en BDD pour : {rapport_name}")
+    print(f"[OK] {inserted_count} indicateurs ESG/GRI stockés pour {rapport_name} "
+          f"(regex={len(codes_trouves_regex)}, sémantique={len(recuperes)})")
 
 
 def calculer_score_esg_global_100(rapport_conformite: dict) -> dict:

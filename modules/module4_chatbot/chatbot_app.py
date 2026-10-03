@@ -781,9 +781,14 @@ with tab_chat:
             if msg.get("sources"):
                 st.markdown("#### 📄 Sources citées :")
                 for src in msg["sources"]:
+                    cnn_badge = ""
+                    if src.get('score_cnn') is not None:
+                        score_pct = int(float(src['score_cnn']) * 100)
+                        color = "#10b981" if score_pct >= 60 else ("#f59e0b" if score_pct >= 40 else "#94a3b8")
+                        cnn_badge = f" | <strong>Score Visuel CNN :</strong> <span style='color:{color};font-weight:700;'>{score_pct}%</span>"
                     st.markdown(f"""
                     <div class="source-box">
-                        <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}<br>
+                        <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}{cnn_badge}<br>
                         <em>"{src['extrait']}"</em>
                     </div>
                     """, unsafe_allow_html=True)
@@ -851,9 +856,14 @@ with tab_chat:
                 if sources:
                     st.markdown("#### 📄 Sources citées :")
                     for src in sources:
+                        cnn_badge = ""
+                        if src.get('score_cnn') is not None:
+                            score_pct = int(float(src['score_cnn']) * 100)
+                            color = "#10b981" if score_pct >= 60 else ("#f59e0b" if score_pct >= 40 else "#94a3b8")
+                            cnn_badge = f" | <strong>Score Visuel CNN :</strong> <span style='color:{color};font-weight:700;'>{score_pct}%</span>"
                         st.markdown(f"""
                         <div class="source-box">
-                            <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}<br>
+                            <strong>Rapport :</strong> {src['document']} | <strong>Page :</strong> {src['page']} | <strong>Domaine :</strong> {src['label']}{cnn_badge}<br>
                             <em>"{src['extrait']}"</em>
                         </div>
                         """, unsafe_allow_html=True)
@@ -868,8 +878,8 @@ with tab_chat:
 
 # ── Onglet Performance des Modèles (Benchmarks & Métriques) ──
 with tab_performance:
-    st.markdown("### 🎯 Tableau de Bord — Performance des Modèles IA")
-    st.caption("Métriques réelles issues des évaluations rigoureuses des modules CNN (Vision), ML/NLP (Classification & NER) et LLM/RAG (Retrieval-Augmented Generation).")
+    st.markdown("### 🎯 Tableau de Bord — Performance des Modèles IA & Métriques PFE")
+    st.caption("Métriques rigoureuses issues des évaluations sur données réelles : Vision CNN (Scoring), Classification E/S/G (TF-IDF vs RF vs CamemBERT), NER spaCy, RAG ChromaDB et Conformité Hybride.")
 
     # 1. Cartes de synthèse clés
     col_p1, col_p2, col_p3, col_p4 = st.columns(4)
@@ -878,7 +888,7 @@ with tab_performance:
         <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid #38bdf8; text-align:center;'>
             <span style='font-size:0.8rem; color:#94a3b8;'>👁️ Vision CNN ResNet-50</span><br/>
             <span style='font-size:1.6rem; font-weight:800; color:#38bdf8;'>96.8%</span><br/>
-            <span style='font-size:0.75rem; color:#cbd5e1;'>Précision filtrage pages ESG</span>
+            <span style='font-size:0.75rem; color:#cbd5e1;'>Scoring softmax (zéro perte)</span>
         </div>
         """, unsafe_allow_html=True)
     with col_p2:
@@ -886,78 +896,135 @@ with tab_performance:
         <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid #10b981; text-align:center;'>
             <span style='font-size:0.8rem; color:#94a3b8;'>🤖 CamemBERT Transformer</span><br/>
             <span style='font-size:1.6rem; font-weight:800; color:#10b981;'>90.9%</span><br/>
-            <span style='font-size:0.75rem; color:#cbd5e1;'>Accuracy Classification E/S/G</span>
+            <span style='font-size:0.75rem; color:#cbd5e1;'>Accuracy (vs 89.3% Baseline)</span>
         </div>
         """, unsafe_allow_html=True)
     with col_p3:
         st.markdown("""
         <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid #a855f7; text-align:center;'>
             <span style='font-size:0.8rem; color:#94a3b8;'>🏷️ spaCy NER Custom</span><br/>
-            <span style='font-size:1.6rem; font-weight:800; color:#a855f7;'>95.9%</span><br/>
-            <span style='font-size:0.75rem; color:#cbd5e1;'>F1-Score (VALEUR, ANNEE, UNITE)</span>
+            <span style='font-size:1.6rem; font-weight:800; color:#a855f7;'>95.97%</span><br/>
+            <span style='font-size:0.75rem; color:#cbd5e1;'>F1-Score entités ESG</span>
         </div>
         """, unsafe_allow_html=True)
     with col_p4:
         st.markdown("""
         <div style='background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; border-left:4px solid #f59e0b; text-align:center;'>
-            <span style='font-size:0.8rem; color:#94a3b8;'>🔍 Moteur RAG ChromaDB</span><br/>
-            <span style='font-size:1.6rem; font-weight:800; color:#f59e0b;'>100%</span><br/>
-            <span style='font-size:0.75rem; color:#cbd5e1;'>Taux réponse (Dist. 0.266)</span>
+            <span style='font-size:0.8rem; color:#94a3b8;'>⚖️ Conformité Hybride</span><br/>
+            <span style='font-size:1.6rem; font-weight:800; color:#f59e0b;'>+25.0%</span><br/>
+            <span style='font-size:0.75rem; color:#cbd5e1;'>Gain via filet sémantique</span>
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("---")
 
-    # 2. Section détaillée NLP : Comparaison des Classifieurs E/S/G (Baseline vs Random Forest vs CamemBERT)
-    col_c1, col_c2 = st.columns(2)
-    with col_c1:
-        st.markdown("#### 📊 Benchmark Comparatif des 3 Classifieurs E/S/G")
-        import pandas as pd
-        df_models_classif = pd.DataFrame({
-            "Modèle": ["Baseline TF-IDF + LogReg", "Random Forest (100 arbres)", "CamemBERT (Transformer)"],
-            "Accuracy (%)": [89.33, 90.71, 90.88],
-            "F1-Score Macro (%)": [89.08, 90.73, 90.84]
-        }).set_index("Modèle")
-        st.bar_chart(df_models_classif)
-        st.caption("Progression scientifique : Baseline (89.3%) ➔ Random Forest (90.7%) ➔ CamemBERT (90.9%).")
+    # Sous-onglets thématiques pour naviguer entre les modèles
+    sub_nlp, sub_cnn, sub_conformite, sub_ner, sub_critique = st.tabs([
+        "🤖 Classification E/S/G", "👁️ Vision CNN (Scoring)", "⚖️ Conformité (Regex+Sémantique)", "🏷️ NER spaCy", "🔬 Analyse Critique Dataset"
+    ])
 
-    with col_c2:
-        st.markdown("#### 🏷️ Performance de l'Extraction d'Entités (NER)")
-        df_ner = pd.DataFrame({
-            "Métrique": ["Précision", "Rappel (Recall)", "F1-Score Global"],
-            "Score (%)": [95.36, 96.58, 95.97]
-        }).set_index("Métrique")
-        st.bar_chart(df_ner)
-        st.caption("Évaluation sur 3 888 phrases annotées (VALEUR, ANNEE, UNITE).")
+    from app.config import GRAPHIQUES_DIR
+    import os
 
-    st.markdown("---")
+    # ── Sous-onglet 1 : Classification E/S/G ──
+    with sub_nlp:
+        st.markdown("#### 📊 Démarche Scientifique & Benchmark des 3 Modèles de Classification")
+        st.caption("Comparaison sur 581 paragraphes de test : Baseline (TF-IDF + Régression Logistique) ➔ Random Forest (100 arbres) ➔ CamemBERT (Transformer fine-tuné).")
+        
+        g1_path = GRAPHIQUES_DIR / "g1_comparaison_modeles.png"
+        g2_path = GRAPHIQUES_DIR / "g2_matrice_confusion_camembert.png"
+        g3_path = GRAPHIQUES_DIR / "g3_metriques_par_classe_camembert.png"
 
-    # 3. Section RAG Retrieval & ChromaDB
-    st.markdown("#### 🔍 Qualité du Retrieval Sémantique (Vector Store)")
-    col_r1, col_r2, col_r3 = st.columns([1, 1, 2])
-    with col_r1:
-        st.metric("Taux de Réponse", "100.0%", "10/10 questions")
-        st.metric("Sources Moyennes / Question", "5.0", "k=5 configuré")
-    with col_r2:
-        st.metric("Distance Cosinus Moyenne", "0.2657", "Haute pertinence (<0.3)")
-        st.metric("Documents Indexés", "12 364", "ChromaDB")
-    with col_r3:
-        st.markdown("**Couverture thématique des résultats RAG :**")
-        df_rag_dist = pd.DataFrame({
-            "Pilier ESG": ["Environnemental", "Social", "Gouvernance", "Autre"],
-            "Passages pertinents": [20, 19, 10, 1]
-        }).set_index("Pilier ESG")
-        st.bar_chart(df_rag_dist)
+        col_g1, col_g2 = st.columns([1, 1])
+        with col_g1:
+            if g1_path.exists():
+                st.image(str(g1_path), caption="Comparaison des 3 modèles : Gain continu de performance", use_container_width=True)
+            if g3_path.exists():
+                st.image(str(g3_path), caption="Précision, Rappel et F1 par dimension ESG (CamemBERT)", use_container_width=True)
+        with col_g2:
+            if g2_path.exists():
+                st.image(str(g2_path), caption="Matrice de confusion CamemBERT (test n=581)", use_container_width=True)
+            
+            st.markdown("""
+            <div style='background:rgba(255,255,255,0.03); padding:14px; border-radius:10px; border-left:4px solid #10b981;'>
+                <strong>💡 Pourquoi 3 modèles ?</strong><br/>
+                1. <strong>Baseline (89.33%) :</strong> Modèle linéaire simple, rapide mais aveugle à l'ordre des mots.<br/>
+                2. <strong>Random Forest (90.71%) :</strong> Capture les interactions non-linéaires entre mots-clés.<br/>
+                3. <strong>CamemBERT (90.88%) :</strong> Comprend le contexte sémantique complet grâce à l'attention bidirectionnelle.
+            </div>
+            """, unsafe_allow_html=True)
 
-    # 4. Bouton pour recalculer en direct
-    st.write("")
-    if st.button("🔄 Actualiser les métriques RAG en direct", key="btn_eval_rag_live"):
-        with st.spinner("Évaluation des 10 questions types sur ChromaDB en cours..."):
-            try:
-                from modules.module3_llm_rag.evaluate_rag import evaluer_retrieval
-                res_rag = evaluer_retrieval()
-                if res_rag:
-                    st.success(f"✅ Évaluation terminée : Taux de réponse {res_rag['taux_reponse']:.1f}% — Distance cosinus moyenne : {res_rag['moy_distance']:.4f}")
-            except Exception as e_ev:
-                st.error(f"Erreur d'évaluation : {e_ev}")
+    # ── Sous-onglet 2 : Vision CNN (Scoring) ──
+    with sub_cnn:
+        st.markdown("#### 👁️ Vision CNN : Du Filtrage Binaire au Scoring Continu")
+        st.caption("Au lieu d'éliminer définitivement des pages (risque de faux négatif silencieux), le CNN attribue une probabilité softmax continue (0.0 → 1.0) qui est attachée comme métadonnée dans ChromaDB.")
+        
+        g9_path = GRAPHIQUES_DIR / "g9_scores_cnn.png"
+        if g9_path.exists():
+            st.image(str(g9_path), caption="Profil CNN réel sur le Rapport Colas (57 pages analysées)", use_container_width=True)
+        
+        c_cnn1, c_cnn2, c_cnn3 = st.columns(3)
+        with c_cnn1:
+            st.metric("Architecture", "ResNet-50 / Light", "Transfer Learning")
+        with c_cnn2:
+            st.metric("Résolution d'entrée", "224 × 224 px", "Normalisation ImageNet")
+        with c_cnn3:
+            st.metric("Mode de décision", "Softmax (Scoring)", "100% pages conservées")
+
+    # ── Sous-onglet 3 : Conformité Hybride ──
+    with sub_conformite:
+        st.markdown("#### ⚖️ Détection Hybride : Regex + Filet de Sécurité Sémantique (MiniLM)")
+        st.caption("La regex détecte les mentions standards ultra-rapidement. Pour les indicateurs reformulés que la regex manque, les embeddings sémantiques vérifient le sens pour éviter les faux négatifs.")
+
+        g10_path = GRAPHIQUES_DIR / "g10_regex_vs_semantique.png"
+        g11_path = GRAPHIQUES_DIR / "g11_calibration_seuil.png"
+
+        col_cf1, col_cf2 = st.columns([1, 1])
+        with col_cf1:
+            if g10_path.exists():
+                st.image(str(g10_path), caption="Couverture GRI : +25.0% d'indicateurs récupérés sur 8 rapports réels", use_container_width=True)
+        with col_cf2:
+            if g11_path.exists():
+                st.image(str(g11_path), caption="Calibration du seuil de similarité cosinus (seuil optimal = 0.55)", use_container_width=True)
+
+    # ── Sous-onglet 4 : NER spaCy ──
+    with sub_ner:
+        st.markdown("#### 🏷️ Reconnaissance d'Entités Nommées (spaCy NER Custom)")
+        st.caption("Extraction automatique des chiffres clés, unités de mesure, années et références GRI dans les paragraphes ESG.")
+        
+        g4_path = GRAPHIQUES_DIR / "g4_ner_spacy.png"
+        col_n1, col_n2 = st.columns([1, 1])
+        with col_n1:
+            if g4_path.exists():
+                st.image(str(g4_path), caption="Performances globales du modèle spaCy NER", use_container_width=True)
+        with col_n2:
+            st.markdown("""
+            **Entités reconnues par le modèle :**
+            - `B-VALEUR` : Chiffres clés (ex: *45 200*, *34.3%*)
+            - `B-UNITE` : Unités normalisées (*tCO2e*, *MWh*, *m³*)
+            - `B-ANNEE` : Années d'exercice (*2023*, *2024*)
+            - `B-TENDANCE` : Sens d'évolution (*baisse*, *hausse*, *réduction*)
+            - `B-REFERENCE_GRI` : Codes standards (*GRI 305*, *302-1*)
+            """)
+            st.metric("F1-Score Global NER", "95.97%", "Precision: 95.36% | Recall: 96.58%")
+
+    # ── Sous-onglet 5 : Analyse Critique Dataset ──
+    with sub_critique:
+        st.markdown("#### 🔬 Recul Critique pour la Soutenance PFE : Limites de la Weak Supervision")
+        st.caption("Analyse scientifique de l'annotation automatique par mots-clés et identification des biais (sous-chaînes parasites, cas ambigus).")
+        
+        g5_path = GRAPHIQUES_DIR / "g5_distribution_classes.png"
+        g6_path = GRAPHIQUES_DIR / "g6_marge_annotation.png"
+        g8_path = GRAPHIQUES_DIR / "g8_sous_chaines_parasites.png"
+
+        col_cr1, col_cr2 = st.columns([1, 1])
+        with col_cr1:
+            if g5_path.exists():
+                st.image(str(g5_path), caption="Distribution des 3 872 paragraphes annotés", use_container_width=True)
+            if g6_path.exists():
+                st.image(str(g6_path), caption="Fragilité de l'annotation : 32.5% des labels tiennent à 1 seul mot-clé", use_container_width=True)
+        with col_cr2:
+            if g8_path.exists():
+                st.image(str(g8_path), caption="Impact des sous-chaînes parasites ('eau' dans réseaux, 'ges' dans changements)", use_container_width=True)
+            st.info("💡 **Argument pour le jury de PFE :** La weak supervision est une méthode industrielle reconnue, mais notre analyse critique montre qu'une validation humaine ciblée sur les 32% de cas ambigus est la perspective prioritaire pour fiabiliser le modèle.")
 

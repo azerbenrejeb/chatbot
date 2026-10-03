@@ -155,6 +155,7 @@ def interroger_rapports(question, n_resultats=3, filtre_label=None, filtre_rappo
             'document': meta.get('rapport', 'Inconnu'),
             'page': meta.get('page', 'N/A'),
             'label': meta.get('label', 'N/A'),
+            'score_cnn': meta.get('score_cnn', None),
             'extrait': doc[:150] + "..."
         })
 

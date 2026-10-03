@@ -84,7 +84,14 @@ else:
 
 # --- Pipeline Helper ---
 def filtrer_pages_cnn(pdf_path):
-    """Convertit le PDF en images et utilise le CNN pour filtrer les pages ESG."""
+    """
+    Convertit le PDF en images et utilise le CNN pour SCORER chaque page (probabilité ESG).
+
+    Amélioration structurelle : au lieu de supprimer les pages non-ESG (risque de faux négatif
+    silencieux), TOUTES les pages sont conservées dans le pipeline. Le CNN attribue un score
+    de probabilité ESG (0.0 → 1.0) stocké comme métadonnée pour prioriser les résultats
+    du chatbot et produire des statistiques de qualité du rapport.
+    """
     temp_img_dir = PROCESSED_DIR / "temp_images"
     temp_img_dir.mkdir(parents=True, exist_ok=True)
     
@@ -94,13 +101,14 @@ def filtrer_pages_cnn(pdf_path):
     image_paths = sorted(list(temp_img_dir.glob(f"{pdf_path.stem}_page_*.jpg")))
     
     if not image_paths:
-        return []
+        return [], {}
 
-    # Si le modèle CNN n'est pas encore entraîné, on prend toutes les pages par défaut
+    # Si le modèle CNN n'est pas encore entraîné, on prend toutes les pages (score=1.0 par défaut)
     if cnn_model is None:
-        print("[INFO] CNN non disponible, traitement de toutes les pages.")
-        pages_esg = list(range(len(image_paths)))
-        return pages_esg
+        print("[INFO] CNN non disponible, traitement de toutes les pages (score par défaut = 1.0).")
+        pages_all = list(range(len(image_paths)))
+        scores_cnn = {p: 1.0 for p in pages_all}
+        return pages_all, scores_cnn
 
     # Transformation d'image pour ResNet-50
     transform = transforms.Compose([
@@ -109,7 +117,10 @@ def filtrer_pages_cnn(pdf_path):
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
     ])
 
-    pages_esg = []
+    pages_all = []
+    scores_cnn = {}
+    nb_esg_fortes = 0  # Pages avec score > 0.5 (statistique)
+
     for img_path in image_paths:
         try:
             # Récupérer l'index de page depuis le nom (ex: name_page_3.jpg -> index 2)
@@ -120,15 +131,22 @@ def filtrer_pages_cnn(pdf_path):
             
             with torch.no_grad():
                 outputs = cnn_model(tensor)
-                pred = torch.argmax(outputs, dim=1).item()
-                
-            if pred == 0:  # ESG (Classe 0)
-                pages_esg.append(page_num)
+                # Softmax pour obtenir une probabilité entre 0.0 et 1.0
+                probs = torch.softmax(outputs, dim=1)
+                prob_esg = probs[0][0].item()  # Classe 0 = ESG
+
+            # TOUTES les pages sont conservées — le score sert de métadonnée
+            pages_all.append(page_num)
+            scores_cnn[page_num] = round(prob_esg, 4)
+
+            if prob_esg > 0.5:
+                nb_esg_fortes += 1
+
         except Exception as e:
             print(f"[ERR] Erreur classification page {img_path.name}: {e}")
 
-    print(f"[OK] CNN a filtré {len(pages_esg)} pages ESG sur {len(image_paths)} au total.")
-    return pages_esg
+    print(f"[OK] CNN scoring : {nb_esg_fortes}/{len(pages_all)} pages à forte probabilité ESG (toutes conservées).")
+    return pages_all, scores_cnn
 
 
 def extraire_texte_ocr(pdf_path, pages_esg, temp_img_dir, max_pages=8):
@@ -232,13 +250,13 @@ async def upload_rapport(file: UploadFile = File(...)):
             except Exception as e:
                 print(f"[WARN] Erreur chargement depuis le cache JSON : {e}. Relancement du pipeline complet...")
 
-        # 2. CNN filtre les pages ESG
-        pages_esg = filtrer_pages_cnn(pdf_path)
+        # 2. CNN score toutes les pages (plus de filtre binaire — toutes les pages sont conservées)
+        pages_esg, scores_cnn = filtrer_pages_cnn(pdf_path)
         
         if not pages_esg:
-            return {"message": "Aucune page ESG détectée par le CNN.", "pages_traitees": 0}
+            return {"message": "Aucune page détectée dans le PDF.", "pages_traitees": 0}
 
-        # 3. Extraire le texte des pages ESG
+        # 3. Extraire le texte de TOUTES les pages (plus de perte de données)
         pages_texte = extraire_texte(pdf_path, pages_esg)
         
         # 3.5 Fallback OCR si le texte extrait est vide (PDF scanné)
@@ -285,7 +303,7 @@ async def upload_rapport(file: UploadFile = File(...)):
         except Exception as e:
             print(f"[WARN] Erreur lors de la création du JSON extrait : {e}")
 
-        # 4.5 Extraire et stocker les indicateurs ESG via spaCy NER
+        # 4.5 Extraire et stocker les indicateurs GRI (regex principale + filet sémantique MiniLM)
         if pages_texte:
             try:
                 full_text = "\n".join([pt['texte'] for pt in pages_texte if pt.get('texte')])
@@ -327,7 +345,8 @@ async def upload_rapport(file: UploadFile = File(...)):
                 metadonnees_a_stocker.append({
                     'page': pt['page'],
                     'rapport': file.filename,
-                    'annee': "2024"  # Année par défaut ou extraite du nom
+                    'annee': "2024",
+                    'score_cnn': scores_cnn.get(pt['page'] - 1, 1.0)  # Score CNN de la page source
                 })
 
         # Traiter les tableaux comme des paragraphes Gouvernance/Environnemental
@@ -337,7 +356,8 @@ async def upload_rapport(file: UploadFile = File(...)):
             metadonnees_a_stocker.append({
                 'page': tab['page'],
                 'rapport': file.filename,
-                'annee': "2024"
+                'annee': "2024",
+                'score_cnn': scores_cnn.get(tab['page'] - 1, 1.0)
             })
 
         # 6. Stocker dans ChromaDB
@@ -347,6 +367,8 @@ async def upload_rapport(file: UploadFile = File(...)):
         return {
             "message": f"Rapport '{file.filename}' traité avec succès",
             "pages_pertinentes": len(pages_esg),
+            "pages_esg_fortes": sum(1 for s in scores_cnn.values() if s > 0.5),
+            "score_cnn_moyen": round(sum(scores_cnn.values()) / max(len(scores_cnn), 1), 3),
             "paragraphes_indexes": len(paragraphes_a_stocker),
             "ocr_used": is_ocr_used,
             "has_text": total_chars > 0

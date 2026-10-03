@@ -34,3 +34,5 @@ Desktop.ini
 # Heavy trained model weights (>100MB)
 models/camembert_ml.pth
 *.pth.large
+models/chroma_db/
+logs_camembert_*.txt

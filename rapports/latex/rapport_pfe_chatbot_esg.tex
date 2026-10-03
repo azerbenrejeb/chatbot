@@ -126,7 +126,7 @@ L'évaluation de la performance extra-financière des entreprises est devenue un
 
 Ce projet de fin d'études présente la conception et le déploiement d'un système d'aide à la décision complet dédié à l'analyse intelligente des rapports RSE et à l'audit de conformité ESG. Notre contribution s'articule autour des avancées majeures suivantes :
 \begin{enumerate}
-    \item \textbf{Vision par Ordinateur sur-mesure (ESG\_CNN\_Light) :} Conception d'une architecture convolutive légère optimisée pour l'inférence CPU, dotée d'une fonction de \textbf{scoring continu softmax} ($0.0 \rightarrow 1.0$) préservant 100\,\% des pages et éliminant le risque de faux négatif silencieux ;
+    \item \textbf{Vision par Ordinateur (CNN) :} Conception d'une architecture convolutive dédiée, dotée d'une fonction de \textbf{scoring continu softmax} ($0.0 \rightarrow 1.0$) préservant 100\,\% des pages et éliminant le risque de faux négatif silencieux ;
     \item \textbf{Corpus d'apprentissage annoté de référence :} Réalisation d'une \textbf{annotation manuelle intégrale et méticuleuse de 3\,872 paragraphes} selon les piliers ESG (1\,639 Environnemental, 1\,260 Social, 973 Gouvernance) ;
     \item \textbf{Benchmark de classification NLP :} Progression scientifique validée entre une Baseline TF-IDF (89,33\,\%), un Random Forest (90,71\,\%) et un modèle Transformer CamemBERT fine-tuné atteignant \textbf{90,88\,\% d'accuracy} et \textbf{90,84\,\% de F1-macro} ;
     \item \textbf{Reconnaissance d'Entités Nommées (spaCy NER) :} Modèle spécialisé extrayant les valeurs numériques, unités, années, tendances et références GRI avec un \textbf{F1-score de 95,97\,\%} ;
@@ -145,7 +145,7 @@ Evaluating corporate extra-financial performance has become a strategic necessit
 
 This graduation project delivers an end-to-end intelligent decision-support system designed for automated CSR report analysis and ESG regulatory compliance auditing. Our main engineering contributions include:
 \begin{enumerate}
-    \item \textbf{Custom Computer Vision (ESG\_CNN\_Light):} A lightweight convolutional architecture tailored for CPU inference, operating with continuous softmax probability scoring ($0.0 \rightarrow 1.0$) to avoid hard page elimination and prevent data loss;
+    \item \textbf{Computer Vision (CNN):} A dedicated convolutional neural network operating with continuous softmax probability scoring ($0.0 \rightarrow 1.0$) to avoid hard page elimination and prevent data loss;
     \item \textbf{Curated Gold-Standard Dataset:} An \textbf{exhaustive manual annotation of 3,872 paragraphs} across ESG dimensions (1,639 Environmental, 1,260 Social, 973 Governance);
     \item \textbf{Comparative NLP Classification Benchmark:} Progression from a TF-IDF Baseline (89.33\%), to Random Forest (90.71\%), up to a fine-tuned CamemBERT Transformer achieving \textbf{90.88\% accuracy} and \textbf{90.84\% macro F1-score};
     \item \textbf{Custom Named Entity Recognition (spaCy NER):} Extraction of metrics, units, reporting years, and GRI indicators with a \textbf{95.97\% F1-score};
@@ -155,7 +155,7 @@ This graduation project delivers an end-to-end intelligent decision-support syst
 
 The solution is orchestrated via a FastAPI backend and delivered through an ergonomic Streamlit dashboard.
 
-\textbf{Keywords:} CSR, ESG, Light CNN, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
+\textbf{Keywords:} CSR, ESG, CNN, CamemBERT, spaCy NER, RAG, ChromaDB, Mistral 7B, GRI Standards, CSRD.
 
 % ═══════════════════════════════════════════════════════════════════
 % TABLES
@@ -239,7 +239,7 @@ Le tableau~\ref{tab:cadrage_crisp} résume l'application concrète des 6 phases 
         \hline
         3. Préparation des données & Extraction multimodale, nettoyage, segmentation et annotation manuelle experte de 3 872 paragraphes \\
         \hline
-        4. Modélisation & Entraînement de l'ESG\_CNN\_Light, fine-tuning de CamemBERT, entraînement de spaCy NER et intégration RAG \\
+        4. Modélisation & Entraînement du modèle CNN, fine-tuning de CamemBERT, entraînement de spaCy NER et intégration RAG \\
         \hline
         5. Évaluation & Validation sur test set indépendant ($n=581$), matrice de confusion et mesures de gain du filet sémantique \\
         \hline
@@ -266,15 +266,15 @@ Le référentiel \textbf{GRI Standards 2021} structure les déclarations d'impac
     \item \textbf{Gouvernance (Séries 200 \& 400) :} GRI 205 (Anti-corruption), GRI 206 (Concurrence), GRI 415 (Lobbying), GRI 419 (Conformité légale).
 \end{itemize}
 
-\section{Vision par Ordinateur : Réseaux Convolutifs et Architecture ESG\_CNN\_Light}
+\section{Vision par Ordinateur : Réseaux Convolutifs (CNN)}
 \subsection{Principe des couches de convolution}
 Dans le cadre de l'analyse documentaire, une page PDF convertie en image RGB ($224 \times 224 \times 3$) contient des motifs caractéristiques (densité de paragraphes, graphiques, en-têtes de tableaux). Une couche de convolution applique un ensemble de noyaux de convolution (\textit{kernels}) pour extraire ces cartes de caractéristiques :
 \begin{equation}
     (I * K)(i, j) = \sum_{m} \sum_{n} I(i - m, j - n) K(m, n)
 \end{equation}
 
-\subsection{Conception sur-mesure de l'architecture ESG\_CNN\_Light}
-Contrairement aux architectures lourdes pré-entraînées nécessitant des GPU dédiés, nous avons conçu un réseau convolutif léger sur-mesure, nommé \textbf{ESG\_CNN\_Light}, optimisé pour l'inférence rapide sur CPU standard. Comme l'illustre la figure~\ref{fig:cnn_light}, il est composé de :
+\subsection{Architecture du modèle CNN pour la vision documentaire}
+Nous avons conçu un réseau de neurones convolutif sur-mesure, optimisé pour l'analyse visuelle des pages de rapports ESG. Comme l'illustre la figure~\ref{fig:cnn_architecture}, l'architecture est composée de :
 \begin{itemize}
     \item \textbf{Bloc Conv 1 :} 16 filtres $3 \times 3$ + Batch Normalization + ReLU + MaxPool $2 \times 2$ ;
     \item \textbf{Bloc Conv 2 :} 32 filtres $3 \times 3$ + Batch Normalization + ReLU + MaxPool $2 \times 2$ ;
@@ -284,9 +284,9 @@ Contrairement aux architectures lourdes pré-entraînées nécessitant des GPU d
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth]{figures/fig_cnn_light_architecture.png}
-    \caption{Architecture détaillée du Réseau Convolutif Léger Custom (ESG\_CNN\_Light)}
-    \label{fig:cnn_light}
+    \includegraphics[width=0.95\textwidth]{figures/fig_cnn_architecture.png}
+    \caption{Architecture détaillée du Réseau de Neurones Convolutif (CNN) pour la vision documentaire}
+    \label{fig:cnn_architecture}
 \end{figure}
 
 \section{Traitement du Langage Naturel et Modèle CamemBERT}
@@ -393,7 +393,7 @@ La figure~\ref{fig:use_case} illustre les cas d'utilisation principaux offerts �
 \subsection{Élimination du risque de faux négatif silencieux}
 La décision binaire classique par \texttt{argmax} supprimait définitivement toute page classée « Non-ESG », créant un risque majeur d'omission. Dans notre système :
 \begin{itemize}
-    \item Le modèle convolutif léger \textbf{ESG\_CNN\_Light} évalue chaque page convertie en image ;
+    \item Le modèle convolutif \textbf{CNN} évalue chaque page convertie en image ;
     \item Une probabilité continue est calculée via la fonction softmax :
     \begin{equation}
         P(\text{ESG}) = \frac{e^{z_0}}{e^{z_0} + e^{z_1}}
@@ -577,7 +577,7 @@ Ce projet de fin d'études a permis de concevoir, réaliser et valider expérime
 
 L'ensemble des objectifs fixés a été atteint :
 \begin{itemize}
-    \item \textbf{Vision sur-mesure :} Architecture convolutive légère (ESG\_CNN\_Light) sans perte d'information grâce au scoring continu softmax ;
+    \item \textbf{Vision par Ordinateur (CNN) :} Architecture convolutive dédiée sans perte d'information grâce au scoring continu softmax ;
     \item \textbf{Corpus d'apprentissage d'excellence :} Annotation manuelle exhaustive de 3\,872 paragraphes réalisée par l'auteur ;
     \item \textbf{Classification de pointe :} Modèle Transformer CamemBERT atteignant \textbf{90,88\,\% d'accuracy} ;
     \item \textbf{Extraction d'entités experte :} Modèle spaCy NER validé à \textbf{95,97\,\% de F1-score} ;

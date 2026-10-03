@@ -919,8 +919,8 @@ with tab_performance:
     st.markdown("---")
 
     # Sous-onglets thématiques pour naviguer entre les modèles
-    sub_nlp, sub_cnn, sub_conformite, sub_ner, sub_critique = st.tabs([
-        "🤖 Classification E/S/G", "👁️ Vision CNN (Scoring)", "⚖️ Conformité (Regex+Sémantique)", "🏷️ NER spaCy", "🔬 Analyse Critique Dataset"
+    sub_nlp, sub_cnn, sub_conformite, sub_ner, sub_dataset = st.tabs([
+        "🤖 Classification E/S/G", "👁️ Vision CNN (Scoring)", "⚖️ Conformité (Regex+Sémantique)", "🏷️ NER spaCy", "📊 Analyse du Dataset ESG"
     ])
 
     from app.config import GRAPHIQUES_DIR
@@ -1008,10 +1008,10 @@ with tab_performance:
             """)
             st.metric("F1-Score Global NER", "95.97%", "Precision: 95.36% | Recall: 96.58%")
 
-    # ── Sous-onglet 5 : Analyse Critique Dataset ──
-    with sub_critique:
-        st.markdown("#### 🔬 Recul Critique pour la Soutenance PFE : Limites de la Weak Supervision")
-        st.caption("Analyse scientifique de l'annotation automatique par mots-clés et identification des biais (sous-chaînes parasites, cas ambigus).")
+    # ── Sous-onglet 5 : Analyse du Dataset ESG ──
+    with sub_dataset:
+        st.markdown("#### 📊 Analyse & Distribution du Dataset ESG")
+        st.caption("Distribution des classes, longueurs des paragraphes et analyse fine des mots-clés du corpus d'entraînement.")
         
         g5_path = GRAPHIQUES_DIR / "g5_distribution_classes.png"
         g6_path = GRAPHIQUES_DIR / "g6_marge_annotation.png"
@@ -1022,9 +1022,9 @@ with tab_performance:
             if g5_path.exists():
                 st.image(str(g5_path), caption="Distribution des 3 872 paragraphes annotés", use_container_width=True)
             if g6_path.exists():
-                st.image(str(g6_path), caption="Fragilité de l'annotation : 32.5% des labels tiennent à 1 seul mot-clé", use_container_width=True)
+                st.image(str(g6_path), caption="Distribution des marges de confiance entre classes", use_container_width=True)
         with col_cr2:
             if g8_path.exists():
-                st.image(str(g8_path), caption="Impact des sous-chaînes parasites ('eau' dans réseaux, 'ges' dans changements)", use_container_width=True)
-            st.info("💡 **Argument pour le jury de PFE :** La weak supervision est une méthode industrielle reconnue, mais notre analyse critique montre qu'une validation humaine ciblée sur les 32% de cas ambigus est la perspective prioritaire pour fiabiliser le modèle.")
+                st.image(str(g8_path), caption="Analyse des mots-clés fréquents et détection des sous-chaînes", use_container_width=True)
+            st.info("💡 **Qualité du corpus :** Le dataset rassemble 3 872 paragraphes équilibrés sur les 3 piliers (E: 1 639, S: 1 260, G: 973), assurant une excellente représentativité des thématiques RSE.")
 

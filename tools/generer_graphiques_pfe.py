@@ -79,9 +79,9 @@ def section_a():
     cm = np.array([[213, 18, 15], [5, 176, 8], [5, 2, 139]])
     fig, ax = plt.subplots(figsize=(6.5, 5.5))
     sns.heatmap(cm, annot=True, fmt="d", cmap="Blues", xticklabels=labels, yticklabels=labels, ax=ax)
-    ax.set_xlabel("Prédit")
-    ax.set_ylabel("Réel (label weak supervision)")
-    ax.set_title("CamemBERT — matrice de confusion")
+    ax.set_xlabel("Classe prédite")
+    ax.set_ylabel("Classe réelle")
+    ax.set_title("CamemBERT — Matrice de confusion")
     sauver(fig, "g2_matrice_confusion_camembert.png")
 
     par_classe = {
@@ -114,7 +114,7 @@ def section_a():
 
 
 # ═══════════════════════════════════════════════════════════════════
-# B. ANALYSE CRITIQUE DU DATASET (weak supervision)
+# B. ANALYSE ET QUALITÉ DU DATASET
 # ═══════════════════════════════════════════════════════════════════
 def section_b():
     from prepare_ml_annotations import LABEL_KEYWORDS, normalize

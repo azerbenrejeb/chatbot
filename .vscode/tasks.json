@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compiler Rapport LaTeX (pdflatex)",
+            "type": "shell",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "rapport_pfe_chatbot_esg.tex"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/rapports/latex"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$latex-workshop"
+            ]
+        },
+        {
+            "label": "Compiler Rapport Complet (Passes x2 pour Sommaire & Figures)",
+            "type": "shell",
+            "command": "pdflatex -interaction=nonstopmode rapport_pfe_chatbot_esg.tex && pdflatex -interaction=nonstopmode rapport_pfe_chatbot_esg.tex",
+            "options": {
+                "cwd": "${workspaceFolder}/rapports/latex"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$latex-workshop"
+            ]
+        }
+    ]
+}

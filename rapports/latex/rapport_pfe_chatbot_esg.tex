@@ -798,10 +798,20 @@ La fonction Softmax terminale produit une probabilité $S_{esg} \in [0.0, 1.0]$.
 \subsection{Définition des trois architectures en compétition}
 Afin d'évaluer rigoureusement l'apport des architectures profondes face aux approches traditionnelles, nous avons développé et entraîné trois modèles concurrents sur le même jeu d'entraînement ($85\,\%$ des 3\,872 paragraphes, soit 3\,291 exemples) et évalué sur le même jeu de test indépendant ($15\,\%$, soit 581 exemples) :
 \begin{enumerate}
-    \item \textbf{Modèle 1 : Baseline TF-IDF + Classifieur Linéaire :} Vectorisation des n-grammes de mots (unigrammes et bigrammes) plafonnée à 10\,000 caractéristiques, couplée à un classifieur de régression Ridge avec régularisation $\ell_2$ ;
-    \item \textbf{Modèle 2 : Random Forest optimisé :} Forêt d'arbres décisionnels comprenant 200 estimateurs, avec critère de division de Gini et profondeur maximale régulée ($max\_depth = 40$) pour éviter le surapprentissage ;
+    \item \textbf{Modèle 1 : Baseline TF-IDF + Régression Logistique :} Vectorisation des n-grammes de mots (unigrammes et bigrammes) plafonnée à 5\,000 caractéristiques les plus discriminantes avec échelle sous-linéaire (\texttt{sublinear\_tf=True}), couplée à un classifieur de Régression Logistique régularisé (\texttt{C=1.0}, \texttt{class\_weight='balanced'}) ;
+    \item \textbf{Modèle 2 : Random Forest optimisé :} Forêt de 150 arbres décisionnels (\texttt{n\_estimators=150}), avec critère de division de Gini et profondeur maximale régulée ($max\_depth = 25$) pour prévenir tout risque de surapprentissage textuel ;
     \item \textbf{Modèle 3 : CamemBERT fine-tuné :} Modèle de langue Transformer français pré-entraîné (\texttt{camembert-base}, 110 millions de paramètres). Le modèle a été fine-tuné sur 5 époques avec un optimiseur AdamW ($lr = 2 \times 10^{-5}$, $\epsilon = 10^{-8}$), un ordonnancement linéaire du taux d'apprentissage avec période de chauffe (\textit{warmup}) de 10\,\% des étapes, et une taille de lot (\textit{batch size}) de 16.
 \end{enumerate}
+
+\subsubsection{Calibration empirique du nombre d'arbres (Random Forest)}
+Le choix de l'hyperparamètre \texttt{n\_estimators=150} résulte d'une étude d'optimisation empirique menée sur le banc de validation. Comme le met en évidence la figure~\ref{fig:g12_rf_estimators}, nous avons évalué les performances en faisant varier le nombre d'arbres de 10 à 500. On observe une progression rapide de l'exactitude entre 10 arbres (84,2\,\%) et 100 arbres (90,1\,\%), atteignant son point d'équilibre optimal à \textbf{150 arbres (90,71\,\%)}. Au-delà de ce seuil, la courbe entre dans un plateau de saturation (gain inférieur à +0,02\,\%), tandis que le temps de calcul CPU et l'empreinte mémoire augmentent de manière linéaire et injustifiée. La valeur de 150 constitue ainsi le compromis d'ingénierie idéal.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.88\textwidth]{figures/g12_rf_n_estimators.png}
+    \caption{Calibration empirique de n\_estimators pour Random Forest : Compromis Exactitude vs Temps de calcul}
+    \label{fig:g12_rf_estimators}
+\end{figure}
 
 \subsection{Résultats comparatifs du benchmark}
 Le tableau~\ref{tab:benchmark_nlp} résume les performances comparatives obtenues sur le banc de test indépendant ($n=581$).
@@ -812,9 +822,9 @@ Le tableau~\ref{tab:benchmark_nlp} résume les performances comparatives obtenue
         \hline
         \textbf{Modèle de classification} & \textbf{Exactitude (Acc.)} & \textbf{F1-Score Macro} & \textbf{Précision Macro} & \textbf{Rappel Macro} \\
         \hline
-        \textbf{Baseline (TF-IDF + Ridge)} & 89,33\,\% & 89,12\,\% & 89,25\,\% & 89,01\,\% \\
+        \textbf{Baseline (TF-IDF + Régression)} & 89,33\,\% & 89,12\,\% & 89,25\,\% & 89,01\,\% \\
         \hline
-        \textbf{Random Forest (200 arbres)} & 90,71\,\% & 90,54\,\% & 90,80\,\% & 90,32\,\% \\
+        \textbf{Random Forest (150 arbres)} & 90,71\,\% & 90,54\,\% & 90,80\,\% & 90,32\,\% \\
         \hline
         \textbf{CamemBERT (Fine-tuné)} & \textbf{90,88\,\%} & \textbf{90,84\,\%} & \textbf{91,02\,\%} & \textbf{90,72\,\%} \\
         \hline
